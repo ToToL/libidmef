@@ -1,10 +1,10 @@
 /*****
 *
 * Copyright (C) 2003-2016 CS-SI. All Rights Reserved.
-* Author: Yoann Vandoorselaere <yoann.v@prelude-ids.com>
+* Author: Yoann Vandoorselaere <yoann.v@libidmef-ids.com>
 * Author: Krzysztof Zaraska <kzaraska@student.uci.agh.edu.pl>
 *
-* This file is part of the Prelude library.
+* This file is part of the LibIdmef library.
 *
 * This program is free software; you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -22,8 +22,8 @@
 *
 *****/
 
-#ifndef _LIBPRELUDE_IDMEF_H
-#define _LIBPRELUDE_IDMEF_H
+#ifndef _LIBIDMEF_IDMEF_H
+#define _LIBIDMEF_IDMEF_H
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -31,13 +31,13 @@
 
 #include <sys/types.h>
 
-#include "prelude-error.h"
+#include "libidmef-error.h"
 
-#include "prelude-inttypes.h"
+#include "libidmef-inttypes.h"
 #include "common.h"
-#include "prelude-list.h"
-#include "prelude-ident.h"
-#include "prelude-string.h"
+#include "libidmef-list.h"
+#include "libidmef-ident.h"
+#include "libidmef-string.h"
 #include "idmef-time.h"
 #include "idmef-data.h"
 #include "idmef-class.h"
@@ -51,4 +51,4 @@
 #include "idmef-message-print.h"
 #include "idmef-additional-data.h"
 
-#endif /* _LIBPRELUDE_IDMEF_H */
+#endif /* _LIBIDMEF_IDMEF_H */

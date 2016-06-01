@@ -24,17 +24,17 @@
 
 #include <stddef.h>
 
-#include "prelude-error.h"
+#include "libidmef-error.h"
 #include "err-sources-sym.h"
 
 /* Return a pointer to a string containing the name of the symbol of
    the error source in the error value ERR.  Returns NULL if the error
    code is not known.  */
-const char *prelude_strsource_sym(prelude_error_t err)
+const char *libidmef_strsource_sym(libidmef_error_t err)
 {
-  	prelude_error_source_t source = prelude_error_source(err);
+  	libidmef_error_source_t source = libidmef_error_source(err);
 
-  	if ( msgidxof(source) == msgidxof(PRELUDE_ERROR_SOURCE_DIM) )
+  	if ( msgidxof(source) == msgidxof(LIBIDMEF_ERROR_SOURCE_DIM) )
     		return NULL;
 
   	return msgstr + msgidx[msgidxof(source)];

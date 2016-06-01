@@ -5,12 +5,12 @@ sys.path.append('.')
 sys.path.append('./.libs')
 
 try:
-	import PreludeEasy
+	import LibIdmefEasy
 except Exception,e:
 	print "Import failed: ",e
-	print "Try 'cd ./.libs && ln -s libprelude_python.so _PreludeEasy.so'"
+	print "Try 'cd ./.libs && ln -s libidmef_python.so _LibIdmefEasy.so'"
 	sys.exit(1)
 
-idmef = PreludeEasy.IDMEF()
+idmef = LibIdmefEasy.IDMEF()
 idmef.Set("alert.classification.text", "Bar")
 idmef.WriteToFile("foo.bin")

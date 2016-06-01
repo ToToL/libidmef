@@ -25,23 +25,23 @@
 #include <string.h>
 #include <errno.h>
 
-#include "prelude-error.h"
+#include "libidmef-error.h"
 #include "gettext.h"
 #include "err-codes.h"
 
 /* Return a pointer to a string containing a description of the error
    code in the error value ERR.  This function is not thread-safe.  */
-const char *prelude_strerror(prelude_error_t err)
+const char *libidmef_strerror(libidmef_error_t err)
 {
 	int no;
-  	prelude_error_code_t code = prelude_error_get_code(err);
+  	libidmef_error_code_t code = libidmef_error_get_code(err);
 
-  	if ( code & PRELUDE_ERROR_SYSTEM_ERROR ) {
-      		no = prelude_error_code_to_errno(code);
+  	if ( code & LIBIDMEF_ERROR_SYSTEM_ERROR ) {
+      		no = libidmef_error_code_to_errno(code);
       		if ( no )
 			return strerror(no);
       		else
-			code = PRELUDE_ERROR_UNKNOWN_ERRNO;
+			code = LIBIDMEF_ERROR_UNKNOWN_ERRNO;
     	}
         
   	return dgettext(PACKAGE, msgstr + msgidx[msgidxof((int)code)]);

@@ -1,11 +1,11 @@
 #!/usr/bin/python
 
 import sys
-import PreludeEasy
+import LibIdmefEasy
 
-idmef = PreludeEasy.IDMEF()
+idmef = LibIdmefEasy.IDMEF()
 idmef.Set("alert.classification.text", "Bar")
 
-client = PreludeEasy.ClientEasy("MyTest")
+client = LibIdmefEasy.ClientEasy("MyTest")
 client << idmef
 

@@ -3,7 +3,7 @@
 * Copyright (C) 2014-2016 CS-SI. All Rights Reserved.
 * Author: Yoann Vandoorselaere <yoannv@gmail.com>
 *
-* This file is part of the Prelude library.
+* This file is part of the LibIdmef library.
 *
 * This program is free software; you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -63,7 +63,7 @@ IDMEFClass::IDMEFClass(IDMEFClass &parent, int child_id, int depth)
         IDMEFClass::IDMEFClassElem elem;
 
         if ( depth >= 16 )
-                throw PreludeError(prelude_error(PRELUDE_ERROR_IDMEF_PATH_DEPTH));
+                throw LibIdmefError(libidmef_error(LIBIDMEF_ERROR_IDMEF_PATH_DEPTH));
 
         _depth = depth;
         _pathelem = parent._pathelem;
@@ -100,7 +100,7 @@ std::string IDMEFClass::toString(void)
 bool IDMEFClass::isList(void)
 {
         if ( _pathelem.size() == 0 )
-                throw PreludeError("Already in rootclass, cannot retrieve parents info");
+                throw LibIdmefError("Already in rootclass, cannot retrieve parents info");
 
         return idmef_class_is_child_list(_pathelem.back().parent_id, _pathelem.back().idx);
 }
@@ -109,7 +109,7 @@ bool IDMEFClass::isList(void)
 bool IDMEFClass::isKeyedList(void)
 {
         if ( _pathelem.size() == 0 )
-                throw PreludeError("Already in rootclass, cannot retrieve parents info");
+                throw LibIdmefError("Already in rootclass, cannot retrieve parents info");
 
         return idmef_class_is_child_keyed_list(_pathelem.back().parent_id, _pathelem.back().idx);
 }
@@ -118,7 +118,7 @@ bool IDMEFClass::isKeyedList(void)
 Idmef::IDMEFValue::IDMEFValueTypeEnum IDMEFClass::getValueType(void)
 {
         if ( _pathelem.size() == 0 )
-                throw PreludeError("Already in rootclass, cannot retrieve parents info");
+                throw LibIdmefError("Already in rootclass, cannot retrieve parents info");
 
         return (Idmef::IDMEFValue::IDMEFValueTypeEnum) idmef_class_get_child_value_type(_pathelem.back().parent_id, _pathelem.back().idx);
 }
@@ -171,7 +171,7 @@ IDMEFClass IDMEFClass::get(const std::string &name)
         int i = idmef_class_find_child(_id, name.c_str());
 
         if ( i < 0 )
-                throw PreludeError(i);
+                throw LibIdmefError(i);
 
         return get(i);
 }
@@ -186,7 +186,7 @@ IDMEFClass IDMEFClass::get(int i)
         if ( cl < 0 ) {
                 vl = (idmef_value_type_id_t) idmef_class_get_child_value_type(_id, i);
                 if ( vl < 0 )
-                        throw PreludeError(vl);
+                        throw LibIdmefError(vl);
         }
 
         return IDMEFClass(*this, i, _depth + 1);
@@ -201,7 +201,7 @@ std::vector<std::string> IDMEFClass::getEnumValues(void)
         std::vector<std::string> ev;
 
         if ( getValueType() != IDMEFValue::TYPE_ENUM )
-                throw PreludeError("Input class is not enumeration");
+                throw LibIdmefError("Input class is not enumeration");
 
         do {
                 ret = idmef_class_enum_to_string(_id, i++);
@@ -222,7 +222,7 @@ IDMEFCriterion::IDMEFCriterionOperatorEnum IDMEFClass::getApplicableOperator(voi
 
         ret = idmef_value_type_get_applicable_operators((idmef_value_type_id_t) getValueType(), &op);
         if ( ret < 0 )
-                throw PreludeError(ret);
+                throw LibIdmefError(ret);
 
         return (IDMEFCriterion::IDMEFCriterionOperatorEnum) ret;
 }

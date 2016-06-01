@@ -9,17 +9,17 @@ Dumping an IDMEF message as a string
 <para>
 This API provide method for dumping any IDMEF object as a string of characters.
 When dumping an object, the object and all of it's children are dumped to the
-provided #prelude_io_t object. 
+provided #libidmef_io_t object. 
 </para>
 
 <para>
-The #prelude_io_t object might be a buffer, a file, or even a socket. Check
-the #prelude_io_t API for more information.
+The #libidmef_io_t object might be a buffer, a file, or even a socket. Check
+the #libidmef_io_t API for more information.
 </para>
 
 <!-- ##### SECTION See_Also ##### -->
 <para>
-#prelude_io_t
+#libidmef_io_t
 </para>
 
 <!-- ##### SECTION Stability_Level ##### -->

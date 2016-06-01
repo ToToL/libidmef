@@ -6,10 +6,10 @@ sys.path.append('.')
 sys.path.append('./.libs')
 
 try:
-	import PreludeEasy
+	import LibIdmefEasy
 except Exception,e:
 	print "Import failed: ",e
-	print "Try 'cd ./.libs && ln -s libprelude_python.so _PreludeEasy.so'"
+	print "Try 'cd ./.libs && ln -s libidmef_python.so _LibIdmefEasy.so'"
 	sys.exit(1)
 
 
@@ -31,7 +31,7 @@ def replay(alert):
 for root, dirs, files in os.walk(src_dir):
 	for name in files:
 		if name.endswith(".idmef"):
-			idmef = PreludeEasy.IDMEF()
+			idmef = LibIdmefEasy.IDMEF()
 			f = open( os.path.join(src_dir,name), "r")
 			idmef >> f
 			f.close()

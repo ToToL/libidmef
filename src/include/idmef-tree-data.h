@@ -3,8 +3,8 @@
 
 typedef struct {
         const char *name;
-        prelude_bool_t list;
-        prelude_bool_t keyed_list;
+        libidmef_bool_t list;
+        libidmef_bool_t keyed_list;
         idmef_value_type_id_t type;
         idmef_class_id_t class;
         int union_id;
@@ -268,12 +268,12 @@ typedef struct {
         int (*copy)(const void *src, void *dst);
         int (*clone)(const void *src, void **dst);
         int (*compare)(const void *obj1, const void *obj2);
-        int (*print)(const void *obj, prelude_io_t *fd);
-        int (*print_json)(const void *obj, prelude_io_t *fd);
-        int (*print_binary)(const void *obj, prelude_io_t *fd);
+        int (*print)(const void *obj, libidmef_io_t *fd);
+        int (*print_json)(const void *obj, libidmef_io_t *fd);
+        int (*print_binary)(const void *obj, libidmef_io_t *fd);
         void *(*ref)(void *src);
         void (*destroy)(void *obj);
-        prelude_bool_t is_listed;
+        libidmef_bool_t is_listed;
 } object_data_t;
 
 

@@ -1,9 +1,9 @@
 /*****
 *
 * Copyright (C) 2003-2016 CS-SI. All Rights Reserved.
-* Author: Yoann Vandoorselaere <yoann.v@prelude-ids.com>
+* Author: Yoann Vandoorselaere <yoann.v@libidmef-ids.com>
 *
-* This file is part of the Prelude library.
+* This file is part of the LibIdmef library.
 *
 * This program is free software; you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -30,13 +30,13 @@
 #include <assert.h>
 
 #include "common.h"
-#include "prelude-inttypes.h"
-#include "prelude-string.h"
+#include "libidmef-inttypes.h"
+#include "libidmef-string.h"
 
-#define PRELUDE_ERROR_SOURCE_DEFAULT PRELUDE_ERROR_SOURCE_IDMEF_VALUE_TYPE
-#include "prelude-error.h"
-#include "prelude-inttypes.h"
-#include "prelude-linked-object.h"
+#define LIBIDMEF_ERROR_SOURCE_DEFAULT LIBIDMEF_ERROR_SOURCE_IDMEF_VALUE_TYPE
+#include "libidmef-error.h"
+#include "libidmef-inttypes.h"
+#include "libidmef-linked-object.h"
 #include "idmef-object-prv.h"
 
 #include "idmef-time.h"
@@ -69,14 +69,14 @@
                                                                                            \
                 (dst)->data. name ##_val = strtod(buf, &endptr);                           \
                 if ( buf == endptr || *endptr != '\0' || errno == ERANGE )                 \
-                        return prelude_error_verbose(PRELUDE_ERROR_IDMEF_VALUE_TYPE_PARSE, \
+                        return libidmef_error_verbose(LIBIDMEF_ERROR_IDMEF_VALUE_TYPE_PARSE, \
                         "Reading " #name " value failed with '%s'", buf);                  \
                 return 1;                                                                  \
         }                                                                                  \
                                                                                            \
-        static int name ## _write(const idmef_value_type_t *src, prelude_string_t *out)    \
+        static int name ## _write(const idmef_value_type_t *src, libidmef_string_t *out)    \
         {                                                                                  \
-                return prelude_string_sprintf(out, (printfmt), src->data.name ##_val);     \
+                return libidmef_string_sprintf(out, (printfmt), src->data.name ##_val);     \
         }
 
 
@@ -88,16 +88,16 @@
                                                                                                      \
                 tmp = rfunc(buf, &endptr, 0);                                                        \
                 if ( buf == endptr || *endptr != '\0' || tmp < min || tmp > max || errno == ERANGE ) \
-                        return prelude_error_verbose(PRELUDE_ERROR_IDMEF_VALUE_TYPE_PARSE,           \
+                        return libidmef_error_verbose(LIBIDMEF_ERROR_IDMEF_VALUE_TYPE_PARSE,           \
                         "Value out of range, required: [" # min " - " # max "], got '%s'", buf);     \
                                                                                                      \
                 dst->data.name ##_val = tmp;                                                         \
                 return 0;                                                                            \
         }                                                                                            \
                                                                                                      \
-        static int name ## _write(const idmef_value_type_t *src, prelude_string_t *out)              \
+        static int name ## _write(const idmef_value_type_t *src, libidmef_string_t *out)              \
         {                                                                                            \
-                return prelude_string_sprintf(out, (fmt_dec), src->data.name ##_val);                \
+                return libidmef_string_sprintf(out, (fmt_dec), src->data.name ##_val);                \
         }
 
 
@@ -117,7 +117,7 @@ typedef struct {
         int (*compare)(const idmef_value_type_t *t1, const idmef_value_type_t *t2, size_t size, idmef_criterion_operator_t op);
 
         int (*read)(idmef_value_type_t *dst, const char *buf);
-        int (*write)(const idmef_value_type_t *src, prelude_string_t *out);
+        int (*write)(const idmef_value_type_t *src, libidmef_string_t *out);
 
 } idmef_value_type_operation_t;
 
@@ -126,14 +126,14 @@ typedef struct {
 /*
  * We specify a type bigger than the one handled, in order to catch min/max error.
  */
-GENERIC_TWO_BASES_RW_FUNC(strtol, "%d", int8, int, PRELUDE_INT8_MIN, PRELUDE_INT8_MAX)
-GENERIC_TWO_BASES_RW_FUNC(strtol, "%d", uint8, unsigned int, 0, PRELUDE_UINT8_MAX)
-GENERIC_TWO_BASES_RW_FUNC(strtol, "%hd", int16, int, PRELUDE_INT16_MIN, PRELUDE_INT16_MAX)
-GENERIC_TWO_BASES_RW_FUNC(strtoul, "%hu", uint16, unsigned int, 0, PRELUDE_UINT16_MAX)
-GENERIC_TWO_BASES_RW_FUNC(strtol, "%d", int32, int64_t, PRELUDE_INT32_MIN, PRELUDE_INT32_MAX)
-GENERIC_TWO_BASES_RW_FUNC(strtoul, "%u", uint32, uint64_t, 0, PRELUDE_UINT32_MAX)
-GENERIC_TWO_BASES_RW_FUNC(strtoll, "%" PRELUDE_PRId64, int64, int64_t, PRELUDE_INT64_MIN, PRELUDE_INT64_MAX)
-GENERIC_TWO_BASES_RW_FUNC(strtoull, "%" PRELUDE_PRIu64, uint64, uint64_t, 0, PRELUDE_UINT64_MAX)
+GENERIC_TWO_BASES_RW_FUNC(strtol, "%d", int8, int, LIBIDMEF_INT8_MIN, LIBIDMEF_INT8_MAX)
+GENERIC_TWO_BASES_RW_FUNC(strtol, "%d", uint8, unsigned int, 0, LIBIDMEF_UINT8_MAX)
+GENERIC_TWO_BASES_RW_FUNC(strtol, "%hd", int16, int, LIBIDMEF_INT16_MIN, LIBIDMEF_INT16_MAX)
+GENERIC_TWO_BASES_RW_FUNC(strtoul, "%hu", uint16, unsigned int, 0, LIBIDMEF_UINT16_MAX)
+GENERIC_TWO_BASES_RW_FUNC(strtol, "%d", int32, int64_t, LIBIDMEF_INT32_MIN, LIBIDMEF_INT32_MAX)
+GENERIC_TWO_BASES_RW_FUNC(strtoul, "%u", uint32, uint64_t, 0, LIBIDMEF_UINT32_MAX)
+GENERIC_TWO_BASES_RW_FUNC(strtoll, "%" LIBIDMEF_PRId64, int64, int64_t, LIBIDMEF_INT64_MIN, LIBIDMEF_INT64_MAX)
+GENERIC_TWO_BASES_RW_FUNC(strtoull, "%" LIBIDMEF_PRIu64, uint64, uint64_t, 0, LIBIDMEF_UINT64_MAX)
 
 GENERIC_ONE_BASE_RW_FUNC("%f", "%f", float, float)
 GENERIC_ONE_BASE_RW_FUNC("%lf", "%f", double, double)
@@ -223,20 +223,20 @@ static int enum_read(idmef_value_type_t *dst, const char *buf)
 
         ret = sscanf(buf, "%d", &(dst)->data.enum_val.value);
 
-        return (ret == 1) ? 0 : prelude_error_verbose(PRELUDE_ERROR_IDMEF_VALUE_TYPE_PARSE, "Reading enum value failed");
+        return (ret == 1) ? 0 : libidmef_error_verbose(LIBIDMEF_ERROR_IDMEF_VALUE_TYPE_PARSE, "Reading enum value failed");
 }
 
 
 
-static int enum_write(const idmef_value_type_t *src, prelude_string_t *out)
+static int enum_write(const idmef_value_type_t *src, libidmef_string_t *out)
 {
         const char *str;
 
         str = idmef_class_enum_to_string(src->data.enum_val.class_id, src->data.enum_val.value);
         if ( ! str )
-                return prelude_error_verbose(PRELUDE_ERROR_IDMEF_VALUE_TYPE_PARSE, "Enumeration conversion from numeric to string failed");
+                return libidmef_error_verbose(LIBIDMEF_ERROR_IDMEF_VALUE_TYPE_PARSE, "Enumeration conversion from numeric to string failed");
 
-        return prelude_string_cat(out, str);
+        return libidmef_string_cat(out, str);
 }
 
 
@@ -250,9 +250,9 @@ static int enum_compare(const idmef_value_type_t *src, const idmef_value_type_t 
         if ( dst->id == IDMEF_VALUE_TYPE_STRING ) {
                 s1 = idmef_class_enum_to_string(src->data.enum_val.class_id, src->data.enum_val.value);
                 if ( ! s1 )
-                        return prelude_error_verbose(PRELUDE_ERROR_IDMEF_VALUE_TYPE_PARSE, "Enumeration conversion from numeric to string failed");
+                        return libidmef_error_verbose(LIBIDMEF_ERROR_IDMEF_VALUE_TYPE_PARSE, "Enumeration conversion from numeric to string failed");
 
-                return charstring_compare(s1, prelude_string_get_string(dst->data.string_val), op);
+                return charstring_compare(s1, libidmef_string_get_string(dst->data.string_val), op);
         }
 
         return generic_compare(src, dst, size, op);
@@ -297,13 +297,13 @@ static int time_read(idmef_value_type_t *dst, const char *buf)
         if ( ret == 0 )
                 return 0;
 
-        return prelude_error_verbose(PRELUDE_ERROR_IDMEF_VALUE_TYPE_PARSE,
+        return libidmef_error_verbose(LIBIDMEF_ERROR_IDMEF_VALUE_TYPE_PARSE,
                                      "Invalid time format specified: '%s'", buf);
 }
 
 
 
-static int time_write(const idmef_value_type_t *src, prelude_string_t *out)
+static int time_write(const idmef_value_type_t *src, libidmef_string_t *out)
 {
         return idmef_time_to_string(src->data.time_val, out);
 }
@@ -346,10 +346,10 @@ static int string_compare(const idmef_value_type_t *t1, const idmef_value_type_t
         const char *s1 = NULL, *s2 = NULL;
 
         if ( t1 && t1->data.string_val )
-                s1 = prelude_string_get_string(t1->data.string_val);
+                s1 = libidmef_string_get_string(t1->data.string_val);
 
         if ( t2 && t2->data.string_val )
-                s2 = prelude_string_get_string(t2->data.string_val);
+                s2 = libidmef_string_get_string(t2->data.string_val);
 
         return charstring_compare(s1, s2, op);
 }
@@ -358,41 +358,41 @@ static int string_compare(const idmef_value_type_t *t1, const idmef_value_type_t
 
 static int string_read(idmef_value_type_t *dst, const char *buf)
 {
-        return prelude_string_new_dup(&dst->data.string_val, buf);
+        return libidmef_string_new_dup(&dst->data.string_val, buf);
 }
 
 
 
 static int string_copy(const idmef_value_type_t *src, void *dst, size_t size)
 {
-        return prelude_string_copy_dup(src->data.string_val, dst);
+        return libidmef_string_copy_dup(src->data.string_val, dst);
 }
 
 
 static int string_ref(const idmef_value_type_t *src)
 {
-        prelude_string_ref(src->data.string_val);
+        libidmef_string_ref(src->data.string_val);
         return 0;
 }
 
 
 static int string_clone(const idmef_value_type_t *src, idmef_value_type_t *dst, size_t size)
 {
-        return prelude_string_clone(src->data.string_val, &dst->data.string_val);
+        return libidmef_string_clone(src->data.string_val, &dst->data.string_val);
 }
 
 
 static void string_destroy(idmef_value_type_t *type)
 {
-        prelude_string_destroy(type->data.string_val);
+        libidmef_string_destroy(type->data.string_val);
 }
 
 
 
-static int string_write(const idmef_value_type_t *src, prelude_string_t *out)
+static int string_write(const idmef_value_type_t *src, libidmef_string_t *out)
 {
-        return prelude_string_sprintf(out, "%s",
-                       prelude_string_get_string_or_default(src->data.string_val, "<empty>"));
+        return libidmef_string_sprintf(out, "%s",
+                       libidmef_string_get_string_or_default(src->data.string_val, "<empty>"));
 }
 
 
@@ -445,7 +445,7 @@ static int data_read(idmef_value_type_t *dst, const char *src)
 
 
 
-static int data_write(const idmef_value_type_t *src, prelude_string_t *out)
+static int data_write(const idmef_value_type_t *src, libidmef_string_t *out)
 {
         return idmef_data_to_string(src->data.data_val, out);
 }
@@ -519,32 +519,32 @@ static void class_destroy(idmef_value_type_t *type)
 
 
 
-static int list_to_string(const char *cname, idmef_class_id_t class, prelude_list_t *head, prelude_string_t *out,
-                          int (*item_to_string_cb)(int class, void *item, prelude_string_t *out))
+static int list_to_string(const char *cname, idmef_class_id_t class, libidmef_list_t *head, libidmef_string_t *out,
+                          int (*item_to_string_cb)(int class, void *item, libidmef_string_t *out))
 {
         void *obj;
         int ret, j;
-        prelude_list_t *tmp;
+        libidmef_list_t *tmp;
 
-        if ( prelude_list_is_empty(head) )
+        if ( libidmef_list_is_empty(head) )
                 return 0;
 
         if ( cname )
-                ret = prelude_string_sprintf(out, " %s:", cname);
+                ret = libidmef_string_sprintf(out, " %s:", cname);
         else
-                ret = prelude_string_cat(out, " ");
+                ret = libidmef_string_cat(out, " ");
 
         if ( ret < 0 )
                 return ret;
 
-        ret = prelude_string_cat(out, "(");
+        ret = libidmef_string_cat(out, "(");
         if ( ret < 0 )
                 return ret;
 
         j = 0;
-        prelude_list_for_each(head, tmp) {
+        libidmef_list_for_each(head, tmp) {
                 if ( j++ > 0 ) {
-                        ret = prelude_string_cat(out, ", ");
+                        ret = libidmef_string_cat(out, ", ");
                         if ( ret < 0 )
                                 return ret;
                 }
@@ -552,25 +552,25 @@ static int list_to_string(const char *cname, idmef_class_id_t class, prelude_lis
                 if ( ! cname )
                         obj = idmef_linked_object_get_object(tmp);
                 else
-                        obj = prelude_linked_object_get_object(tmp);
+                        obj = libidmef_linked_object_get_object(tmp);
 
                 ret = item_to_string_cb(class, obj, out);
                 if ( ret < 0 )
                         return ret;
         }
 
-        return prelude_string_cat(out, ")");
+        return libidmef_string_cat(out, ")");
 }
 
 
 
-static int listed_str_to_string(idmef_class_id_t parent_class, void *parent, prelude_string_t *out)
+static int listed_str_to_string(idmef_class_id_t parent_class, void *parent, libidmef_string_t *out)
 {
-        return prelude_string_cat(out, prelude_string_get_string(parent));
+        return libidmef_string_cat(out, libidmef_string_get_string(parent));
 }
 
 
-static int class_to_string(idmef_class_id_t parent_class, void *parent, prelude_string_t *out)
+static int class_to_string(idmef_class_id_t parent_class, void *parent, libidmef_string_t *out)
 {
         int ret, i;
         void *childptr;
@@ -578,7 +578,7 @@ static int class_to_string(idmef_class_id_t parent_class, void *parent, prelude_
         idmef_value_type_id_t vtype;
         const char *pname = idmef_class_get_name(parent_class);
 
-        ret = prelude_string_sprintf(out, "<IDMEF%c%s",  toupper(*pname), pname + 1);
+        ret = libidmef_string_sprintf(out, "<IDMEF%c%s",  toupper(*pname), pname + 1);
         if ( ret < 0 )
                 return ret;
 
@@ -597,7 +597,7 @@ static int class_to_string(idmef_class_id_t parent_class, void *parent, prelude_
                         const char *cname = idmef_class_get_child_name(parent_class, i);
 
                         if ( ! idmef_class_is_child_list(parent_class, i) ) {
-                                ret = prelude_string_sprintf(out, " %s:", cname);
+                                ret = libidmef_string_sprintf(out, " %s:", cname);
                                 if ( ret < 0 ) {
                                         idmef_value_destroy(childptr);
                                         return ret;
@@ -619,7 +619,7 @@ static int class_to_string(idmef_class_id_t parent_class, void *parent, prelude_
                 }
 
                 if ( ! idmef_class_is_child_list(parent_class, i) ) {
-                        ret = prelude_string_cat(out, " ");
+                        ret = libidmef_string_cat(out, " ");
                         if ( ret < 0 )
                                 return ret;
 
@@ -635,11 +635,11 @@ static int class_to_string(idmef_class_id_t parent_class, void *parent, prelude_
                 }
         }
 
-        return prelude_string_cat(out, ">");
+        return libidmef_string_cat(out, ">");
 }
 
 
-static int class_write(const idmef_value_type_t *src, prelude_string_t *out)
+static int class_write(const idmef_value_type_t *src, libidmef_string_t *out)
 {
         return class_to_string(src->data.class_val.class_id, src->data.class_val.object, out);
 }
@@ -685,7 +685,7 @@ static const idmef_value_type_operation_t ops_tbl[] = {
 static int is_type_valid(idmef_value_type_id_t type)
 {
         if ( type < 0 || (size_t) type >= (sizeof(ops_tbl) / sizeof(*ops_tbl)) )
-                return prelude_error_verbose(PRELUDE_ERROR_IDMEF_VALUE_TYPE_UNKNOWN, "Unknown IDMEF type id: '%d'", type);
+                return libidmef_error_verbose(LIBIDMEF_ERROR_IDMEF_VALUE_TYPE_UNKNOWN, "Unknown IDMEF type id: '%d'", type);
 
         return 0;
 }
@@ -716,7 +716,7 @@ int idmef_value_type_clone(const idmef_value_type_t *src, idmef_value_type_t *ds
                 return ret;
 
         if ( ! ops_tbl[dst->id].clone )
-                return prelude_error_verbose(PRELUDE_ERROR_IDMEF_VALUE_TYPE_CLONE_UNAVAILABLE,
+                return libidmef_error_verbose(LIBIDMEF_ERROR_IDMEF_VALUE_TYPE_CLONE_UNAVAILABLE,
                                              "Object type '%s' does not support clone operation",
                                              idmef_value_type_to_string(dst->id));
 
@@ -735,7 +735,7 @@ int idmef_value_type_copy(const idmef_value_type_t *src, void *dst)
                 return ret;
 
         if ( ! ops_tbl[src->id].copy )
-                return prelude_error_verbose(PRELUDE_ERROR_IDMEF_VALUE_TYPE_COPY_UNAVAILABLE,
+                return libidmef_error_verbose(LIBIDMEF_ERROR_IDMEF_VALUE_TYPE_COPY_UNAVAILABLE,
                                              "Object type '%s' does not support copy operation",
                                              idmef_value_type_to_string(src->id));
 
@@ -753,7 +753,7 @@ int idmef_value_type_ref(const idmef_value_type_t *vt)
                 return ret;
 
         if ( ! ops_tbl[vt->id].ref )
-                return prelude_error_verbose(PRELUDE_ERROR_IDMEF_VALUE_TYPE_REF_UNAVAILABLE,
+                return libidmef_error_verbose(LIBIDMEF_ERROR_IDMEF_VALUE_TYPE_REF_UNAVAILABLE,
                                              "Object type '%s' does not support ref operation",
                                              idmef_value_type_to_string(vt->id));
 
@@ -768,7 +768,7 @@ int idmef_value_type_compare(const idmef_value_type_t *type1,
         int ret;
         idmef_value_type_id_t tid;
 
-        prelude_return_val_if_fail(type1 || type2, prelude_error(PRELUDE_ERROR_ASSERTION));
+        libidmef_return_val_if_fail(type1 || type2, libidmef_error(LIBIDMEF_ERROR_ASSERTION));
         tid = (type1) ? type1->id : type2->id;
 
         ret = is_type_valid(tid);
@@ -777,16 +777,16 @@ int idmef_value_type_compare(const idmef_value_type_t *type1,
 
         if ( type1 && type2 && type1->id != type2->id ) {
                 if ( type1->id != IDMEF_VALUE_TYPE_ENUM && type2->id != IDMEF_VALUE_TYPE_STRING )
-                        return prelude_error(PRELUDE_ERROR_IDMEF_VALUE_TYPE_COMPARE_MISMATCH);
+                        return libidmef_error(LIBIDMEF_ERROR_IDMEF_VALUE_TYPE_COMPARE_MISMATCH);
         }
 
         if ( ! (op & ops_tbl[tid].operator) )
-                return prelude_error_verbose(PRELUDE_ERROR_IDMEF_VALUE_TYPE_COMPARE_UNAVAILABLE,
+                return libidmef_error_verbose(LIBIDMEF_ERROR_IDMEF_VALUE_TYPE_COMPARE_UNAVAILABLE,
                                              "Object type '%s' does not support operator '%s'",
                                              idmef_value_type_to_string(tid), idmef_criterion_operator_to_string(op));
 
         if ( ! ops_tbl[tid].compare )
-                return prelude_error_verbose(PRELUDE_ERROR_IDMEF_VALUE_TYPE_COMPARE_UNAVAILABLE,
+                return libidmef_error_verbose(LIBIDMEF_ERROR_IDMEF_VALUE_TYPE_COMPARE_UNAVAILABLE,
                                              "Object type '%s' does not support compare operation",
                                              idmef_value_type_to_string(tid));
 
@@ -812,7 +812,7 @@ int idmef_value_type_read(idmef_value_type_t *dst, const char *buf)
                 return ret;
 
         if ( ! ops_tbl[dst->id].read )
-                return prelude_error_verbose(PRELUDE_ERROR_IDMEF_VALUE_TYPE_READ_UNAVAILABLE,
+                return libidmef_error_verbose(LIBIDMEF_ERROR_IDMEF_VALUE_TYPE_READ_UNAVAILABLE,
                                              "Object type '%s' does not support read operation",
                                              idmef_value_type_to_string(dst->id));
 
@@ -823,7 +823,7 @@ int idmef_value_type_read(idmef_value_type_t *dst, const char *buf)
 
 
 
-int idmef_value_type_write(const idmef_value_type_t *src, prelude_string_t *out)
+int idmef_value_type_write(const idmef_value_type_t *src, libidmef_string_t *out)
 {
         int ret;
 
@@ -832,7 +832,7 @@ int idmef_value_type_write(const idmef_value_type_t *src, prelude_string_t *out)
                 return ret;
 
         if ( ! ops_tbl[src->id].write )
-                return prelude_error_verbose(PRELUDE_ERROR_IDMEF_VALUE_TYPE_WRITE_UNAVAILABLE,
+                return libidmef_error_verbose(LIBIDMEF_ERROR_IDMEF_VALUE_TYPE_WRITE_UNAVAILABLE,
                                              "Object type '%s' does not support write operation",
                                              idmef_value_type_to_string(src->id));
 
@@ -869,7 +869,7 @@ int idmef_value_type_check_operator(idmef_value_type_id_t type, idmef_criterion_
         if ( (~ops_tbl[type].operator & op) == 0 )
                 return 0;
 
-        return prelude_error_verbose(PRELUDE_ERROR_IDMEF_CRITERION_UNSUPPORTED_OPERATOR,
+        return libidmef_error_verbose(LIBIDMEF_ERROR_IDMEF_CRITERION_UNSUPPORTED_OPERATOR,
                                      "Object type '%s' does not support operator '%s'",
                                      idmef_value_type_to_string(type), idmef_criterion_operator_to_string(op));
 }

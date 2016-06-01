@@ -1,9 +1,9 @@
 /*****
 *
 * Copyright (C) 2003-2016 CS-SI. All Rights Reserved.
-* Author: Nicolas Delon <nicolas.delon@prelude-ids.com>
+* Author: Nicolas Delon <nicolas.delon@libidmef-ids.com>
 *
-* This file is part of the Prelude library.
+* This file is part of the LibIdmef library.
 *
 * This program is free software; you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -21,10 +21,10 @@
 *
 *****/
 
-#ifndef _LIBPRELUDE_IDMEF_DATA_H
-#define _LIBPRELUDE_IDMEF_DATA_H
+#ifndef _LIBIDMEF_IDMEF_DATA_H
+#define _LIBIDMEF_IDMEF_DATA_H
 
-#include "prelude-list.h"
+#include "libidmef-list.h"
 
 #ifdef __cplusplus
  extern "C" {
@@ -60,7 +60,7 @@ typedef struct {
                 const void *ro_data;
         } data;
 
-        prelude_list_t list;
+        libidmef_list_t list;
 } idmef_data_t;
 
 
@@ -72,16 +72,16 @@ idmef_data_t *idmef_data_ref(idmef_data_t *data);
 
 int idmef_data_new_char(idmef_data_t **data, char c);
 int idmef_data_new_byte(idmef_data_t **data, uint8_t i);
-int idmef_data_new_uint32(idmef_data_t **data, uint32_t i) PRELUDE_DEPRECATED;
-int idmef_data_new_uint64(idmef_data_t **data, uint64_t i) PRELUDE_DEPRECATED;
+int idmef_data_new_uint32(idmef_data_t **data, uint32_t i) LIBIDMEF_DEPRECATED;
+int idmef_data_new_uint64(idmef_data_t **data, uint64_t i) LIBIDMEF_DEPRECATED;
 int idmef_data_new_int(idmef_data_t **data, int64_t i);
 int idmef_data_new_float(idmef_data_t **data, float f);
 int idmef_data_new_time(idmef_data_t **data, idmef_time_t *time);
 
 void idmef_data_set_char(idmef_data_t *data, char c);
 void idmef_data_set_byte(idmef_data_t *data, uint8_t i);
-void idmef_data_set_uint32(idmef_data_t *data, uint32_t i) PRELUDE_DEPRECATED;
-void idmef_data_set_uint64(idmef_data_t *data, uint64_t i) PRELUDE_DEPRECATED;
+void idmef_data_set_uint32(idmef_data_t *data, uint32_t i) LIBIDMEF_DEPRECATED;
+void idmef_data_set_uint64(idmef_data_t *data, uint64_t i) LIBIDMEF_DEPRECATED;
 void idmef_data_set_int(idmef_data_t *data, int64_t i);
 void idmef_data_set_float(idmef_data_t *data, float f);
 void idmef_data_set_time(idmef_data_t *data, idmef_time_t *time);
@@ -149,9 +149,9 @@ char idmef_data_get_char(const idmef_data_t *data);
 
 uint8_t idmef_data_get_byte(const idmef_data_t *data);
 
-uint32_t idmef_data_get_uint32(const idmef_data_t *data) PRELUDE_DEPRECATED;
+uint32_t idmef_data_get_uint32(const idmef_data_t *data) LIBIDMEF_DEPRECATED;
 
-uint64_t idmef_data_get_uint64(const idmef_data_t *data) PRELUDE_DEPRECATED;
+uint64_t idmef_data_get_uint64(const idmef_data_t *data) LIBIDMEF_DEPRECATED;
 
 int64_t idmef_data_get_int(const idmef_data_t *data);
 
@@ -161,9 +161,9 @@ const char *idmef_data_get_char_string(const idmef_data_t *data);
 
 const unsigned char *idmef_data_get_byte_string(const idmef_data_t *data);
 
-prelude_bool_t idmef_data_is_empty(const idmef_data_t *data);
+libidmef_bool_t idmef_data_is_empty(const idmef_data_t *data);
 
-int idmef_data_to_string(const idmef_data_t *data, prelude_string_t *out);
+int idmef_data_to_string(const idmef_data_t *data, libidmef_string_t *out);
 
 void idmef_data_destroy_internal(idmef_data_t *data);
 
@@ -173,4 +173,4 @@ int idmef_data_compare(const idmef_data_t *data1, const idmef_data_t *data2);
  }
 #endif
 
-#endif /* _LIBPRELUDE_IDMEF_DATA_H */
+#endif /* _LIBIDMEF_IDMEF_DATA_H */

@@ -1,11 +1,11 @@
 #include <stdio.h>
 #include <stdarg.h>
 
-#include "prelude-log.h"
-#include "prelude-error.h"
+#include "libidmef-log.h"
+#include "libidmef-error.h"
 
 
-void prelude_perror(prelude_error_t error, const char *fmt, ...)
+void libidmef_perror(libidmef_error_t error, const char *fmt, ...)
 {
 	va_list ap;
 	char buf[1024];
@@ -14,8 +14,8 @@ void prelude_perror(prelude_error_t error, const char *fmt, ...)
 	vsnprintf(buf, sizeof(buf), fmt, ap);
 	va_end(ap);
 
-        if ( prelude_error_get_source(error) )
-                prelude_log(PRELUDE_LOG_WARN, "%s: %s: %s.\n", prelude_strsource(error), buf, prelude_strerror(error));
+        if ( libidmef_error_get_source(error) )
+                libidmef_log(LIBIDMEF_LOG_WARN, "%s: %s: %s.\n", libidmef_strsource(error), buf, libidmef_strerror(error));
         else
-                prelude_log(PRELUDE_LOG_WARN, "%s: %s.\n", buf, prelude_strerror(error));
+                libidmef_log(LIBIDMEF_LOG_WARN, "%s: %s.\n", buf, libidmef_strerror(error));
 }

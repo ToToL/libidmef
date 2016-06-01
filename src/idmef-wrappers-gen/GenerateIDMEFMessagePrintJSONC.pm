@@ -1,7 +1,7 @@
 # Copyright (C) 2003-2012 CS-SI. All Rights Reserved.
-# Author: Nicolas Delon <nicolas.delon@prelude-ids.com>
+# Author: Nicolas Delon <nicolas.delon@libidmef-ids.com>
 #
-# This file is part of the Prelude library.
+# This file is part of the LibIdmef library.
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -33,10 +33,10 @@ sub        header
 /*****
 *
 * Copyright (C) 2004-2016 CS-SI. All Rights Reserved.
-* Author: Yoann Vandoorselaere <yoann.v\@prelude-ids.com>
-* Author: Nicolas Delon <nicolas.delon\@prelude-ids.com>
+* Author: Yoann Vandoorselaere <yoann.v\@libidmef-ids.com>
+* Author: Nicolas Delon <nicolas.delon\@libidmef-ids.com>
 *
-* This file is part of the Prelude library.
+* This file is part of the LibIdmef library.
 *
 * This program is free software; you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -75,33 +75,33 @@ sub        header
 #define conv_int32 conv_int64
 
 
-static int conv_uint64(prelude_io_t *fd, uint64_t value)
+static int conv_uint64(libidmef_io_t *fd, uint64_t value)
 {
         int ret;
         char buf[32];
 
-        ret = snprintf(buf, sizeof(buf), \"%\" PRELUDE_PRIu64, value);
+        ret = snprintf(buf, sizeof(buf), \"%\" LIBIDMEF_PRIu64, value);
         if ( ret < 0 || ret >= sizeof(buf) )
                 return -1;
 
-        return prelude_io_write(fd, buf, ret);
+        return libidmef_io_write(fd, buf, ret);
 }
 
 
-static int conv_int64(prelude_io_t *fd, int64_t value)
+static int conv_int64(libidmef_io_t *fd, int64_t value)
 {
         int ret;
         char buf[32];
 
-        ret = snprintf(buf, sizeof(buf), \"%\" PRELUDE_PRId64, value);
+        ret = snprintf(buf, sizeof(buf), \"%\" LIBIDMEF_PRId64, value);
         if ( ret < 0 || ret >= sizeof(buf) )
                 return -1;
 
-        return prelude_io_write(fd, buf, ret);
+        return libidmef_io_write(fd, buf, ret);
 }
 
 
-static int conv_float(prelude_io_t *fd, float value)
+static int conv_float(libidmef_io_t *fd, float value)
 {
         int ret;
         char buf[32];
@@ -110,54 +110,54 @@ static int conv_float(prelude_io_t *fd, float value)
         if ( ret < 0 || ret >= sizeof(buf) )
                 return -1;
 
-        return prelude_io_write(fd, buf, ret);
+        return libidmef_io_write(fd, buf, ret);
 }
 
 
-static int conv_string(prelude_io_t *fd, prelude_string_t *string)
+static int conv_string(libidmef_io_t *fd, libidmef_string_t *string)
 {
         size_t i;
         ssize_t ret;
         const unsigned char *content;
 
-        content = (const unsigned char *) prelude_string_get_string_or_default(string, \"\");
-        ret = prelude_io_write(fd, \"\\\"\", 1);
+        content = (const unsigned char *) libidmef_string_get_string_or_default(string, \"\");
+        ret = libidmef_io_write(fd, \"\\\"\", 1);
         if ( ret < 0 )
                 return ret;
 
-        for ( i = 0; i < prelude_string_get_len(string); i++, content++ ) {
+        for ( i = 0; i < libidmef_string_get_len(string); i++, content++ ) {
                 switch(*content) {
                         case '\\\\':
                         case '\"':
                         case '/':
-                                ret = prelude_io_write(fd, \"\\\\\", 1);
+                                ret = libidmef_io_write(fd, \"\\\\\", 1);
                                 if ( ret < 0 )
                                         return ret;
 
-                                ret = prelude_io_write(fd, content, 1);
+                                ret = libidmef_io_write(fd, content, 1);
                                 break;
                         case '\\b':
-                                ret = prelude_io_write(fd, \"\\\\b\", 2);
+                                ret = libidmef_io_write(fd, \"\\\\b\", 2);
                                 break;
                         case '\\t':
-                                ret = prelude_io_write(fd, \"\\\\t\", 2);
+                                ret = libidmef_io_write(fd, \"\\\\t\", 2);
                                 break;
                         case '\\n':
-                                ret = prelude_io_write(fd, \"\\\\n\", 2);
+                                ret = libidmef_io_write(fd, \"\\\\n\", 2);
                                 break;
                         case '\\f':
-                                ret = prelude_io_write(fd, \"\\\\f\", 2);
+                                ret = libidmef_io_write(fd, \"\\\\f\", 2);
                                 break;
                         case '\\r':
-                                ret = prelude_io_write(fd, \"\\\\r\", 2);
+                                ret = libidmef_io_write(fd, \"\\\\r\", 2);
                                 break;
                         default:
                                 if ( *content >= 0x20 )
-                                        ret = prelude_io_write(fd, content, 1);
+                                        ret = libidmef_io_write(fd, content, 1);
                                 else {
                                         char seq[7];
                                         snprintf(seq, sizeof(seq), \"\\\\u%04X\", *content);
-                                        ret = prelude_io_write(fd, seq, strlen(seq));
+                                        ret = libidmef_io_write(fd, seq, strlen(seq));
                                 }
                 }
 
@@ -165,19 +165,19 @@ static int conv_string(prelude_io_t *fd, prelude_string_t *string)
                         return ret;
         }
 
-        return prelude_io_write(fd, \"\\\"\", 1);
+        return libidmef_io_write(fd, \"\\\"\", 1);
 }
 
 
-static int conv_time(prelude_io_t *fd, idmef_time_t *t)
+static int conv_time(libidmef_io_t *fd, idmef_time_t *t)
 {
         int ret;
-        prelude_string_t *str;
+        libidmef_string_t *str;
 
         if ( ! t )
                 return 0;
 
-        ret = prelude_string_new(&str);
+        ret = libidmef_string_new(&str);
         if ( ret < 0 )
                 return ret;
 
@@ -188,17 +188,17 @@ static int conv_time(prelude_io_t *fd, idmef_time_t *t)
         ret = conv_string(fd, str);
 
 error:
-        prelude_string_destroy(str);
+        libidmef_string_destroy(str);
         return ret;
 }
 
 
-static int conv_data(prelude_io_t *fd, idmef_data_t *data)
+static int conv_data(libidmef_io_t *fd, idmef_data_t *data)
 {
         int ret;
-        prelude_string_t *out;
+        libidmef_string_t *out;
 
-        ret = prelude_string_new(&out);
+        ret = libidmef_string_new(&out);
         if ( ret < 0 )
                 return ret;
 
@@ -209,21 +209,21 @@ static int conv_data(prelude_io_t *fd, idmef_data_t *data)
         switch (idmef_data_get_type(data)) {
                 case IDMEF_DATA_TYPE_INT:
                 case IDMEF_DATA_TYPE_FLOAT:
-                        ret = prelude_io_write(fd, prelude_string_get_string(out), prelude_string_get_len(out));
+                        ret = libidmef_io_write(fd, libidmef_string_get_string(out), libidmef_string_get_len(out));
                         break;
                 default:
                         ret = conv_string(fd, out);
                         break;
         }
 error:
-        prelude_string_destroy(out);
+        libidmef_string_destroy(out);
         return ret;
 }
 
 
-static int do_write(prelude_io_t *fd, const char *str)
+static int do_write(libidmef_io_t *fd, const char *str)
 {
-        return prelude_io_write(fd, str, strlen(str));
+        return libidmef_io_write(fd, str, strlen(str));
 }
 "
 );
@@ -428,7 +428,7 @@ sub        struct
  *
  * This function will convert \@ptr to a json,
  */
-int idmef_$struct->{short_typename}_print_json($struct->{typename} *ptr, prelude_io_t *fd)
+int idmef_$struct->{short_typename}_print_json($struct->{typename} *ptr, libidmef_io_t *fd)
 \{
         int ret;
 

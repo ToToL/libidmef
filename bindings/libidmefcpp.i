@@ -1,9 +1,9 @@
 /*****
 *
 * Copyright (C) 2005-2016 CS-SI. All Rights Reserved.
-* Author: Yoann Vandoorselaere <yoannv@prelude-ids.com>
+* Author: Yoann Vandoorselaere <yoannv@libidmef-ids.com>
 *
-* This file is part of the Prelude library.
+* This file is part of the LibIdmef library.
 *
 * This program is free software; you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -41,7 +41,7 @@
 #include <sstream>
 
 #include "libidmef.hxx"
-#include "prelude-error.hxx"
+#include "libidmef-error.hxx"
 #include "idmef-criteria.hxx"
 #include "idmef-value.hxx"
 #include "idmef-path.hxx"
@@ -64,8 +64,8 @@ typedef unsigned int uint32_t;
 typedef long long int64_t;
 typedef unsigned long long uint64_t;
 
-%ignore prelude_error_t;
-typedef signed int prelude_error_t;
+%ignore libidmef_error_t;
+typedef signed int libidmef_error_t;
 
 %ignore idmef_class_id_t;
 typedef int idmef_class_id_t;
@@ -76,7 +76,7 @@ typedef long long time_t;
 %exception {
         try {
                 $action
-        } catch(Idmef::PreludeError &e) {
+        } catch(Idmef::LibIdmefError &e) {
                 SWIG_exception(SWIG_RuntimeError, e.what());
                 SWIG_fail;
         }
@@ -109,7 +109,7 @@ typedef long long time_t;
 %template() std::vector<Idmef::IDMEFValue>;
 %template() std::vector<Idmef::Connection>;
 
-#ifdef SWIG_COMPILE_LIBPRELUDE
+#ifdef SWIG_COMPILE_LIBIDMEF
 %extend Idmef::IDMEF {
         Idmef::IDMEFValue get(const char *path) {
                 Idmef::IDMEFValue value;
@@ -164,8 +164,8 @@ int IDMEFValue_to_SWIG(TARGET_LANGUAGE_SELF self, const Idmef::IDMEFValue &resul
         Idmef::IDMEFValue::IDMEFValueTypeEnum type = result.getType();
 
         if ( type == Idmef::IDMEFValue::TYPE_STRING ) {
-                prelude_string_t *str = idmef_value_get_string(value);
-                *ret = SWIG_FromCharPtrAndSize(prelude_string_get_string(str), prelude_string_get_len(str));
+                libidmef_string_t *str = idmef_value_get_string(value);
+                *ret = SWIG_FromCharPtrAndSize(libidmef_string_get_string(str), libidmef_string_get_len(str));
         }
 
         else if ( type == Idmef::IDMEFValue::TYPE_INT8 )
@@ -290,9 +290,9 @@ int IDMEFValue_to_SWIG(TARGET_LANGUAGE_SELF self, const Idmef::IDMEFValue &resul
  * because they might acquire internal libidmef mutex that may also be
  * acquired undirectly through the libidmef asynchronous stack.
  *
- * [Thread 2]: Libprelude async stack
+ * [Thread 2]: Liblibidmef async stack
  * -> Lock internal mutexX
- *    -> prelude_log()
+ *    -> libidmef_log()
  *       -> SWIG/C log callback
  *          -> Wait on Interpreter lock [DEADLOCK]
  *             -> Python logging callback (never called)
@@ -316,8 +316,8 @@ int IDMEFValue_to_SWIG(TARGET_LANGUAGE_SELF self, const Idmef::IDMEFValue &resul
  * needed.
  */
 
-#ifdef SWIG_COMPILE_LIBPRELUDE
-%feature("exceptionclass") Idmef::PreludeError;
+#ifdef SWIG_COMPILE_LIBIDMEF
+%feature("exceptionclass") Idmef::LibIdmefError;
 %feature("kwargs") Idmef::IDMEFClass::getPath;
 %feature("kwargs") Idmef::IDMEFPath::getClass;
 %feature("kwargs") Idmef::IDMEFPath::getValueType;
@@ -329,7 +329,7 @@ int IDMEFValue_to_SWIG(TARGET_LANGUAGE_SELF self, const Idmef::IDMEFValue &resul
 %feature("kwargs") Idmef::IDMEFPath::isList;
 
 %include libidmef.hxx
-%include prelude-error.hxx
+%include libidmef-error.hxx
 %include idmef-criteria.hxx
 %include idmef-value.hxx
 %include idmef-path.hxx

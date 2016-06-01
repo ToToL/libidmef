@@ -3,19 +3,19 @@
 #include <stdlib.h>
 #include <string.h>
 #include <assert.h>
-#include "prelude.h"
+#include "libidmef.h"
 
 
 static void set_value_check(idmef_message_t *idmef, const char *paths,
-                            const char *str_value, prelude_bool_t verify_get)
+                            const char *str_value, libidmef_bool_t verify_get)
 {
         idmef_path_t *path;
         idmef_value_t *value;
-        prelude_string_t *str;
-        prelude_string_t *res;
+        libidmef_string_t *str;
+        libidmef_string_t *res;
 
         assert(idmef_path_new_fast(&path, paths) == 0);
-        assert(prelude_string_new_ref(&str, str_value) == 0);
+        assert(libidmef_string_new_ref(&str, str_value) == 0);
         assert(idmef_value_new_string(&value, str) == 0);
 
         if ( verify_get )
@@ -32,10 +32,10 @@ static void set_value_check(idmef_message_t *idmef, const char *paths,
 
         assert(idmef_path_get(path, idmef, &value) > 0);
 
-        assert(prelude_string_new(&res) == 0);
+        assert(libidmef_string_new(&res) == 0);
         assert(idmef_value_to_string(value, res) >= 0);
-        assert(strcmp(str_value, prelude_string_get_string(res)) == 0);
-        prelude_string_destroy(res);
+        assert(strcmp(str_value, libidmef_string_get_string(res)) == 0);
+        libidmef_string_destroy(res);
 
         idmef_value_destroy(value);
         idmef_path_destroy(path);
@@ -50,9 +50,9 @@ int main(void)
         struct {
                 const char *path;
                 int depth;
-                prelude_bool_t has_list;
-                prelude_bool_t ambiguous;
-                prelude_bool_t successful;
+                libidmef_bool_t has_list;
+                libidmef_bool_t ambiguous;
+                libidmef_bool_t successful;
         } plist[] = {
                 { "alert.classification.text", 3, FALSE, FALSE, TRUE },
                 { "alert.assessment.impact.severity", 4, FALSE, FALSE, TRUE },

@@ -1,9 +1,9 @@
 #!/usr/bin/env ruby 
 
-require("Prelude")
+require("LibIdmef")
 
-Prelude::PreludeLog::setCallback(lambda{|level,str|print "log: " + str})
-idmef = Prelude::IDMEF.new()
+LibIdmef::LibIdmefLog::setCallback(lambda{|level,str|print "log: " + str})
+idmef = LibIdmef::IDMEF.new()
 
 print "*** IDMEF->Set() ***\n"
 idmef.set("alert.classification.text", "My Message")
@@ -35,7 +35,7 @@ fd.close()
 
 print "\n*** IDMEF->Read() ***\n"
 fd2 = File.new("foo.bin", "r")
-idmef2 = Prelude::IDMEF.new()
+idmef2 = LibIdmef::IDMEF.new()
 while true do
 	begin
 		idmef2 << fd2
@@ -48,14 +48,14 @@ end
 fd2.close()
 
 fd2 = File.new("foo.bin", "r")
-idmef2 = Prelude::IDMEF.new()
+idmef2 = LibIdmef::IDMEF.new()
 while idmef2.read(fd2) > 0 do
 	print idmef2
 end
 fd2.close()
 
 print "\n*** Client ***\n"
-c = Prelude::ClientEasy.new("prelude-lml")
+c = LibIdmef::ClientEasy.new("libidmef-lml")
 c.start()
 
 c << idmef

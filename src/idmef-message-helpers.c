@@ -1,9 +1,9 @@
 /*****
 *
 * Copyright (C) 2008-2016 CS-SI. All Rights Reserved.
-* Author: Yoann Vandoorselaere <yoann.v@prelude-ids.com>
+* Author: Yoann Vandoorselaere <yoann.v@libidmef-ids.com>
 *
-* This file is part of the Prelude library.
+* This file is part of the LibIdmef library.
 *
 * This program is free software; you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -105,15 +105,15 @@ int idmef_message_set_string(idmef_message_t *message, const char *path, const c
 {
         int ret;
         idmef_value_t *iv;
-        prelude_string_t *str;
+        libidmef_string_t *str;
 
-        ret = prelude_string_new_dup(&str, value);
+        ret = libidmef_string_new_dup(&str, value);
         if ( ret < 0 )
                 return ret;
 
         ret = idmef_value_new_string(&iv, str);
         if ( ret < 0 ) {
-                prelude_string_destroy(str);
+                libidmef_string_destroy(str);
                 return ret;
         }
 
@@ -143,7 +143,7 @@ int idmef_message_get_string(idmef_message_t *message, const char *path, char **
 {
         int ret;
         idmef_value_t *iv;
-        prelude_string_t *str;
+        libidmef_string_t *str;
 
         ret = idmef_message_get_value(message, path, &iv);
         if ( ret <= 0 )
@@ -160,13 +160,13 @@ int idmef_message_get_string(idmef_message_t *message, const char *path, char **
                 goto err;
         }
 
-        if ( prelude_string_is_empty(str) ) {
+        if ( libidmef_string_is_empty(str) ) {
                 *result = NULL;
                 return 0;
         }
 
-        *result = strdup(prelude_string_get_string(str));
-        ret = prelude_string_get_len(str);
+        *result = strdup(libidmef_string_get_string(str));
+        ret = libidmef_string_get_len(str);
 
 err:
         idmef_value_destroy(iv);

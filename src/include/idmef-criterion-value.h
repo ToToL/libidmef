@@ -1,9 +1,9 @@
 /*****
 *
 * Copyright (C) 2004-2016 CS-SI. All Rights Reserved.
-* Author: Nicolas Delon <nicolas.delon@prelude-ids.com>
+* Author: Nicolas Delon <nicolas.delon@libidmef-ids.com>
 *
-* This file is part of the Prelude library.
+* This file is part of the LibIdmef library.
 *
 * This program is free software; you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -21,8 +21,8 @@
 *
 *****/
 
-#ifndef _LIBPRELUDE_IDMEF_CRITERION_VALUE_H
-#define _LIBPRELUDE_IDMEF_CRITERION_VALUE_H
+#ifndef _LIBIDMEF_IDMEF_CRITERION_VALUE_H
+#define _LIBIDMEF_IDMEF_CRITERION_VALUE_H
 
 #ifdef __cplusplus
  extern "C" {
@@ -58,9 +58,9 @@ int idmef_criterion_value_clone(const idmef_criterion_value_t *src, idmef_criter
 
 void idmef_criterion_value_destroy(idmef_criterion_value_t *value);
 
-int idmef_criterion_value_print(idmef_criterion_value_t *value, prelude_io_t *fd);
+int idmef_criterion_value_print(idmef_criterion_value_t *value, libidmef_io_t *fd);
 
-int idmef_criterion_value_to_string(idmef_criterion_value_t *value, prelude_string_t *out);
+int idmef_criterion_value_to_string(idmef_criterion_value_t *value, libidmef_string_t *out);
 
 int idmef_criterion_value_match(idmef_criterion_value_t *cv, idmef_value_t *value, idmef_criterion_operator_t op);
 
@@ -77,4 +77,4 @@ idmef_criterion_value_type_t idmef_criterion_value_get_type(idmef_criterion_valu
 #endif
 
          
-#endif /* _LIBPRELUDE_IDMEF_CRITERION_VALUE_H */
+#endif /* _LIBIDMEF_IDMEF_CRITERION_VALUE_H */

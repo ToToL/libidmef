@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <assert.h>
-#include "prelude.h"
+#include "libidmef.h"
 
 
 static void cast_data(idmef_value_t *value)
@@ -162,9 +162,9 @@ static void cast_string(void)
 {
         idmef_data_t *data;
         idmef_value_t *value;
-        prelude_string_t *str;
+        libidmef_string_t *str;
 
-        assert(prelude_string_new_ref(&str, "abcdefgh") == 0);
+        assert(libidmef_string_new_ref(&str, "abcdefgh") == 0);
         assert(idmef_value_new_string(&value, str) == 0);
         idmef_value_dont_have_own_data(value);
 
@@ -186,14 +186,14 @@ static void cast_string(void)
         assert(_idmef_value_cast(value, IDMEF_VALUE_TYPE_DATA, -1) == 0);
         assert(idmef_value_get_type(value) == IDMEF_VALUE_TYPE_DATA);
         assert(data = idmef_value_get_data(value));
-        assert(idmef_data_get_len(data) == (prelude_string_get_len(str) + 1));
-        assert(memcmp(prelude_string_get_string(str), idmef_data_get_data(data), idmef_data_get_len(data)) == 0);
-        prelude_string_destroy(str);
+        assert(idmef_data_get_len(data) == (libidmef_string_get_len(str) + 1));
+        assert(memcmp(libidmef_string_get_string(str), idmef_data_get_data(data), idmef_data_get_len(data)) == 0);
+        libidmef_string_destroy(str);
 
         cast_data(value);
         idmef_value_destroy(value);
 
-        assert(prelude_string_new_ref(&str, "2008-01-01 20:42:31") == 0);
+        assert(libidmef_string_new_ref(&str, "2008-01-01 20:42:31") == 0);
         assert(idmef_value_new_string(&value, str) == 0);
         assert(_idmef_value_cast(value, IDMEF_VALUE_TYPE_TIME, -1) == 0);
         idmef_value_destroy(value);

@@ -50,9 +50,9 @@ sub this {
 package Idmef;
 
 
-############# Class : Idmef::PreludeError ##############
+############# Class : Idmef::LibIdmefError ##############
 
-package Idmef::PreludeError;
+package Idmef::LibIdmefError;
 use vars qw(@ISA %OWNER %ITERATORS %BLESSEDMEMBERS);
 @ISA = qw( Idmef );
 %OWNER = ();
@@ -63,19 +63,19 @@ sub DESTROY {
     return unless defined $self;
     delete $ITERATORS{$self};
     if (exists $OWNER{$self}) {
-        Idmefc::delete_PreludeError($self);
+        Idmefc::delete_LibIdmefError($self);
         delete $OWNER{$self};
     }
 }
 
 sub new {
     my $pkg = shift;
-    my $self = Idmefc::new_PreludeError(@_);
+    my $self = Idmefc::new_LibIdmefError(@_);
     bless $self, $pkg if defined($self);
 }
 
-*getCode = *Idmefc::PreludeError_getCode;
-*what = *Idmefc::PreludeError_what;
+*getCode = *Idmefc::LibIdmefError_getCode;
+*what = *Idmefc::LibIdmefError_what;
 sub DISOWN {
     my $self = shift;
     my $ptr = tied(%$self);

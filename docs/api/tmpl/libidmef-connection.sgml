@@ -1,0 +1,307 @@
+<!-- ##### SECTION Title ##### -->
+libidmef-connection
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### SECTION Image ##### -->
+
+
+<!-- ##### ENUM libidmef_connection_permission_t ##### -->
+<para>
+
+</para>
+
+@LIBIDMEF_CONNECTION_PERMISSION_IDMEF_READ: 
+@LIBIDMEF_CONNECTION_PERMISSION_ADMIN_READ: 
+@LIBIDMEF_CONNECTION_PERMISSION_IDMEF_WRITE: 
+@LIBIDMEF_CONNECTION_PERMISSION_ADMIN_WRITE: 
+
+<!-- ##### ENUM libidmef_connection_state_t ##### -->
+<para>
+
+</para>
+
+@LIBIDMEF_CONNECTION_STATE_ESTABLISHED: 
+
+<!-- ##### TYPEDEF libidmef_connection_t ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION libidmef_connection_destroy ##### -->
+<para>
+
+</para>
+
+@conn: 
+
+
+<!-- ##### FUNCTION libidmef_connection_send ##### -->
+<para>
+
+</para>
+
+@cnx: 
+@msg: 
+@Returns: 
+
+
+<!-- ##### FUNCTION libidmef_connection_recv ##### -->
+<para>
+
+</para>
+
+@cnx: 
+@outmsg: 
+@Returns: 
+
+
+<!-- ##### FUNCTION libidmef_connection_recv_idmef ##### -->
+<para>
+
+</para>
+
+@con: 
+@idmef: 
+@Returns: 
+
+
+<!-- ##### FUNCTION libidmef_connection_connect ##### -->
+<para>
+
+</para>
+
+@cnx: 
+@profile: 
+@permission: 
+@Returns: 
+
+
+<!-- ##### FUNCTION libidmef_connection_forward ##### -->
+<para>
+
+</para>
+
+@cnx: 
+@src: 
+@count: 
+@Returns: 
+
+
+<!-- ##### FUNCTION libidmef_connection_get_local_addr ##### -->
+<para>
+
+</para>
+
+@cnx: 
+@Returns: 
+
+
+<!-- ##### FUNCTION libidmef_connection_get_local_port ##### -->
+<para>
+
+</para>
+
+@cnx: 
+@Returns: 
+
+
+<!-- ##### FUNCTION libidmef_connection_get_peer_addr ##### -->
+<para>
+
+</para>
+
+@cnx: 
+@Returns: 
+
+
+<!-- ##### FUNCTION libidmef_connection_get_peer_port ##### -->
+<para>
+
+</para>
+
+@cnx: 
+@Returns: 
+
+
+<!-- ##### FUNCTION libidmef_connection_is_alive ##### -->
+<para>
+
+</para>
+
+@cnx: 
+@Returns: 
+
+
+<!-- ##### FUNCTION libidmef_connection_get_fd ##### -->
+<para>
+
+</para>
+
+@cnx: 
+@Returns: 
+
+
+<!-- ##### FUNCTION libidmef_connection_close ##### -->
+<para>
+
+</para>
+
+@cnx: 
+@Returns: 
+
+
+<!-- ##### FUNCTION libidmef_connection_set_fd_ref ##### -->
+<para>
+
+</para>
+
+@cnx: 
+@fd: 
+
+
+<!-- ##### FUNCTION libidmef_connection_set_fd_nodup ##### -->
+<para>
+
+</para>
+
+@cnx: 
+@fd: 
+
+
+<!-- ##### FUNCTION libidmef_connection_set_state ##### -->
+<para>
+
+</para>
+
+@cnx: 
+@state: 
+
+
+<!-- ##### FUNCTION libidmef_connection_get_state ##### -->
+<para>
+
+</para>
+
+@cnx: 
+@Returns: 
+
+
+<!-- ##### FUNCTION libidmef_connection_set_data ##### -->
+<para>
+
+</para>
+
+@cnx: 
+@data: 
+
+
+<!-- ##### FUNCTION libidmef_connection_get_data ##### -->
+<para>
+
+</para>
+
+@cnx: 
+@Returns: 
+
+
+<!-- ##### FUNCTION libidmef_connection_get_default_socket_filename ##### -->
+<para>
+
+</para>
+
+@void: 
+@Returns: 
+
+
+<!-- ##### FUNCTION libidmef_connection_get_permission ##### -->
+<para>
+
+</para>
+
+@conn: 
+@Returns: 
+
+
+<!-- ##### FUNCTION libidmef_connection_get_peer_analyzerid ##### -->
+<para>
+
+</para>
+
+@cnx: 
+@Returns: 
+
+
+<!-- ##### FUNCTION libidmef_connection_set_peer_analyzerid ##### -->
+<para>
+
+</para>
+
+@cnx: 
+@analyzerid: 
+
+
+<!-- ##### FUNCTION libidmef_connection_new ##### -->
+<para>
+
+</para>
+
+@ret: 
+@addr: 
+@Returns: 
+
+
+<!-- ##### FUNCTION libidmef_connection_ref ##### -->
+<para>
+
+</para>
+
+@conn: 
+@Returns: 
+
+
+<!-- ##### FUNCTION libidmef_connection_new_msgbuf ##### -->
+<para>
+
+</para>
+
+@connection: 
+@msgbuf: 
+@Returns: 
+
+
+<!-- ##### FUNCTION libidmef_connection_permission_to_string ##### -->
+<para>
+
+</para>
+
+@perm: 
+@out: 
+@Returns: 
+
+
+<!-- ##### FUNCTION libidmef_connection_permission_new_from_string ##### -->
+<para>
+
+</para>
+
+@out: 
+@buf: 
+@Returns: 
+
+

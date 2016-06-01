@@ -26,7 +26,7 @@
 #include <stdio.h>
 #include <sys/types.h>
 
-#include "prelude-inttypes.h"
+#include "libidmef-inttypes.h"
 #include "ntp.h"
 
 

@@ -1,7 +1,7 @@
 # Copyright (C) 2003-2016 CS-SI. All Rights Reserved.
-# Author: Nicolas Delon <nicolas.delon@prelude-ids.com>
+# Author: Nicolas Delon <nicolas.delon@libidmef-ids.com>
 #
-# This file is part of the Prelude library.
+# This file is part of the LibIdmef library.
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -33,10 +33,10 @@ sub        header
 /*****
 *
 * Copyright (C) 2001-2016 CS-SI. All Rights Reserved.
-* Author: Yoann Vandoorselaere <yoann.v\@prelude-ids.com>
-* Author: Nicolas Delon <nicolas.delon\@prelude-ids.com>
+* Author: Yoann Vandoorselaere <yoann.v\@libidmef-ids.com>
+* Author: Nicolas Delon <nicolas.delon\@libidmef-ids.com>
 *
-* This file is part of the Prelude library.
+* This file is part of the LibIdmef library.
 *
 * This program is free software; you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -62,12 +62,12 @@ sub        header
 #include <string.h>
 #include <unistd.h>
 
-#include \"prelude-inttypes.h\"
-#include \"prelude-list.h\"
-#include \"prelude-log.h\"
-#include \"prelude-io.h\"
-#include \"prelude-ident.h\"
-#include \"prelude-message-id.h\"
+#include \"libidmef-inttypes.h\"
+#include \"libidmef-list.h\"
+#include \"libidmef-log.h\"
+#include \"libidmef-io.h\"
+#include \"libidmef-ident.h\"
+#include \"libidmef-message-id.h\"
 #include \"idmef-message-id.h\"
 #include \"idmef.h\"
 #include \"idmef-tree-wrap.h\"
@@ -84,44 +84,44 @@ sub        header
  * Here we are trying to communicate using a home made, binary version of IDMEF.
  */
 
-int binary_write(prelude_io_t *fd, uint8_t tag, uint32_t len, const void *data)
+int binary_write(libidmef_io_t *fd, uint8_t tag, uint32_t len, const void *data)
 {
         uint32_t l;
 
         l = htonl(len);
 
-        prelude_io_write(fd, &tag, sizeof(tag));
-        prelude_io_write(fd, &l, sizeof(l));
+        libidmef_io_write(fd, &tag, sizeof(tag));
+        libidmef_io_write(fd, &l, sizeof(l));
 
         if ( len > 0 )
-                prelude_io_write(fd, data, len);
+                libidmef_io_write(fd, data, len);
 
         return 1;
 }
 
 
-static inline int prelude_string_write(prelude_string_t *string, prelude_io_t *fd, uint8_t tag)
+static inline int libidmef_string_write(libidmef_string_t *string, libidmef_io_t *fd, uint8_t tag)
 \{
-        if ( ! string || prelude_string_is_empty(string) )
+        if ( ! string || libidmef_string_is_empty(string) )
                 return 0;
 
-        return binary_write(fd, tag, prelude_string_get_len(string) + 1, prelude_string_get_string(string));
+        return binary_write(fd, tag, libidmef_string_get_len(string) + 1, libidmef_string_get_string(string));
 \}
 
 
 
-static inline int uint64_write(uint64_t data, prelude_io_t *fd, uint8_t tag)
+static inline int uint64_write(uint64_t data, libidmef_io_t *fd, uint8_t tag)
 \{
         uint64_t dst;
 
-        dst = prelude_hton64(data);
+        dst = libidmef_hton64(data);
 
         return binary_write(fd, tag, sizeof(dst), &dst);
 \}
 
 
 
-static inline int uint32_write(uint32_t data, prelude_io_t *fd, uint8_t tag)
+static inline int uint32_write(uint32_t data, libidmef_io_t *fd, uint8_t tag)
 \{
         data = htonl(data);
         return binary_write(fd, tag, sizeof(data), &data);
@@ -129,21 +129,21 @@ static inline int uint32_write(uint32_t data, prelude_io_t *fd, uint8_t tag)
 
 
 
-static inline int int32_write(uint32_t data, prelude_io_t *fd, uint8_t tag)
+static inline int int32_write(uint32_t data, libidmef_io_t *fd, uint8_t tag)
 \{
         return uint32_write(data, fd, tag);
 \}
 
 
 
-static inline int uint8_write(uint8_t data, prelude_io_t *fd, uint8_t tag)
+static inline int uint8_write(uint8_t data, libidmef_io_t *fd, uint8_t tag)
 \{
         return binary_write(fd, tag, sizeof (data), &data);
 \}
 
 
 
-static inline int uint16_write(uint16_t data, prelude_io_t *fd, uint8_t tag)
+static inline int uint16_write(uint16_t data, libidmef_io_t *fd, uint8_t tag)
 \{
         data = htons(data);
         return binary_write(fd, tag, sizeof(data), &data);
@@ -151,14 +151,14 @@ static inline int uint16_write(uint16_t data, prelude_io_t *fd, uint8_t tag)
 
 
 
-static inline int float_write(float data, prelude_io_t *fd, uint8_t tag)
+static inline int float_write(float data, libidmef_io_t *fd, uint8_t tag)
 \{
-        uint32_t tmp = prelude_htonf(data);
+        uint32_t tmp = libidmef_htonf(data);
         return binary_write(fd, tag, sizeof(tmp), &tmp);
 \}
 
 
-static inline int idmef_time_write(const idmef_time_t *data, prelude_io_t *fd, uint8_t tag)
+static inline int idmef_time_write(const idmef_time_t *data, libidmef_io_t *fd, uint8_t tag)
 \{
         uint32_t tmp;
         unsigned char buf[12];
@@ -180,7 +180,7 @@ static inline int idmef_time_write(const idmef_time_t *data, prelude_io_t *fd, u
 
 
 
-static inline int idmef_data_write(idmef_data_t *data, prelude_io_t *fd, uint8_t tag)
+static inline int idmef_data_write(idmef_data_t *data, libidmef_io_t *fd, uint8_t tag)
 \{
         int ret;
         idmef_data_type_t type;
@@ -336,7 +336,7 @@ sub        pre_declared
     my        $tree = shift;
     my        $struct = shift;
 
-    $self->output("int idmef_$struct->{short_typename}_write($struct->{typename} *, prelude_io_t *);", "\n\n");
+    $self->output("int idmef_$struct->{short_typename}_write($struct->{typename} *, libidmef_io_t *);", "\n\n");
 }
 
 sub        struct
@@ -349,14 +349,14 @@ sub        struct
 /**
  * idmef_$struct->{short_typename}_write:
  * \@$struct->{short_typename}: Pointer to a #$struct->{typename} object.
- * \@msg: Pointer to a #prelude_msgbuf_t object, where the message should be written.
+ * \@msg: Pointer to a #libidmef_msgbuf_t object, where the message should be written.
  *
  * Write \@$struct->{short_typename} within \@msg message buffer. The buffer is
- * associated with a #prelude_io_t file descriptor where the data will be written.
+ * associated with a #libidmef_io_t file descriptor where the data will be written.
  *
  * Returns: 0 on success, a negative value if an error occured.
  */
-int idmef_$struct->{short_typename}_write($struct->{typename} *$struct->{short_typename}, prelude_io_t *fd)\n\{\n", " " x 8, "int ret;\n");
+int idmef_$struct->{short_typename}_write($struct->{typename} *$struct->{short_typename}, libidmef_io_t *fd)\n\{\n", " " x 8, "int ret;\n");
 
     $self->output(" " x 8, "if ( ! $struct->{short_typename} )", "\n",
                   " " x 16, "return 0;",

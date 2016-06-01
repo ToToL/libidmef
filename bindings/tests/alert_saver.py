@@ -2,7 +2,7 @@
 
 import os
 import sys
-import PreludeEasy
+import LibIdmefEasy
 
 
 ##################
@@ -22,8 +22,8 @@ if os.path.exists(dest_dir) == 0:
 	sys.exit(1)
 
 
-client = PreludeEasy.ClientEasy("PolluxTest", PreludeEasy.Client.IDMEF_READ)
-client.SetFlags(client.GetFlags() & ~PreludeEasy.Client.HEARTBEAT)
+client = LibIdmefEasy.ClientEasy("PolluxTest", LibIdmefEasy.Client.IDMEF_READ)
+client.SetFlags(client.GetFlags() & ~LibIdmefEasy.Client.HEARTBEAT)
 #client.Init()
 client.Start()
 
@@ -49,7 +49,7 @@ import time
 while 1:
 	sys.stdout.write(".")
 	sys.stdout.flush()
-	idmef = PreludeEasy.IDMEF()
+	idmef = LibIdmefEasy.IDMEF()
 	client >> idmef
 	if idmef:
 		handle_alert(idmef)

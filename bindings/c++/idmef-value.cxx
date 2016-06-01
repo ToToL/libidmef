@@ -1,9 +1,9 @@
 /*****
 *
 * Copyright (C) 2008-2016 CS-SI. All Rights Reserved.
-* Author: Yoann Vandoorselaere <yoann@prelude-ids.com>
+* Author: Yoann Vandoorselaere <yoann@libidmef-ids.com>
 *
-* This file is part of the Prelude library.
+* This file is part of the LibIdmef library.
 *
 * This program is free software; you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -24,7 +24,7 @@
 #include <string.h>
 #include <sstream>
 
-#include "prelude-error.hxx"
+#include "libidmef-error.hxx"
 #include "idmef.hxx"
 #include "idmef-value.hxx"
 #include "idmef-criteria.hxx"
@@ -71,16 +71,16 @@ IDMEFValue::IDMEFValue(const IDMEFValue &value)
 void IDMEFValue::_InitFromString(const char *value, size_t len)
 {
         int ret;
-        prelude_string_t *str;
+        libidmef_string_t *str;
 
-        ret = prelude_string_new_dup_fast(&str, value, len);
+        ret = libidmef_string_new_dup_fast(&str, value, len);
         if ( ret < 0 )
-                throw PreludeError(ret);
+                throw LibIdmefError(ret);
 
         ret = idmef_value_new_string(&_value, str);
         if ( ret < 0 ) {
-                prelude_string_destroy(str);
-                throw PreludeError(ret);
+                libidmef_string_destroy(str);
+                throw LibIdmefError(ret);
         }
 }
 
@@ -101,7 +101,7 @@ IDMEFValue::IDMEFValue(int32_t value)
 {
         int ret = idmef_value_new_int32(&_value, value);
         if ( ret < 0 )
-                throw PreludeError(ret);
+                throw LibIdmefError(ret);
 }
 
 
@@ -109,7 +109,7 @@ IDMEFValue::IDMEFValue(int64_t value)
 {
         int ret = idmef_value_new_int64(&_value, value);
         if ( ret < 0 )
-                throw PreludeError(ret);
+                throw LibIdmefError(ret);
 }
 
 
@@ -117,7 +117,7 @@ IDMEFValue::IDMEFValue(uint64_t value)
 {
         int ret = idmef_value_new_uint64(&_value, value);
         if ( ret < 0 )
-                throw PreludeError(ret);
+                throw LibIdmefError(ret);
 }
 
 
@@ -125,7 +125,7 @@ IDMEFValue::IDMEFValue(float value)
 {
         int ret = idmef_value_new_float(&_value, value);
         if ( ret < 0 )
-                throw PreludeError(ret);
+                throw LibIdmefError(ret);
 }
 
 
@@ -133,7 +133,7 @@ IDMEFValue::IDMEFValue(double value)
 {
         int ret = idmef_value_new_double(&_value, value);
         if ( ret < 0 )
-                throw PreludeError(ret);
+                throw LibIdmefError(ret);
 }
 
 
@@ -141,7 +141,7 @@ IDMEFValue::IDMEFValue(IDMEFTime &time)
 {
         int ret = idmef_value_new_time(&_value, idmef_time_ref(time));
         if ( ret < 0 )
-                throw PreludeError(ret);
+                throw LibIdmefError(ret);
 }
 
 
@@ -153,7 +153,7 @@ IDMEFValue::IDMEFValue(IDMEF *idmef)
         if (  idmef ) {
                 ret = idmef_value_new_class(&v, idmef->getId(), idmef_object_ref((idmef_object_t *) *idmef));
                 if ( ret < 0 )
-                       throw PreludeError(ret);
+                       throw LibIdmefError(ret);
         }
 
         _value = v;
@@ -168,12 +168,12 @@ IDMEFValue::IDMEFValue(const std::vector<IDMEF> &value)
 
         ret = idmef_value_new_list(&_value);
         if ( ret < 0 )
-                throw PreludeError(ret);
+                throw LibIdmefError(ret);
 
         for ( i = value.begin(); i != value.end(); i++ ) {
                 ret = idmef_value_new_class(&vitem, i->getId(), idmef_object_ref((idmef_object_t *) *i));
                 if ( ret < 0 )
-                        throw PreludeError(ret);
+                        throw LibIdmefError(ret);
 
                 idmef_value_list_add(_value, vitem);
         }
@@ -187,7 +187,7 @@ IDMEFValue::IDMEFValue(const std::vector<IDMEFValue> &value)
 
         ret = idmef_value_new_list(&_value);
         if ( ret < 0 )
-                throw PreludeError(ret);
+                throw LibIdmefError(ret);
 
         for ( i = value.begin(); i != value.end(); i++ )
                 idmef_value_list_add(_value, idmef_value_ref(*i));
@@ -205,7 +205,7 @@ int IDMEFValue::match(const IDMEFValue &value, int op) const
 
         ret = idmef_value_match(this->_value, value._value, (idmef_criterion_operator_t) op);
         if ( ret < 0 )
-                throw PreludeError(ret);
+                throw LibIdmefError(ret);
 
         return ret;
 }
@@ -218,7 +218,7 @@ IDMEFValue IDMEFValue::clone() const
 
         ret = idmef_value_clone(_value, &clone);
         if ( ret < 0 )
-                throw PreludeError(ret);
+                throw LibIdmefError(ret);
 
         return IDMEFValue(clone);
 }
@@ -228,20 +228,20 @@ const std::string IDMEFValue::toString() const
 {
         int ret;
         std::string s;
-        prelude_string_t *str;
+        libidmef_string_t *str;
 
-        ret = prelude_string_new(&str);
+        ret = libidmef_string_new(&str);
         if ( ret < 0 )
-                throw PreludeError(ret);
+                throw LibIdmefError(ret);
 
         ret = idmef_value_to_string(_value, str);
         if ( ret < 0 ) {
-                prelude_string_destroy(str);
-                throw PreludeError(ret);
+                libidmef_string_destroy(str);
+                throw LibIdmefError(ret);
         }
 
-        s = prelude_string_get_string(str);
-        prelude_string_destroy(str);
+        s = libidmef_string_get_string(str);
+        libidmef_string_destroy(str);
 
         return s;
 }
@@ -270,7 +270,7 @@ IDMEFValue::operator std::vector<IDMEFValue> () const
         if ( getType() != TYPE_LIST ) {
                 std::stringstream s;
                 s << "Left value doesn't fit '" << idmef_value_type_to_string((idmef_value_type_id_t) getType()) << "' requirement";
-                throw PreludeError(s.str());
+                throw LibIdmefError(s.str());
         }
 
         idmef_value_iterate(_value, iterate_cb, &vlist);
@@ -281,12 +281,12 @@ IDMEFValue::operator std::vector<IDMEFValue> () const
 
 IDMEFValue::operator IDMEFTime () const
 {
-        prelude_except_if_fail(_value);
+        libidmef_except_if_fail(_value);
 
         if ( getType() != TYPE_TIME ) {
                 std::stringstream s;
                 s << "Left value doesn't fit '" << idmef_value_type_to_string((idmef_value_type_id_t) getType()) << "' requirement";
-                throw PreludeError(s.str());
+                throw LibIdmefError(s.str());
         }
 
         return IDMEFTime(idmef_time_ref(idmef_value_get_time(_value)));
@@ -298,7 +298,7 @@ IDMEFValue::operator int32_t () const
 {
         IDMEFValueTypeEnum vtype;
 
-        prelude_except_if_fail(_value);
+        libidmef_except_if_fail(_value);
         vtype = getType();
 
         if ( vtype == TYPE_INT8 )
@@ -321,13 +321,13 @@ IDMEFValue::operator int32_t () const
 
         std::stringstream s;
         s << "Left value doesn't fit '" << idmef_value_type_to_string((idmef_value_type_id_t) vtype) << "' requirement";
-        throw PreludeError(s.str());
+        throw LibIdmefError(s.str());
 }
 
 
 IDMEFValue::operator uint32_t () const
 {
-        prelude_except_if_fail(_value);
+        libidmef_except_if_fail(_value);
 
         if ( getType() == TYPE_UINT32 )
                 return idmef_value_get_uint32(_value);
@@ -338,7 +338,7 @@ IDMEFValue::operator uint32_t () const
 
 IDMEFValue::operator int64_t () const
 {
-        prelude_except_if_fail(_value);
+        libidmef_except_if_fail(_value);
 
         if ( getType() == TYPE_INT64 )
                 return idmef_value_get_int64(_value);
@@ -349,7 +349,7 @@ IDMEFValue::operator int64_t () const
 
 IDMEFValue::operator uint64_t () const
 {
-        prelude_except_if_fail(_value);
+        libidmef_except_if_fail(_value);
 
         if ( getType() == TYPE_UINT64 )
                 return idmef_value_get_uint64(_value);
@@ -362,7 +362,7 @@ IDMEFValue::operator float () const
 {
         IDMEFValueTypeEnum vtype;
 
-        prelude_except_if_fail(_value);
+        libidmef_except_if_fail(_value);
         vtype = getType();
 
         if ( vtype == TYPE_FLOAT )
@@ -377,13 +377,13 @@ IDMEFValue::operator float () const
 
         std::stringstream s;
         s << "Left value doesn't fit '" << idmef_value_type_to_string((idmef_value_type_id_t) vtype) << "' requirement";
-        throw PreludeError(s.str());
+        throw LibIdmefError(s.str());
 }
 
 
 IDMEFValue::operator double () const
 {
-        prelude_except_if_fail(_value);
+        libidmef_except_if_fail(_value);
 
         if ( getType() == TYPE_DOUBLE )
                 return idmef_value_get_double(_value);
@@ -395,10 +395,10 @@ IDMEFValue::operator double () const
 std::string IDMEFValue::convert_string() const
 {
         std::stringstream s;
-        prelude_except_if_fail(_value);
+        libidmef_except_if_fail(_value);
 
         if ( getType() == TYPE_STRING )
-                return prelude_string_get_string(idmef_value_get_string(_value));
+                return libidmef_string_get_string(idmef_value_get_string(_value));
 
         else if ( getType() == TYPE_TIME )
                 return IDMEFTime(idmef_time_ref(idmef_value_get_time(_value)));
@@ -430,12 +430,12 @@ std::string IDMEFValue::convert_string() const
 
                 else {
                         s << "Left value doesn't fit 'data' type '" << t << "' requirement";
-                        throw PreludeError(s.str());
+                        throw LibIdmefError(s.str());
                 }
         }
 
         s << "Left value doesn't fit '" << idmef_value_type_to_string((idmef_value_type_id_t) getType()) << "' requirement";
-        throw PreludeError(s.str());
+        throw LibIdmefError(s.str());
 }
 
 

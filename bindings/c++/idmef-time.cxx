@@ -1,9 +1,9 @@
 /*****
 *
 * Copyright (C) 2008-2016 CS-SI. All Rights Reserved.
-* Author: Yoann Vandoorselaere <yoann@prelude-ids.com>
+* Author: Yoann Vandoorselaere <yoann@libidmef-ids.com>
 *
-* This file is part of the Prelude library.
+* This file is part of the LibIdmef library.
 *
 * This program is free software; you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -21,7 +21,7 @@
 *
 *****/
 
-#include "prelude-error.hxx"
+#include "libidmef-error.hxx"
 #include "idmef-time.hxx"
 
 using namespace Idmef;
@@ -46,7 +46,7 @@ IDMEFTime::IDMEFTime()
 
         ret = idmef_time_new_from_gettimeofday(&_time);
         if ( ret < 0 )
-                throw PreludeError(ret);
+                throw LibIdmefError(ret);
 
 }
 
@@ -63,7 +63,7 @@ IDMEFTime::IDMEFTime(time_t time)
 
         ret = idmef_time_new_from_time(&_time, &time);
         if ( ret < 0 )
-                throw PreludeError(ret);
+                throw LibIdmefError(ret);
 }
 
 
@@ -73,7 +73,7 @@ IDMEFTime::IDMEFTime(const char *str)
 
         ret = idmef_time_new_from_string(&_time, str);
         if ( ret < 0 )
-                throw PreludeError(ret);
+                throw LibIdmefError(ret);
 }
 
 
@@ -83,7 +83,7 @@ IDMEFTime::IDMEFTime(const struct timeval *tv)
 
         ret = idmef_time_new_from_timeval(&_time, tv);
         if ( ret < 0 )
-                throw PreludeError(ret);
+                throw LibIdmefError(ret);
 }
 
 
@@ -100,7 +100,7 @@ void IDMEFTime::set(const struct timeval *tv)
 
         ret = idmef_time_set_from_timeval(_time, tv);
         if ( ret < 0 )
-                throw PreludeError(ret);
+                throw LibIdmefError(ret);
 }
 
 
@@ -111,7 +111,7 @@ void IDMEFTime::set(const char *str)
 
         ret = idmef_time_set_from_string(_time, str);
         if ( ret < 0 )
-                throw PreludeError(ret);
+                throw LibIdmefError(ret);
 }
 
 
@@ -121,7 +121,7 @@ void IDMEFTime::set()
 
         ret = idmef_time_set_from_gettimeofday(_time);
         if ( ret < 0 )
-                throw PreludeError(ret);
+                throw LibIdmefError(ret);
 }
 
 
@@ -168,7 +168,7 @@ IDMEFTime IDMEFTime::clone() const
 
         ret = idmef_time_clone(_time, &clone);
         if ( ret < 0 )
-                throw PreludeError(ret);
+                throw LibIdmefError(ret);
 
         return IDMEFTime(clone);
 }
@@ -178,18 +178,18 @@ const std::string IDMEFTime::toString() const
 {
         int ret;
         std::string cs;
-        prelude_string_t *str = NULL;
+        libidmef_string_t *str = NULL;
 
-        ret = prelude_string_new(&str);
+        ret = libidmef_string_new(&str);
         if ( ret < 0 )
-                throw PreludeError(ret);
+                throw LibIdmefError(ret);
 
         ret = idmef_time_to_string(_time, str);
         if ( ret < 0 )
-                throw PreludeError(ret);
+                throw LibIdmefError(ret);
 
-        cs = prelude_string_get_string(str);
-        prelude_string_destroy(str);
+        cs = libidmef_string_get_string(str);
+        libidmef_string_destroy(str);
 
         return cs;
 }

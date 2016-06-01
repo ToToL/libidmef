@@ -15,15 +15,15 @@ sys.path.append('../.libs')
 import gvgen
 
 try:
-       import PreludeEasy
+       import LibIdmefEasy
 except Exception,e:
        print "Import failed: ",e
-       print "Try 'cd ./.libs && ln -s libprelude_python.so _PreludeEasy.so'"
+       print "Try 'cd ./.libs && ln -s libidmef_python.so _LibIdmefEasy.so'"
        sys.exit(1)
 
 
 
-client = PreludeEasy.Client("PreludeGvGen")
+client = LibIdmefEasy.Client("LibIdmefGvGen")
 client.Init()
 
 client.PoolInit("localhost", 1)

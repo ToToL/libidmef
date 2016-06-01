@@ -1,9 +1,9 @@
 /*****
 *
 * Copyright (C) 2004-2016 CS-SI. All Rights Reserved.
-* Author: Yoann Vandoorselaere <yoann.v@prelude-ids.com>
+* Author: Yoann Vandoorselaere <yoann.v@libidmef-ids.com>
 *
-* This file is part of the Prelude library.
+* This file is part of the LibIdmef library.
 *
 * This program is free software; you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -29,10 +29,10 @@
 #include <sys/types.h>
 #include <netinet/in.h>
 
-#include "prelude-log.h"
-#include "prelude-string.h"
-#include "prelude-error.h"
-#include "prelude-inttypes.h"
+#include "libidmef-log.h"
+#include "libidmef-string.h"
+#include "libidmef-error.h"
+#include "libidmef-inttypes.h"
 #include "idmef.h"
 #include "idmef-tree-wrap.h"
 #include "idmef-additional-data.h"
@@ -171,7 +171,7 @@ static const struct {
         { IDMEF_ADDITIONAL_DATA_TYPE_NTPSTAMP, IDMEF_DATA_TYPE_INT, sizeof(uint64_t) },
         { IDMEF_ADDITIONAL_DATA_TYPE_PORTLIST, IDMEF_DATA_TYPE_CHAR_STRING, 0 },
         { IDMEF_ADDITIONAL_DATA_TYPE_REAL, IDMEF_DATA_TYPE_FLOAT, sizeof(float) },
-        { IDMEF_ADDITIONAL_DATA_TYPE_BOOLEAN, IDMEF_DATA_TYPE_BYTE, sizeof(prelude_bool_t) },
+        { IDMEF_ADDITIONAL_DATA_TYPE_BOOLEAN, IDMEF_DATA_TYPE_BYTE, sizeof(libidmef_bool_t) },
         { IDMEF_ADDITIONAL_DATA_TYPE_BYTE_STRING, IDMEF_DATA_TYPE_BYTE_STRING, 0 },
         { IDMEF_ADDITIONAL_DATA_TYPE_XML, IDMEF_DATA_TYPE_CHAR_STRING, 0 }
 };
@@ -181,20 +181,20 @@ static const struct {
 static int check_type(idmef_additional_data_type_t type, const unsigned char *buf, size_t len)
 {
         if ( type < 0 || (size_t) type >= sizeof(idmef_additional_data_type_table) / sizeof(*idmef_additional_data_type_table) )
-                return prelude_error_verbose(PRELUDE_ERROR_GENERIC, "Invalid IDMEFAdditionalData type specified");
+                return libidmef_error_verbose(LIBIDMEF_ERROR_GENERIC, "Invalid IDMEFAdditionalData type specified");
 
         if ( idmef_additional_data_type_table[type].len != 0 &&
              len > idmef_additional_data_type_table[type].len )
-                return prelude_error_verbose(PRELUDE_ERROR_GENERIC, "Provided value length does not match specified type length");
+                return libidmef_error_verbose(LIBIDMEF_ERROR_GENERIC, "Provided value length does not match specified type length");
 
         if ( idmef_additional_data_type_table[type].len == 0 && len < 1 )
-                return prelude_error_verbose(PRELUDE_ERROR_GENERIC, "Invalid value length for this type");
+                return libidmef_error_verbose(LIBIDMEF_ERROR_GENERIC, "Invalid value length for this type");
 
         if ( type == IDMEF_ADDITIONAL_DATA_TYPE_STRING ||
              type == IDMEF_ADDITIONAL_DATA_TYPE_DATE_TIME ||
              type == IDMEF_ADDITIONAL_DATA_TYPE_PORTLIST ||
              type == IDMEF_ADDITIONAL_DATA_TYPE_XML )
-                return buf[len - 1] == '\0' ? 0 : prelude_error_verbose(PRELUDE_ERROR_GENERIC, "String is not nul terminated");
+                return buf[len - 1] == '\0' ? 0 : libidmef_error_verbose(LIBIDMEF_ERROR_GENERIC, "String is not nul terminated");
 
         return 0;
 }
@@ -355,7 +355,7 @@ int idmef_additional_data_set_ptr_nodup_fast(idmef_additional_data_t *data,
  */
 IDMEF_ADDITIONAL_DATA_SIMPLE(IDMEF_DATA_TYPE_FLOAT, float, IDMEF_ADDITIONAL_DATA_TYPE_REAL, float, real)
 IDMEF_ADDITIONAL_DATA_SIMPLE(IDMEF_DATA_TYPE_INT, int, IDMEF_ADDITIONAL_DATA_TYPE_INTEGER, uint32_t, integer)
-IDMEF_ADDITIONAL_DATA_SIMPLE(IDMEF_DATA_TYPE_BYTE, byte, IDMEF_ADDITIONAL_DATA_TYPE_BOOLEAN, prelude_bool_t, boolean)
+IDMEF_ADDITIONAL_DATA_SIMPLE(IDMEF_DATA_TYPE_BYTE, byte, IDMEF_ADDITIONAL_DATA_TYPE_BOOLEAN, libidmef_bool_t, boolean)
 IDMEF_ADDITIONAL_DATA_SIMPLE(IDMEF_DATA_TYPE_BYTE, byte, IDMEF_ADDITIONAL_DATA_TYPE_BYTE, uint8_t, byte)
 IDMEF_ADDITIONAL_DATA_SIMPLE(IDMEF_DATA_TYPE_CHAR, char, IDMEF_ADDITIONAL_DATA_TYPE_CHARACTER, char, character)
 
@@ -374,7 +374,7 @@ int idmef_additional_data_copy_ref(idmef_additional_data_t *src, idmef_additiona
 {
         int ret;
 
-        ret = prelude_string_copy_ref(idmef_additional_data_get_meaning(src), idmef_additional_data_get_meaning(dst));
+        ret = libidmef_string_copy_ref(idmef_additional_data_get_meaning(src), idmef_additional_data_get_meaning(dst));
         if ( ret < 0 )
                 return ret;
 
@@ -392,7 +392,7 @@ int idmef_additional_data_copy_dup(idmef_additional_data_t *src, idmef_additiona
 {
         int ret;
 
-        ret = prelude_string_copy_dup(idmef_additional_data_get_meaning(src), idmef_additional_data_get_meaning(dst));
+        ret = libidmef_string_copy_dup(idmef_additional_data_get_meaning(src), idmef_additional_data_get_meaning(dst));
         if ( ret < 0 )
                 return ret;
 
@@ -410,14 +410,14 @@ size_t idmef_additional_data_get_len(idmef_additional_data_t *data)
 
 
 
-prelude_bool_t idmef_additional_data_is_empty(idmef_additional_data_t *data)
+libidmef_bool_t idmef_additional_data_is_empty(idmef_additional_data_t *data)
 {
         return idmef_data_is_empty(idmef_additional_data_get_data(data));
 }
 
 
 
-int idmef_additional_data_data_to_string(idmef_additional_data_t *ad, prelude_string_t *out)
+int idmef_additional_data_data_to_string(idmef_additional_data_t *ad, libidmef_string_t *out)
 {
         int ret;
         uint64_t i;
@@ -431,7 +431,7 @@ int idmef_additional_data_data_to_string(idmef_additional_data_t *ad, prelude_st
 
         case IDMEF_ADDITIONAL_DATA_TYPE_NTPSTAMP:
                 i = idmef_data_get_int(data);
-                ret = prelude_string_sprintf(out, "0x%" PRELUDE_PRIx32 ".0x%" PRELUDE_PRIx32, (uint32_t) (i >> 32), (uint32_t) i);
+                ret = libidmef_string_sprintf(out, "0x%" LIBIDMEF_PRIx32 ".0x%" LIBIDMEF_PRIx32, (uint32_t) (i >> 32), (uint32_t) i);
                 break;
 
         default:

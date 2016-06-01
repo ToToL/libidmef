@@ -1,7 +1,7 @@
 includedir = $(prefix)/include/libidmef
 
 include_HEADERS = \
-	prelude-error.hxx \
+	libidmef-error.hxx \
 	idmef.hxx \
 	idmef-class.hxx \
 	idmef-criteria.hxx \

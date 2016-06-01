@@ -1,9 +1,9 @@
 /*****
 *
 * Copyright (C) 2008-2016 CS-SI. All Rights Reserved.
-* Author: Yoann Vandoorselaere <yoann@prelude-ids.com>
+* Author: Yoann Vandoorselaere <yoann@libidmef-ids.com>
 *
-* This file is part of the Prelude library.
+* This file is part of the LibIdmef library.
 *
 * This program is free software; you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -21,8 +21,8 @@
 *
 *****/
 
-#ifndef _LIBPRELUDE_IDMEF_CRITERIA_HXX
-#define _LIBPRELUDE_IDMEF_CRITERIA_HXX
+#ifndef _LIBIDMEF_IDMEF_CRITERIA_HXX
+#define _LIBIDMEF_IDMEF_CRITERIA_HXX
 
 #include <string>
 #include "idmef.h"

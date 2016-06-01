@@ -1,6 +1,6 @@
 #!/usr/bin/env perl
 
-use Prelude;
+use LibIdmef;
 
 sub log_func {
 	($level, $str) = @_;
@@ -25,9 +25,9 @@ sub print_array($)
 }
 
 
-Prelude::PreludeLog::setCallback(\&log_func);
+LibIdmef::LibIdmefLog::setCallback(\&log_func);
 
-$idmef = new Prelude::IDMEF;
+$idmef = new LibIdmef::IDMEF;
 
 print "*** IDMEF->Set() ***\n";
 $idmef->set("alert.classification.text", "My Message");
@@ -62,7 +62,7 @@ close FILE;
 
 print "\n\n*** IDMEF->Read() ***\n";
 open FILE2, "<foo.bin" or die "arg2";
-my $idmef2 = new Prelude::IDMEF;
+my $idmef2 = new LibIdmef::IDMEF;
 while ( $idmef2->read(FILE2) ) {
 	print $idmef2->toString();
 }
@@ -70,7 +70,7 @@ while ( $idmef2->read(FILE2) ) {
 close FILE2;
 
 print "\n*** Client ***";
-$client = new Prelude::ClientEasy("prelude-lml");
+$client = new LibIdmef::ClientEasy("libidmef-lml");
 $client->start();
 
 $client->sendIDMEF($idmef);

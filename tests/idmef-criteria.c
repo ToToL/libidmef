@@ -2,7 +2,7 @@
 
 #include <stdlib.h>
 #include <assert.h>
-#include "prelude.h"
+#include "libidmef.h"
 
 static void test_criteria(idmef_message_t *idmef, const char *criteria_str, int expect_create, int expect_match)
 {
@@ -25,9 +25,9 @@ int main(void)
         idmef_alert_t *alert;
         idmef_message_t *idmef;
         idmef_classification_t *classification;
-        prelude_string_t *str;
+        libidmef_string_t *str;
 
-        assert(prelude_string_new_ref(&str, "A") == 0);
+        assert(libidmef_string_new_ref(&str, "A") == 0);
 
         assert(idmef_message_new(&idmef) == 0);
         assert(idmef_message_new_alert(idmef, &alert) == 0);
@@ -47,7 +47,7 @@ int main(void)
         test_criteria(idmef, "alert.classification.text = (A || B || C || D) || heartbeat", 0, 1);
         test_criteria(idmef, "(alert.classification.text == A || heartbeat", -1, -1);
 
-        prelude_string_set_ref(str, "My String");
+        libidmef_string_set_ref(str, "My String");
 
         test_criteria(idmef, "alert.classification.text != 'My String'", 0, 0);
         test_criteria(idmef, "alert.classification.text != 'random'", 0, 1);

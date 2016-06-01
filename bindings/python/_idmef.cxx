@@ -3557,7 +3557,7 @@ SwigPyBuiltin_SetMetaType (PyTypeObject *type, PyTypeObject *metatype)
 #define SWIGTYPE_p_Idmef__IDMEFPath swig_types[4]
 #define SWIGTYPE_p_Idmef__IDMEFTime swig_types[5]
 #define SWIGTYPE_p_Idmef__IDMEFValue swig_types[6]
-#define SWIGTYPE_p_Idmef__PreludeError swig_types[7]
+#define SWIGTYPE_p_Idmef__LibIdmefError swig_types[7]
 #define SWIGTYPE_p_SwigPyObject swig_types[8]
 #define SWIGTYPE_p_allocator_type swig_types[9]
 #define SWIGTYPE_p_char swig_types[10]
@@ -4074,7 +4074,7 @@ SWIG_AsVal_ptrdiff_t (PyObject * obj, ptrdiff_t *val)
 #include <sstream>
 
 #include "libidmef.hxx"
-#include "prelude-error.hxx"
+#include "libidmef-error.hxx"
 #include "idmef-criteria.hxx"
 #include "idmef-value.hxx"
 #include "idmef-path.hxx"
@@ -5627,8 +5627,8 @@ int IDMEFValue_to_SWIG(TARGET_LANGUAGE_SELF self, const Idmef::IDMEFValue &resul
         Idmef::IDMEFValue::IDMEFValueTypeEnum type = result.getType();
 
         if ( type == Idmef::IDMEFValue::TYPE_STRING ) {
-                prelude_string_t *str = idmef_value_get_string(value);
-                *ret = SWIG_FromCharPtrAndSize(prelude_string_get_string(str), prelude_string_get_len(str));
+                libidmef_string_t *str = idmef_value_get_string(value);
+                *ret = SWIG_FromCharPtrAndSize(libidmef_string_get_string(str), libidmef_string_get_len(str));
         }
 
         else if ( type == Idmef::IDMEFValue::TYPE_INT8 )
@@ -6590,26 +6590,26 @@ fail:
 
 SWIGPY_BINARYFUNC_CLOSURE(_wrap_SwigPyIterator___sub__)
 
-SWIGINTERN PyObject *_wrap_delete_PreludeError(PyObject *self, PyObject *args) {
+SWIGINTERN PyObject *_wrap_delete_LibIdmefError(PyObject *self, PyObject *args) {
   PyObject *resultobj = 0;
-  Idmef::PreludeError *arg1 = (Idmef::PreludeError *) 0 ;
+  Idmef::LibIdmefError *arg1 = (Idmef::LibIdmefError *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject *swig_obj[1] ;
   
-  if (!SWIG_Python_UnpackTuple(args,"delete_PreludeError",0,0,0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(self, &argp1,SWIGTYPE_p_Idmef__PreludeError, SWIG_POINTER_DISOWN |  0 );
+  if (!SWIG_Python_UnpackTuple(args,"delete_LibIdmefError",0,0,0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(self, &argp1,SWIGTYPE_p_Idmef__LibIdmefError, SWIG_POINTER_DISOWN |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_PreludeError" "', argument " "1"" of type '" "Idmef::PreludeError *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_LibIdmefError" "', argument " "1"" of type '" "Idmef::LibIdmefError *""'"); 
   }
-  arg1 = reinterpret_cast< Idmef::PreludeError * >(argp1);
+  arg1 = reinterpret_cast< Idmef::LibIdmefError * >(argp1);
   {
     try {
       delete arg1;
-    } catch(Idmef::PreludeError &e) {
-      SWIG_Python_Raise(SWIG_NewPointerObj(new PreludeError(e),
-          SWIGTYPE_p_Idmef__PreludeError, SWIG_POINTER_OWN),
-        "PreludeError", SWIGTYPE_p_Idmef__PreludeError);
+    } catch(Idmef::LibIdmefError &e) {
+      SWIG_Python_Raise(SWIG_NewPointerObj(new LibIdmefError(e),
+          SWIGTYPE_p_Idmef__LibIdmefError, SWIG_POINTER_OWN),
+        "LibIdmefError", SWIGTYPE_p_Idmef__LibIdmefError);
       SWIG_fail;
     }
   }
@@ -6620,87 +6620,87 @@ fail:
 }
 
 
-SWIGINTERN int _wrap_new_PreludeError__SWIG_0(PyObject *self, int nobjs, PyObject **SWIGUNUSEDPARM(swig_obj)) {
+SWIGINTERN int _wrap_new_LibIdmefError__SWIG_0(PyObject *self, int nobjs, PyObject **SWIGUNUSEDPARM(swig_obj)) {
   PyObject *resultobj = 0;
-  Idmef::PreludeError *result = 0 ;
+  Idmef::LibIdmefError *result = 0 ;
   
   if ((nobjs < 0) || (nobjs > 0)) SWIG_fail;
   {
     try {
-      result = (Idmef::PreludeError *)new Idmef::PreludeError();
-    } catch(Idmef::PreludeError &e) {
-      SWIG_Python_Raise(SWIG_NewPointerObj(new PreludeError(e),
-          SWIGTYPE_p_Idmef__PreludeError, SWIG_POINTER_OWN),
-        "PreludeError", SWIGTYPE_p_Idmef__PreludeError);
+      result = (Idmef::LibIdmefError *)new Idmef::LibIdmefError();
+    } catch(Idmef::LibIdmefError &e) {
+      SWIG_Python_Raise(SWIG_NewPointerObj(new LibIdmefError(e),
+          SWIGTYPE_p_Idmef__LibIdmefError, SWIG_POINTER_OWN),
+        "LibIdmefError", SWIGTYPE_p_Idmef__LibIdmefError);
       SWIG_fail;
     }
   }
-  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_Idmef__PreludeError, SWIG_BUILTIN_INIT |  0 );
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_Idmef__LibIdmefError, SWIG_BUILTIN_INIT |  0 );
   return resultobj == Py_None ? -1 : 0;
 fail:
   return -1;
 }
 
 
-SWIGINTERN int _wrap_new_PreludeError__SWIG_1(PyObject *self, int nobjs, PyObject **swig_obj) {
+SWIGINTERN int _wrap_new_LibIdmefError__SWIG_1(PyObject *self, int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   int arg1 ;
   int val1 ;
   int ecode1 = 0 ;
-  Idmef::PreludeError *result = 0 ;
+  Idmef::LibIdmefError *result = 0 ;
   
   if ((nobjs < 1) || (nobjs > 1)) SWIG_fail;
   ecode1 = SWIG_AsVal_int(swig_obj[0], &val1);
   if (!SWIG_IsOK(ecode1)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "new_PreludeError" "', argument " "1"" of type '" "int""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "new_LibIdmefError" "', argument " "1"" of type '" "int""'");
   } 
   arg1 = static_cast< int >(val1);
   {
     try {
-      result = (Idmef::PreludeError *)new Idmef::PreludeError(arg1);
-    } catch(Idmef::PreludeError &e) {
-      SWIG_Python_Raise(SWIG_NewPointerObj(new PreludeError(e),
-          SWIGTYPE_p_Idmef__PreludeError, SWIG_POINTER_OWN),
-        "PreludeError", SWIGTYPE_p_Idmef__PreludeError);
+      result = (Idmef::LibIdmefError *)new Idmef::LibIdmefError(arg1);
+    } catch(Idmef::LibIdmefError &e) {
+      SWIG_Python_Raise(SWIG_NewPointerObj(new LibIdmefError(e),
+          SWIGTYPE_p_Idmef__LibIdmefError, SWIG_POINTER_OWN),
+        "LibIdmefError", SWIGTYPE_p_Idmef__LibIdmefError);
       SWIG_fail;
     }
   }
-  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_Idmef__PreludeError, SWIG_BUILTIN_INIT |  0 );
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_Idmef__LibIdmefError, SWIG_BUILTIN_INIT |  0 );
   return resultobj == Py_None ? -1 : 0;
 fail:
   return -1;
 }
 
 
-SWIGINTERN int _wrap_new_PreludeError__SWIG_2(PyObject *self, int nobjs, PyObject **swig_obj) {
+SWIGINTERN int _wrap_new_LibIdmefError__SWIG_2(PyObject *self, int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   std::string *arg1 = 0 ;
   int res1 = SWIG_OLDOBJ ;
-  Idmef::PreludeError *result = 0 ;
+  Idmef::LibIdmefError *result = 0 ;
   
   if ((nobjs < 1) || (nobjs > 1)) SWIG_fail;
   {
     std::string *ptr = (std::string *)0;
     res1 = SWIG_AsPtr_std_string(swig_obj[0], &ptr);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_PreludeError" "', argument " "1"" of type '" "std::string const &""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_LibIdmefError" "', argument " "1"" of type '" "std::string const &""'"); 
     }
     if (!ptr) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_PreludeError" "', argument " "1"" of type '" "std::string const &""'"); 
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_LibIdmefError" "', argument " "1"" of type '" "std::string const &""'"); 
     }
     arg1 = ptr;
   }
   {
     try {
-      result = (Idmef::PreludeError *)new Idmef::PreludeError((std::string const &)*arg1);
-    } catch(Idmef::PreludeError &e) {
-      SWIG_Python_Raise(SWIG_NewPointerObj(new PreludeError(e),
-          SWIGTYPE_p_Idmef__PreludeError, SWIG_POINTER_OWN),
-        "PreludeError", SWIGTYPE_p_Idmef__PreludeError);
+      result = (Idmef::LibIdmefError *)new Idmef::LibIdmefError((std::string const &)*arg1);
+    } catch(Idmef::LibIdmefError &e) {
+      SWIG_Python_Raise(SWIG_NewPointerObj(new LibIdmefError(e),
+          SWIGTYPE_p_Idmef__LibIdmefError, SWIG_POINTER_OWN),
+        "LibIdmefError", SWIGTYPE_p_Idmef__LibIdmefError);
       SWIG_fail;
     }
   }
-  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_Idmef__PreludeError, SWIG_BUILTIN_INIT |  0 );
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_Idmef__LibIdmefError, SWIG_BUILTIN_INIT |  0 );
   if (SWIG_IsNewObj(res1)) delete arg1;
   return resultobj == Py_None ? -1 : 0;
 fail:
@@ -6709,16 +6709,16 @@ fail:
 }
 
 
-SWIGINTERN int _wrap_new_PreludeError(PyObject *self, PyObject *args) {
+SWIGINTERN int _wrap_new_LibIdmefError(PyObject *self, PyObject *args) {
   Py_ssize_t argc;
   PyObject *argv[2] = {
     0
   };
   
-  if (!(argc = SWIG_Python_UnpackTuple(args,"new_PreludeError",0,1,argv))) SWIG_fail;
+  if (!(argc = SWIG_Python_UnpackTuple(args,"new_LibIdmefError",0,1,argv))) SWIG_fail;
   --argc;
   if (argc == 0) {
-    return _wrap_new_PreludeError__SWIG_0(self, argc, argv);
+    return _wrap_new_LibIdmefError__SWIG_0(self, argc, argv);
   }
   if (argc == 1) {
     int _v = 0;
@@ -6729,45 +6729,45 @@ SWIGINTERN int _wrap_new_PreludeError(PyObject *self, PyObject *args) {
       }
     }
     if (!_v) goto check_2;
-    return _wrap_new_PreludeError__SWIG_1(self, argc, argv);
+    return _wrap_new_LibIdmefError__SWIG_1(self, argc, argv);
   }
 check_2:
   
   if (argc == 1) {
-    return _wrap_new_PreludeError__SWIG_2(self, argc, argv);
+    return _wrap_new_LibIdmefError__SWIG_2(self, argc, argv);
   }
   
 fail:
-  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'new_PreludeError'.\n"
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'new_LibIdmefError'.\n"
     "  Possible C/C++ prototypes are:\n"
-    "    Idmef::PreludeError::PreludeError()\n"
-    "    Idmef::PreludeError::PreludeError(int)\n"
-    "    Idmef::PreludeError::PreludeError(std::string const &)\n");
+    "    Idmef::LibIdmefError::LibIdmefError()\n"
+    "    Idmef::LibIdmefError::LibIdmefError(int)\n"
+    "    Idmef::LibIdmefError::LibIdmefError(std::string const &)\n");
   return -1;
 }
 
 
-SWIGINTERN PyObject *_wrap_PreludeError_getCode(PyObject *self, PyObject *args) {
+SWIGINTERN PyObject *_wrap_LibIdmefError_getCode(PyObject *self, PyObject *args) {
   PyObject *resultobj = 0;
-  Idmef::PreludeError *arg1 = (Idmef::PreludeError *) 0 ;
+  Idmef::LibIdmefError *arg1 = (Idmef::LibIdmefError *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject *swig_obj[1] ;
   int result;
   
-  if (!SWIG_Python_UnpackTuple(args,"PreludeError_getCode",0,0,0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(self, &argp1,SWIGTYPE_p_Idmef__PreludeError, 0 |  0 );
+  if (!SWIG_Python_UnpackTuple(args,"LibIdmefError_getCode",0,0,0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(self, &argp1,SWIGTYPE_p_Idmef__LibIdmefError, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "PreludeError_getCode" "', argument " "1"" of type '" "Idmef::PreludeError const *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "LibIdmefError_getCode" "', argument " "1"" of type '" "Idmef::LibIdmefError const *""'"); 
   }
-  arg1 = reinterpret_cast< Idmef::PreludeError * >(argp1);
+  arg1 = reinterpret_cast< Idmef::LibIdmefError * >(argp1);
   {
     try {
-      result = (int)((Idmef::PreludeError const *)arg1)->getCode();
-    } catch(Idmef::PreludeError &e) {
-      SWIG_Python_Raise(SWIG_NewPointerObj(new PreludeError(e),
-          SWIGTYPE_p_Idmef__PreludeError, SWIG_POINTER_OWN),
-        "PreludeError", SWIGTYPE_p_Idmef__PreludeError);
+      result = (int)((Idmef::LibIdmefError const *)arg1)->getCode();
+    } catch(Idmef::LibIdmefError &e) {
+      SWIG_Python_Raise(SWIG_NewPointerObj(new LibIdmefError(e),
+          SWIGTYPE_p_Idmef__LibIdmefError, SWIG_POINTER_OWN),
+        "LibIdmefError", SWIGTYPE_p_Idmef__LibIdmefError);
       SWIG_fail;
     }
   }
@@ -6778,27 +6778,27 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_PreludeError_what(PyObject *self, PyObject *args) {
+SWIGINTERN PyObject *_wrap_LibIdmefError_what(PyObject *self, PyObject *args) {
   PyObject *resultobj = 0;
-  Idmef::PreludeError *arg1 = (Idmef::PreludeError *) 0 ;
+  Idmef::LibIdmefError *arg1 = (Idmef::LibIdmefError *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject *swig_obj[1] ;
   char *result = 0 ;
   
-  if (!SWIG_Python_UnpackTuple(args,"PreludeError_what",0,0,0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(self, &argp1,SWIGTYPE_p_Idmef__PreludeError, 0 |  0 );
+  if (!SWIG_Python_UnpackTuple(args,"LibIdmefError_what",0,0,0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(self, &argp1,SWIGTYPE_p_Idmef__LibIdmefError, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "PreludeError_what" "', argument " "1"" of type '" "Idmef::PreludeError const *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "LibIdmefError_what" "', argument " "1"" of type '" "Idmef::LibIdmefError const *""'"); 
   }
-  arg1 = reinterpret_cast< Idmef::PreludeError * >(argp1);
+  arg1 = reinterpret_cast< Idmef::LibIdmefError * >(argp1);
   {
     try {
-      result = (char *)((Idmef::PreludeError const *)arg1)->what();
-    } catch(Idmef::PreludeError &e) {
-      SWIG_Python_Raise(SWIG_NewPointerObj(new PreludeError(e),
-          SWIGTYPE_p_Idmef__PreludeError, SWIG_POINTER_OWN),
-        "PreludeError", SWIGTYPE_p_Idmef__PreludeError);
+      result = (char *)((Idmef::LibIdmefError const *)arg1)->what();
+    } catch(Idmef::LibIdmefError &e) {
+      SWIG_Python_Raise(SWIG_NewPointerObj(new LibIdmefError(e),
+          SWIGTYPE_p_Idmef__LibIdmefError, SWIG_POINTER_OWN),
+        "LibIdmefError", SWIGTYPE_p_Idmef__LibIdmefError);
       SWIG_fail;
     }
   }
@@ -6809,7 +6809,7 @@ fail:
 }
 
 
-SWIGPY_REPRFUNC_CLOSURE(_wrap_PreludeError_what)
+SWIGPY_REPRFUNC_CLOSURE(_wrap_LibIdmefError_what)
 
 SWIGINTERN int _wrap_new_IDMEFCriterion(PyObject *self, PyObject *args) {
   PyObject *resultobj = 0;
@@ -6819,10 +6819,10 @@ SWIGINTERN int _wrap_new_IDMEFCriterion(PyObject *self, PyObject *args) {
   {
     try {
       result = (Idmef::IDMEFCriterion *)new Idmef::IDMEFCriterion();
-    } catch(Idmef::PreludeError &e) {
-      SWIG_Python_Raise(SWIG_NewPointerObj(new PreludeError(e),
-          SWIGTYPE_p_Idmef__PreludeError, SWIG_POINTER_OWN),
-        "PreludeError", SWIGTYPE_p_Idmef__PreludeError);
+    } catch(Idmef::LibIdmefError &e) {
+      SWIG_Python_Raise(SWIG_NewPointerObj(new LibIdmefError(e),
+          SWIGTYPE_p_Idmef__LibIdmefError, SWIG_POINTER_OWN),
+        "LibIdmefError", SWIGTYPE_p_Idmef__LibIdmefError);
       SWIG_fail;
     }
   }
@@ -6849,10 +6849,10 @@ SWIGINTERN PyObject *_wrap_delete_IDMEFCriterion(PyObject *self, PyObject *args)
   {
     try {
       delete arg1;
-    } catch(Idmef::PreludeError &e) {
-      SWIG_Python_Raise(SWIG_NewPointerObj(new PreludeError(e),
-          SWIGTYPE_p_Idmef__PreludeError, SWIG_POINTER_OWN),
-        "PreludeError", SWIGTYPE_p_Idmef__PreludeError);
+    } catch(Idmef::LibIdmefError &e) {
+      SWIG_Python_Raise(SWIG_NewPointerObj(new LibIdmefError(e),
+          SWIGTYPE_p_Idmef__LibIdmefError, SWIG_POINTER_OWN),
+        "LibIdmefError", SWIGTYPE_p_Idmef__LibIdmefError);
       SWIG_fail;
     }
   }
@@ -6879,10 +6879,10 @@ SWIGINTERN PyObject *_wrap_delete_IDMEFCriteria(PyObject *self, PyObject *args) 
   {
     try {
       delete arg1;
-    } catch(Idmef::PreludeError &e) {
-      SWIG_Python_Raise(SWIG_NewPointerObj(new PreludeError(e),
-          SWIGTYPE_p_Idmef__PreludeError, SWIG_POINTER_OWN),
-        "PreludeError", SWIGTYPE_p_Idmef__PreludeError);
+    } catch(Idmef::LibIdmefError &e) {
+      SWIG_Python_Raise(SWIG_NewPointerObj(new LibIdmefError(e),
+          SWIGTYPE_p_Idmef__LibIdmefError, SWIG_POINTER_OWN),
+        "LibIdmefError", SWIGTYPE_p_Idmef__LibIdmefError);
       SWIG_fail;
     }
   }
@@ -6901,10 +6901,10 @@ SWIGINTERN int _wrap_new_IDMEFCriteria__SWIG_0(PyObject *self, int nobjs, PyObje
   {
     try {
       result = (Idmef::IDMEFCriteria *)new Idmef::IDMEFCriteria();
-    } catch(Idmef::PreludeError &e) {
-      SWIG_Python_Raise(SWIG_NewPointerObj(new PreludeError(e),
-          SWIGTYPE_p_Idmef__PreludeError, SWIG_POINTER_OWN),
-        "PreludeError", SWIGTYPE_p_Idmef__PreludeError);
+    } catch(Idmef::LibIdmefError &e) {
+      SWIG_Python_Raise(SWIG_NewPointerObj(new LibIdmefError(e),
+          SWIGTYPE_p_Idmef__LibIdmefError, SWIG_POINTER_OWN),
+        "LibIdmefError", SWIGTYPE_p_Idmef__LibIdmefError);
       SWIG_fail;
     }
   }
@@ -6934,10 +6934,10 @@ SWIGINTERN int _wrap_new_IDMEFCriteria__SWIG_1(PyObject *self, int nobjs, PyObje
   {
     try {
       result = (Idmef::IDMEFCriteria *)new Idmef::IDMEFCriteria((Idmef::IDMEFCriteria const &)*arg1);
-    } catch(Idmef::PreludeError &e) {
-      SWIG_Python_Raise(SWIG_NewPointerObj(new PreludeError(e),
-          SWIGTYPE_p_Idmef__PreludeError, SWIG_POINTER_OWN),
-        "PreludeError", SWIGTYPE_p_Idmef__PreludeError);
+    } catch(Idmef::LibIdmefError &e) {
+      SWIG_Python_Raise(SWIG_NewPointerObj(new LibIdmefError(e),
+          SWIGTYPE_p_Idmef__LibIdmefError, SWIG_POINTER_OWN),
+        "LibIdmefError", SWIGTYPE_p_Idmef__LibIdmefError);
       SWIG_fail;
     }
   }
@@ -6965,10 +6965,10 @@ SWIGINTERN int _wrap_new_IDMEFCriteria__SWIG_2(PyObject *self, int nobjs, PyObje
   {
     try {
       result = (Idmef::IDMEFCriteria *)new Idmef::IDMEFCriteria((char const *)arg1);
-    } catch(Idmef::PreludeError &e) {
-      SWIG_Python_Raise(SWIG_NewPointerObj(new PreludeError(e),
-          SWIGTYPE_p_Idmef__PreludeError, SWIG_POINTER_OWN),
-        "PreludeError", SWIGTYPE_p_Idmef__PreludeError);
+    } catch(Idmef::LibIdmefError &e) {
+      SWIG_Python_Raise(SWIG_NewPointerObj(new LibIdmefError(e),
+          SWIGTYPE_p_Idmef__LibIdmefError, SWIG_POINTER_OWN),
+        "LibIdmefError", SWIGTYPE_p_Idmef__LibIdmefError);
       SWIG_fail;
     }
   }
@@ -7002,10 +7002,10 @@ SWIGINTERN int _wrap_new_IDMEFCriteria__SWIG_3(PyObject *self, int nobjs, PyObje
   {
     try {
       result = (Idmef::IDMEFCriteria *)new Idmef::IDMEFCriteria((std::string const &)*arg1);
-    } catch(Idmef::PreludeError &e) {
-      SWIG_Python_Raise(SWIG_NewPointerObj(new PreludeError(e),
-          SWIGTYPE_p_Idmef__PreludeError, SWIG_POINTER_OWN),
-        "PreludeError", SWIGTYPE_p_Idmef__PreludeError);
+    } catch(Idmef::LibIdmefError &e) {
+      SWIG_Python_Raise(SWIG_NewPointerObj(new LibIdmefError(e),
+          SWIGTYPE_p_Idmef__LibIdmefError, SWIG_POINTER_OWN),
+        "LibIdmefError", SWIGTYPE_p_Idmef__LibIdmefError);
       SWIG_fail;
     }
   }
@@ -7034,10 +7034,10 @@ SWIGINTERN int _wrap_new_IDMEFCriteria__SWIG_4(PyObject *self, int nobjs, PyObje
   {
     try {
       result = (Idmef::IDMEFCriteria *)new Idmef::IDMEFCriteria(arg1);
-    } catch(Idmef::PreludeError &e) {
-      SWIG_Python_Raise(SWIG_NewPointerObj(new PreludeError(e),
-          SWIGTYPE_p_Idmef__PreludeError, SWIG_POINTER_OWN),
-        "PreludeError", SWIGTYPE_p_Idmef__PreludeError);
+    } catch(Idmef::LibIdmefError &e) {
+      SWIG_Python_Raise(SWIG_NewPointerObj(new LibIdmefError(e),
+          SWIGTYPE_p_Idmef__LibIdmefError, SWIG_POINTER_OWN),
+        "LibIdmefError", SWIGTYPE_p_Idmef__LibIdmefError);
       SWIG_fail;
     }
   }
@@ -7135,10 +7135,10 @@ SWIGINTERN PyObject *_wrap_IDMEFCriteria_match(PyObject *self, PyObject *args) {
   {
     try {
       result = (int)((Idmef::IDMEFCriteria const *)arg1)->match(arg2);
-    } catch(Idmef::PreludeError &e) {
-      SWIG_Python_Raise(SWIG_NewPointerObj(new PreludeError(e),
-          SWIGTYPE_p_Idmef__PreludeError, SWIG_POINTER_OWN),
-        "PreludeError", SWIGTYPE_p_Idmef__PreludeError);
+    } catch(Idmef::LibIdmefError &e) {
+      SWIG_Python_Raise(SWIG_NewPointerObj(new LibIdmefError(e),
+          SWIGTYPE_p_Idmef__LibIdmefError, SWIG_POINTER_OWN),
+        "LibIdmefError", SWIGTYPE_p_Idmef__LibIdmefError);
       SWIG_fail;
     }
   }
@@ -7166,10 +7166,10 @@ SWIGINTERN PyObject *_wrap_IDMEFCriteria_clone(PyObject *self, PyObject *args) {
   {
     try {
       result = ((Idmef::IDMEFCriteria const *)arg1)->clone();
-    } catch(Idmef::PreludeError &e) {
-      SWIG_Python_Raise(SWIG_NewPointerObj(new PreludeError(e),
-          SWIGTYPE_p_Idmef__PreludeError, SWIG_POINTER_OWN),
-        "PreludeError", SWIGTYPE_p_Idmef__PreludeError);
+    } catch(Idmef::LibIdmefError &e) {
+      SWIG_Python_Raise(SWIG_NewPointerObj(new LibIdmefError(e),
+          SWIGTYPE_p_Idmef__LibIdmefError, SWIG_POINTER_OWN),
+        "LibIdmefError", SWIGTYPE_p_Idmef__LibIdmefError);
       SWIG_fail;
     }
   }
@@ -7208,10 +7208,10 @@ SWIGINTERN PyObject *_wrap_IDMEFCriteria_andCriteria(PyObject *self, PyObject *a
   {
     try {
       (arg1)->andCriteria((Idmef::IDMEFCriteria const &)*arg2);
-    } catch(Idmef::PreludeError &e) {
-      SWIG_Python_Raise(SWIG_NewPointerObj(new PreludeError(e),
-          SWIGTYPE_p_Idmef__PreludeError, SWIG_POINTER_OWN),
-        "PreludeError", SWIGTYPE_p_Idmef__PreludeError);
+    } catch(Idmef::LibIdmefError &e) {
+      SWIG_Python_Raise(SWIG_NewPointerObj(new LibIdmefError(e),
+          SWIGTYPE_p_Idmef__LibIdmefError, SWIG_POINTER_OWN),
+        "LibIdmefError", SWIGTYPE_p_Idmef__LibIdmefError);
       SWIG_fail;
     }
   }
@@ -7250,10 +7250,10 @@ SWIGINTERN PyObject *_wrap_IDMEFCriteria_orCriteria(PyObject *self, PyObject *ar
   {
     try {
       (arg1)->orCriteria((Idmef::IDMEFCriteria const &)*arg2);
-    } catch(Idmef::PreludeError &e) {
-      SWIG_Python_Raise(SWIG_NewPointerObj(new PreludeError(e),
-          SWIGTYPE_p_Idmef__PreludeError, SWIG_POINTER_OWN),
-        "PreludeError", SWIGTYPE_p_Idmef__PreludeError);
+    } catch(Idmef::LibIdmefError &e) {
+      SWIG_Python_Raise(SWIG_NewPointerObj(new LibIdmefError(e),
+          SWIGTYPE_p_Idmef__LibIdmefError, SWIG_POINTER_OWN),
+        "LibIdmefError", SWIGTYPE_p_Idmef__LibIdmefError);
       SWIG_fail;
     }
   }
@@ -7281,10 +7281,10 @@ SWIGINTERN PyObject *_wrap_IDMEFCriteria_toString(PyObject *self, PyObject *args
   {
     try {
       result = ((Idmef::IDMEFCriteria const *)arg1)->toString();
-    } catch(Idmef::PreludeError &e) {
-      SWIG_Python_Raise(SWIG_NewPointerObj(new PreludeError(e),
-          SWIGTYPE_p_Idmef__PreludeError, SWIG_POINTER_OWN),
-        "PreludeError", SWIGTYPE_p_Idmef__PreludeError);
+    } catch(Idmef::LibIdmefError &e) {
+      SWIG_Python_Raise(SWIG_NewPointerObj(new LibIdmefError(e),
+          SWIGTYPE_p_Idmef__LibIdmefError, SWIG_POINTER_OWN),
+        "LibIdmefError", SWIGTYPE_p_Idmef__LibIdmefError);
       SWIG_fail;
     }
   }
@@ -7314,10 +7314,10 @@ SWIGINTERN PyObject *_wrap_IDMEFValue_getType(PyObject *self, PyObject *args) {
   {
     try {
       result = (Idmef::IDMEFValue::IDMEFValueTypeEnum)((Idmef::IDMEFValue const *)arg1)->getType();
-    } catch(Idmef::PreludeError &e) {
-      SWIG_Python_Raise(SWIG_NewPointerObj(new PreludeError(e),
-          SWIGTYPE_p_Idmef__PreludeError, SWIG_POINTER_OWN),
-        "PreludeError", SWIGTYPE_p_Idmef__PreludeError);
+    } catch(Idmef::LibIdmefError &e) {
+      SWIG_Python_Raise(SWIG_NewPointerObj(new LibIdmefError(e),
+          SWIGTYPE_p_Idmef__LibIdmefError, SWIG_POINTER_OWN),
+        "LibIdmefError", SWIGTYPE_p_Idmef__LibIdmefError);
       SWIG_fail;
     }
   }
@@ -7345,10 +7345,10 @@ SWIGINTERN PyObject *_wrap_IDMEFValue_isNull(PyObject *self, PyObject *args) {
   {
     try {
       result = (bool)((Idmef::IDMEFValue const *)arg1)->isNull();
-    } catch(Idmef::PreludeError &e) {
-      SWIG_Python_Raise(SWIG_NewPointerObj(new PreludeError(e),
-          SWIGTYPE_p_Idmef__PreludeError, SWIG_POINTER_OWN),
-        "PreludeError", SWIGTYPE_p_Idmef__PreludeError);
+    } catch(Idmef::LibIdmefError &e) {
+      SWIG_Python_Raise(SWIG_NewPointerObj(new LibIdmefError(e),
+          SWIGTYPE_p_Idmef__LibIdmefError, SWIG_POINTER_OWN),
+        "LibIdmefError", SWIGTYPE_p_Idmef__LibIdmefError);
       SWIG_fail;
     }
   }
@@ -7367,10 +7367,10 @@ SWIGINTERN int _wrap_new_IDMEFValue__SWIG_0(PyObject *self, int nobjs, PyObject 
   {
     try {
       result = (Idmef::IDMEFValue *)new Idmef::IDMEFValue();
-    } catch(Idmef::PreludeError &e) {
-      SWIG_Python_Raise(SWIG_NewPointerObj(new PreludeError(e),
-          SWIGTYPE_p_Idmef__PreludeError, SWIG_POINTER_OWN),
-        "PreludeError", SWIGTYPE_p_Idmef__PreludeError);
+    } catch(Idmef::LibIdmefError &e) {
+      SWIG_Python_Raise(SWIG_NewPointerObj(new LibIdmefError(e),
+          SWIGTYPE_p_Idmef__LibIdmefError, SWIG_POINTER_OWN),
+        "LibIdmefError", SWIGTYPE_p_Idmef__LibIdmefError);
       SWIG_fail;
     }
   }
@@ -7397,10 +7397,10 @@ SWIGINTERN PyObject *_wrap_delete_IDMEFValue(PyObject *self, PyObject *args) {
   {
     try {
       delete arg1;
-    } catch(Idmef::PreludeError &e) {
-      SWIG_Python_Raise(SWIG_NewPointerObj(new PreludeError(e),
-          SWIGTYPE_p_Idmef__PreludeError, SWIG_POINTER_OWN),
-        "PreludeError", SWIGTYPE_p_Idmef__PreludeError);
+    } catch(Idmef::LibIdmefError &e) {
+      SWIG_Python_Raise(SWIG_NewPointerObj(new LibIdmefError(e),
+          SWIGTYPE_p_Idmef__LibIdmefError, SWIG_POINTER_OWN),
+        "LibIdmefError", SWIGTYPE_p_Idmef__LibIdmefError);
       SWIG_fail;
     }
   }
@@ -7427,10 +7427,10 @@ SWIGINTERN int _wrap_new_IDMEFValue__SWIG_1(PyObject *self, int nobjs, PyObject 
   {
     try {
       result = (Idmef::IDMEFValue *)new Idmef::IDMEFValue(arg1);
-    } catch(Idmef::PreludeError &e) {
-      SWIG_Python_Raise(SWIG_NewPointerObj(new PreludeError(e),
-          SWIGTYPE_p_Idmef__PreludeError, SWIG_POINTER_OWN),
-        "PreludeError", SWIGTYPE_p_Idmef__PreludeError);
+    } catch(Idmef::LibIdmefError &e) {
+      SWIG_Python_Raise(SWIG_NewPointerObj(new LibIdmefError(e),
+          SWIGTYPE_p_Idmef__LibIdmefError, SWIG_POINTER_OWN),
+        "LibIdmefError", SWIGTYPE_p_Idmef__LibIdmefError);
       SWIG_fail;
     }
   }
@@ -7462,10 +7462,10 @@ SWIGINTERN int _wrap_new_IDMEFValue__SWIG_2(PyObject *self, int nobjs, PyObject 
   {
     try {
       result = (Idmef::IDMEFValue *)new Idmef::IDMEFValue((std::vector< Idmef::IDMEF,std::allocator< Idmef::IDMEF > > const &)*arg1);
-    } catch(Idmef::PreludeError &e) {
-      SWIG_Python_Raise(SWIG_NewPointerObj(new PreludeError(e),
-          SWIGTYPE_p_Idmef__PreludeError, SWIG_POINTER_OWN),
-        "PreludeError", SWIGTYPE_p_Idmef__PreludeError);
+    } catch(Idmef::LibIdmefError &e) {
+      SWIG_Python_Raise(SWIG_NewPointerObj(new LibIdmefError(e),
+          SWIGTYPE_p_Idmef__LibIdmefError, SWIG_POINTER_OWN),
+        "LibIdmefError", SWIGTYPE_p_Idmef__LibIdmefError);
       SWIG_fail;
     }
   }
@@ -7497,10 +7497,10 @@ SWIGINTERN int _wrap_new_IDMEFValue__SWIG_3(PyObject *self, int nobjs, PyObject 
   {
     try {
       result = (Idmef::IDMEFValue *)new Idmef::IDMEFValue((Idmef::IDMEFValue const &)*arg1);
-    } catch(Idmef::PreludeError &e) {
-      SWIG_Python_Raise(SWIG_NewPointerObj(new PreludeError(e),
-          SWIGTYPE_p_Idmef__PreludeError, SWIG_POINTER_OWN),
-        "PreludeError", SWIGTYPE_p_Idmef__PreludeError);
+    } catch(Idmef::LibIdmefError &e) {
+      SWIG_Python_Raise(SWIG_NewPointerObj(new LibIdmefError(e),
+          SWIGTYPE_p_Idmef__LibIdmefError, SWIG_POINTER_OWN),
+        "LibIdmefError", SWIGTYPE_p_Idmef__LibIdmefError);
       SWIG_fail;
     }
   }
@@ -7532,10 +7532,10 @@ SWIGINTERN int _wrap_new_IDMEFValue__SWIG_4(PyObject *self, int nobjs, PyObject 
   {
     try {
       result = (Idmef::IDMEFValue *)new Idmef::IDMEFValue((std::vector< Idmef::IDMEFValue,std::allocator< Idmef::IDMEFValue > > const &)*arg1);
-    } catch(Idmef::PreludeError &e) {
-      SWIG_Python_Raise(SWIG_NewPointerObj(new PreludeError(e),
-          SWIGTYPE_p_Idmef__PreludeError, SWIG_POINTER_OWN),
-        "PreludeError", SWIGTYPE_p_Idmef__PreludeError);
+    } catch(Idmef::LibIdmefError &e) {
+      SWIG_Python_Raise(SWIG_NewPointerObj(new LibIdmefError(e),
+          SWIGTYPE_p_Idmef__LibIdmefError, SWIG_POINTER_OWN),
+        "LibIdmefError", SWIGTYPE_p_Idmef__LibIdmefError);
       SWIG_fail;
     }
   }
@@ -7564,10 +7564,10 @@ SWIGINTERN int _wrap_new_IDMEFValue__SWIG_5(PyObject *self, int nobjs, PyObject 
   {
     try {
       result = (Idmef::IDMEFValue *)new Idmef::IDMEFValue(arg1);
-    } catch(Idmef::PreludeError &e) {
-      SWIG_Python_Raise(SWIG_NewPointerObj(new PreludeError(e),
-          SWIGTYPE_p_Idmef__PreludeError, SWIG_POINTER_OWN),
-        "PreludeError", SWIGTYPE_p_Idmef__PreludeError);
+    } catch(Idmef::LibIdmefError &e) {
+      SWIG_Python_Raise(SWIG_NewPointerObj(new LibIdmefError(e),
+          SWIGTYPE_p_Idmef__LibIdmefError, SWIG_POINTER_OWN),
+        "LibIdmefError", SWIGTYPE_p_Idmef__LibIdmefError);
       SWIG_fail;
     }
   }
@@ -7599,10 +7599,10 @@ SWIGINTERN int _wrap_new_IDMEFValue__SWIG_6(PyObject *self, int nobjs, PyObject 
   {
     try {
       result = (Idmef::IDMEFValue *)new Idmef::IDMEFValue((std::string const &)*arg1);
-    } catch(Idmef::PreludeError &e) {
-      SWIG_Python_Raise(SWIG_NewPointerObj(new PreludeError(e),
-          SWIGTYPE_p_Idmef__PreludeError, SWIG_POINTER_OWN),
-        "PreludeError", SWIGTYPE_p_Idmef__PreludeError);
+    } catch(Idmef::LibIdmefError &e) {
+      SWIG_Python_Raise(SWIG_NewPointerObj(new LibIdmefError(e),
+          SWIGTYPE_p_Idmef__LibIdmefError, SWIG_POINTER_OWN),
+        "LibIdmefError", SWIGTYPE_p_Idmef__LibIdmefError);
       SWIG_fail;
     }
   }
@@ -7631,10 +7631,10 @@ SWIGINTERN int _wrap_new_IDMEFValue__SWIG_7(PyObject *self, int nobjs, PyObject 
   {
     try {
       result = (Idmef::IDMEFValue *)new Idmef::IDMEFValue(arg1);
-    } catch(Idmef::PreludeError &e) {
-      SWIG_Python_Raise(SWIG_NewPointerObj(new PreludeError(e),
-          SWIGTYPE_p_Idmef__PreludeError, SWIG_POINTER_OWN),
-        "PreludeError", SWIGTYPE_p_Idmef__PreludeError);
+    } catch(Idmef::LibIdmefError &e) {
+      SWIG_Python_Raise(SWIG_NewPointerObj(new LibIdmefError(e),
+          SWIGTYPE_p_Idmef__LibIdmefError, SWIG_POINTER_OWN),
+        "LibIdmefError", SWIGTYPE_p_Idmef__LibIdmefError);
       SWIG_fail;
     }
   }
@@ -7661,10 +7661,10 @@ SWIGINTERN int _wrap_new_IDMEFValue__SWIG_8(PyObject *self, int nobjs, PyObject 
   {
     try {
       result = (Idmef::IDMEFValue *)new Idmef::IDMEFValue(arg1);
-    } catch(Idmef::PreludeError &e) {
-      SWIG_Python_Raise(SWIG_NewPointerObj(new PreludeError(e),
-          SWIGTYPE_p_Idmef__PreludeError, SWIG_POINTER_OWN),
-        "PreludeError", SWIGTYPE_p_Idmef__PreludeError);
+    } catch(Idmef::LibIdmefError &e) {
+      SWIG_Python_Raise(SWIG_NewPointerObj(new LibIdmefError(e),
+          SWIGTYPE_p_Idmef__LibIdmefError, SWIG_POINTER_OWN),
+        "LibIdmefError", SWIGTYPE_p_Idmef__LibIdmefError);
       SWIG_fail;
     }
   }
@@ -7691,10 +7691,10 @@ SWIGINTERN int _wrap_new_IDMEFValue__SWIG_9(PyObject *self, int nobjs, PyObject 
   {
     try {
       result = (Idmef::IDMEFValue *)new Idmef::IDMEFValue(arg1);
-    } catch(Idmef::PreludeError &e) {
-      SWIG_Python_Raise(SWIG_NewPointerObj(new PreludeError(e),
-          SWIGTYPE_p_Idmef__PreludeError, SWIG_POINTER_OWN),
-        "PreludeError", SWIGTYPE_p_Idmef__PreludeError);
+    } catch(Idmef::LibIdmefError &e) {
+      SWIG_Python_Raise(SWIG_NewPointerObj(new LibIdmefError(e),
+          SWIGTYPE_p_Idmef__LibIdmefError, SWIG_POINTER_OWN),
+        "LibIdmefError", SWIGTYPE_p_Idmef__LibIdmefError);
       SWIG_fail;
     }
   }
@@ -7721,10 +7721,10 @@ SWIGINTERN int _wrap_new_IDMEFValue__SWIG_10(PyObject *self, int nobjs, PyObject
   {
     try {
       result = (Idmef::IDMEFValue *)new Idmef::IDMEFValue(arg1);
-    } catch(Idmef::PreludeError &e) {
-      SWIG_Python_Raise(SWIG_NewPointerObj(new PreludeError(e),
-          SWIGTYPE_p_Idmef__PreludeError, SWIG_POINTER_OWN),
-        "PreludeError", SWIGTYPE_p_Idmef__PreludeError);
+    } catch(Idmef::LibIdmefError &e) {
+      SWIG_Python_Raise(SWIG_NewPointerObj(new LibIdmefError(e),
+          SWIGTYPE_p_Idmef__LibIdmefError, SWIG_POINTER_OWN),
+        "LibIdmefError", SWIGTYPE_p_Idmef__LibIdmefError);
       SWIG_fail;
     }
   }
@@ -7751,10 +7751,10 @@ SWIGINTERN int _wrap_new_IDMEFValue__SWIG_11(PyObject *self, int nobjs, PyObject
   {
     try {
       result = (Idmef::IDMEFValue *)new Idmef::IDMEFValue(arg1);
-    } catch(Idmef::PreludeError &e) {
-      SWIG_Python_Raise(SWIG_NewPointerObj(new PreludeError(e),
-          SWIGTYPE_p_Idmef__PreludeError, SWIG_POINTER_OWN),
-        "PreludeError", SWIGTYPE_p_Idmef__PreludeError);
+    } catch(Idmef::LibIdmefError &e) {
+      SWIG_Python_Raise(SWIG_NewPointerObj(new LibIdmefError(e),
+          SWIGTYPE_p_Idmef__LibIdmefError, SWIG_POINTER_OWN),
+        "LibIdmefError", SWIGTYPE_p_Idmef__LibIdmefError);
       SWIG_fail;
     }
   }
@@ -7784,10 +7784,10 @@ SWIGINTERN int _wrap_new_IDMEFValue__SWIG_12(PyObject *self, int nobjs, PyObject
   {
     try {
       result = (Idmef::IDMEFValue *)new Idmef::IDMEFValue(*arg1);
-    } catch(Idmef::PreludeError &e) {
-      SWIG_Python_Raise(SWIG_NewPointerObj(new PreludeError(e),
-          SWIGTYPE_p_Idmef__PreludeError, SWIG_POINTER_OWN),
-        "PreludeError", SWIGTYPE_p_Idmef__PreludeError);
+    } catch(Idmef::LibIdmefError &e) {
+      SWIG_Python_Raise(SWIG_NewPointerObj(new LibIdmefError(e),
+          SWIGTYPE_p_Idmef__LibIdmefError, SWIG_POINTER_OWN),
+        "LibIdmefError", SWIGTYPE_p_Idmef__LibIdmefError);
       SWIG_fail;
     }
   }
@@ -8003,10 +8003,10 @@ SWIGINTERN PyObject *_wrap_IDMEFValue_match(PyObject *self, PyObject *args) {
   {
     try {
       result = (int)((Idmef::IDMEFValue const *)arg1)->match((Idmef::IDMEFValue const &)*arg2,arg3);
-    } catch(Idmef::PreludeError &e) {
-      SWIG_Python_Raise(SWIG_NewPointerObj(new PreludeError(e),
-          SWIGTYPE_p_Idmef__PreludeError, SWIG_POINTER_OWN),
-        "PreludeError", SWIGTYPE_p_Idmef__PreludeError);
+    } catch(Idmef::LibIdmefError &e) {
+      SWIG_Python_Raise(SWIG_NewPointerObj(new LibIdmefError(e),
+          SWIGTYPE_p_Idmef__LibIdmefError, SWIG_POINTER_OWN),
+        "LibIdmefError", SWIGTYPE_p_Idmef__LibIdmefError);
       SWIG_fail;
     }
   }
@@ -8034,10 +8034,10 @@ SWIGINTERN PyObject *_wrap_IDMEFValue_clone(PyObject *self, PyObject *args) {
   {
     try {
       result = ((Idmef::IDMEFValue const *)arg1)->clone();
-    } catch(Idmef::PreludeError &e) {
-      SWIG_Python_Raise(SWIG_NewPointerObj(new PreludeError(e),
-          SWIGTYPE_p_Idmef__PreludeError, SWIG_POINTER_OWN),
-        "PreludeError", SWIGTYPE_p_Idmef__PreludeError);
+    } catch(Idmef::LibIdmefError &e) {
+      SWIG_Python_Raise(SWIG_NewPointerObj(new LibIdmefError(e),
+          SWIGTYPE_p_Idmef__LibIdmefError, SWIG_POINTER_OWN),
+        "LibIdmefError", SWIGTYPE_p_Idmef__LibIdmefError);
       SWIG_fail;
     }
   }
@@ -8083,10 +8083,10 @@ SWIGINTERN PyObject *_wrap_IDMEFValue_toString(PyObject *self, PyObject *args) {
   {
     try {
       result = ((Idmef::IDMEFValue const *)arg1)->toString();
-    } catch(Idmef::PreludeError &e) {
-      SWIG_Python_Raise(SWIG_NewPointerObj(new PreludeError(e),
-          SWIGTYPE_p_Idmef__PreludeError, SWIG_POINTER_OWN),
-        "PreludeError", SWIGTYPE_p_Idmef__PreludeError);
+    } catch(Idmef::LibIdmefError &e) {
+      SWIG_Python_Raise(SWIG_NewPointerObj(new LibIdmefError(e),
+          SWIGTYPE_p_Idmef__LibIdmefError, SWIG_POINTER_OWN),
+        "LibIdmefError", SWIGTYPE_p_Idmef__LibIdmefError);
       SWIG_fail;
     }
   }
@@ -8128,10 +8128,10 @@ SWIGINTERN PyObject *_wrap_IDMEFValue___eq____SWIG_0(PyObject *self, int nobjs, 
   {
     try {
       result = (bool)((Idmef::IDMEFValue const *)arg1)->operator ==((std::vector< Idmef::IDMEFValue,std::allocator< Idmef::IDMEFValue > > const &)*arg2);
-    } catch(Idmef::PreludeError &e) {
-      SWIG_Python_Raise(SWIG_NewPointerObj(new PreludeError(e),
-          SWIGTYPE_p_Idmef__PreludeError, SWIG_POINTER_OWN),
-        "PreludeError", SWIGTYPE_p_Idmef__PreludeError);
+    } catch(Idmef::LibIdmefError &e) {
+      SWIG_Python_Raise(SWIG_NewPointerObj(new LibIdmefError(e),
+          SWIGTYPE_p_Idmef__LibIdmefError, SWIG_POINTER_OWN),
+        "LibIdmefError", SWIGTYPE_p_Idmef__LibIdmefError);
       SWIG_fail;
     }
   }
@@ -8173,10 +8173,10 @@ SWIGINTERN PyObject *_wrap_IDMEFValue___le__(PyObject *self, PyObject *args) {
   {
     try {
       result = (bool)((Idmef::IDMEFValue const *)arg1)->operator <=((Idmef::IDMEFValue const &)*arg2);
-    } catch(Idmef::PreludeError &e) {
-      SWIG_Python_Raise(SWIG_NewPointerObj(new PreludeError(e),
-          SWIGTYPE_p_Idmef__PreludeError, SWIG_POINTER_OWN),
-        "PreludeError", SWIGTYPE_p_Idmef__PreludeError);
+    } catch(Idmef::LibIdmefError &e) {
+      SWIG_Python_Raise(SWIG_NewPointerObj(new LibIdmefError(e),
+          SWIGTYPE_p_Idmef__LibIdmefError, SWIG_POINTER_OWN),
+        "LibIdmefError", SWIGTYPE_p_Idmef__LibIdmefError);
       SWIG_fail;
     }
   }
@@ -8216,10 +8216,10 @@ SWIGINTERN PyObject *_wrap_IDMEFValue___ge__(PyObject *self, PyObject *args) {
   {
     try {
       result = (bool)((Idmef::IDMEFValue const *)arg1)->operator >=((Idmef::IDMEFValue const &)*arg2);
-    } catch(Idmef::PreludeError &e) {
-      SWIG_Python_Raise(SWIG_NewPointerObj(new PreludeError(e),
-          SWIGTYPE_p_Idmef__PreludeError, SWIG_POINTER_OWN),
-        "PreludeError", SWIGTYPE_p_Idmef__PreludeError);
+    } catch(Idmef::LibIdmefError &e) {
+      SWIG_Python_Raise(SWIG_NewPointerObj(new LibIdmefError(e),
+          SWIGTYPE_p_Idmef__LibIdmefError, SWIG_POINTER_OWN),
+        "LibIdmefError", SWIGTYPE_p_Idmef__LibIdmefError);
       SWIG_fail;
     }
   }
@@ -8259,10 +8259,10 @@ SWIGINTERN PyObject *_wrap_IDMEFValue___lt__(PyObject *self, PyObject *args) {
   {
     try {
       result = (bool)((Idmef::IDMEFValue const *)arg1)->operator <((Idmef::IDMEFValue const &)*arg2);
-    } catch(Idmef::PreludeError &e) {
-      SWIG_Python_Raise(SWIG_NewPointerObj(new PreludeError(e),
-          SWIGTYPE_p_Idmef__PreludeError, SWIG_POINTER_OWN),
-        "PreludeError", SWIGTYPE_p_Idmef__PreludeError);
+    } catch(Idmef::LibIdmefError &e) {
+      SWIG_Python_Raise(SWIG_NewPointerObj(new LibIdmefError(e),
+          SWIGTYPE_p_Idmef__LibIdmefError, SWIG_POINTER_OWN),
+        "LibIdmefError", SWIGTYPE_p_Idmef__LibIdmefError);
       SWIG_fail;
     }
   }
@@ -8302,10 +8302,10 @@ SWIGINTERN PyObject *_wrap_IDMEFValue___gt__(PyObject *self, PyObject *args) {
   {
     try {
       result = (bool)((Idmef::IDMEFValue const *)arg1)->operator >((Idmef::IDMEFValue const &)*arg2);
-    } catch(Idmef::PreludeError &e) {
-      SWIG_Python_Raise(SWIG_NewPointerObj(new PreludeError(e),
-          SWIGTYPE_p_Idmef__PreludeError, SWIG_POINTER_OWN),
-        "PreludeError", SWIGTYPE_p_Idmef__PreludeError);
+    } catch(Idmef::LibIdmefError &e) {
+      SWIG_Python_Raise(SWIG_NewPointerObj(new LibIdmefError(e),
+          SWIGTYPE_p_Idmef__LibIdmefError, SWIG_POINTER_OWN),
+        "LibIdmefError", SWIGTYPE_p_Idmef__LibIdmefError);
       SWIG_fail;
     }
   }
@@ -8343,10 +8343,10 @@ SWIGINTERN PyObject *_wrap_IDMEFValue___eq____SWIG_1(PyObject *self, int nobjs, 
   {
     try {
       result = (bool)((Idmef::IDMEFValue const *)arg1)->operator ==((Idmef::IDMEFValue const &)*arg2);
-    } catch(Idmef::PreludeError &e) {
-      SWIG_Python_Raise(SWIG_NewPointerObj(new PreludeError(e),
-          SWIGTYPE_p_Idmef__PreludeError, SWIG_POINTER_OWN),
-        "PreludeError", SWIGTYPE_p_Idmef__PreludeError);
+    } catch(Idmef::LibIdmefError &e) {
+      SWIG_Python_Raise(SWIG_NewPointerObj(new LibIdmefError(e),
+          SWIGTYPE_p_Idmef__LibIdmefError, SWIG_POINTER_OWN),
+        "LibIdmefError", SWIGTYPE_p_Idmef__LibIdmefError);
       SWIG_fail;
     }
   }
@@ -8415,10 +8415,10 @@ SWIGINTERN PyObject *_wrap_IDMEFValue___ne__(PyObject *self, PyObject *args) {
   {
     try {
       result = (bool)((Idmef::IDMEFValue const *)arg1)->operator !=((Idmef::IDMEFValue const &)*arg2);
-    } catch(Idmef::PreludeError &e) {
-      SWIG_Python_Raise(SWIG_NewPointerObj(new PreludeError(e),
-          SWIGTYPE_p_Idmef__PreludeError, SWIG_POINTER_OWN),
-        "PreludeError", SWIGTYPE_p_Idmef__PreludeError);
+    } catch(Idmef::LibIdmefError &e) {
+      SWIG_Python_Raise(SWIG_NewPointerObj(new LibIdmefError(e),
+          SWIGTYPE_p_Idmef__LibIdmefError, SWIG_POINTER_OWN),
+        "LibIdmefError", SWIGTYPE_p_Idmef__LibIdmefError);
       SWIG_fail;
     }
   }
@@ -8446,10 +8446,10 @@ SWIGINTERN int _wrap_new_IDMEFPath__SWIG_0(PyObject *self, int nobjs, PyObject *
   {
     try {
       result = (Idmef::IDMEFPath *)new Idmef::IDMEFPath((char const *)arg1);
-    } catch(Idmef::PreludeError &e) {
-      SWIG_Python_Raise(SWIG_NewPointerObj(new PreludeError(e),
-          SWIGTYPE_p_Idmef__PreludeError, SWIG_POINTER_OWN),
-        "PreludeError", SWIGTYPE_p_Idmef__PreludeError);
+    } catch(Idmef::LibIdmefError &e) {
+      SWIG_Python_Raise(SWIG_NewPointerObj(new LibIdmefError(e),
+          SWIGTYPE_p_Idmef__LibIdmefError, SWIG_POINTER_OWN),
+        "LibIdmefError", SWIGTYPE_p_Idmef__LibIdmefError);
       SWIG_fail;
     }
   }
@@ -8490,10 +8490,10 @@ SWIGINTERN int _wrap_new_IDMEFPath__SWIG_1(PyObject *self, int nobjs, PyObject *
   {
     try {
       result = (Idmef::IDMEFPath *)new Idmef::IDMEFPath(*arg1,(char const *)arg2);
-    } catch(Idmef::PreludeError &e) {
-      SWIG_Python_Raise(SWIG_NewPointerObj(new PreludeError(e),
-          SWIGTYPE_p_Idmef__PreludeError, SWIG_POINTER_OWN),
-        "PreludeError", SWIGTYPE_p_Idmef__PreludeError);
+    } catch(Idmef::LibIdmefError &e) {
+      SWIG_Python_Raise(SWIG_NewPointerObj(new LibIdmefError(e),
+          SWIGTYPE_p_Idmef__LibIdmefError, SWIG_POINTER_OWN),
+        "LibIdmefError", SWIGTYPE_p_Idmef__LibIdmefError);
       SWIG_fail;
     }
   }
@@ -8522,10 +8522,10 @@ SWIGINTERN int _wrap_new_IDMEFPath__SWIG_2(PyObject *self, int nobjs, PyObject *
   {
     try {
       result = (Idmef::IDMEFPath *)new Idmef::IDMEFPath(arg1);
-    } catch(Idmef::PreludeError &e) {
-      SWIG_Python_Raise(SWIG_NewPointerObj(new PreludeError(e),
-          SWIGTYPE_p_Idmef__PreludeError, SWIG_POINTER_OWN),
-        "PreludeError", SWIGTYPE_p_Idmef__PreludeError);
+    } catch(Idmef::LibIdmefError &e) {
+      SWIG_Python_Raise(SWIG_NewPointerObj(new LibIdmefError(e),
+          SWIGTYPE_p_Idmef__LibIdmefError, SWIG_POINTER_OWN),
+        "LibIdmefError", SWIGTYPE_p_Idmef__LibIdmefError);
       SWIG_fail;
     }
   }
@@ -8555,10 +8555,10 @@ SWIGINTERN int _wrap_new_IDMEFPath__SWIG_3(PyObject *self, int nobjs, PyObject *
   {
     try {
       result = (Idmef::IDMEFPath *)new Idmef::IDMEFPath((Idmef::IDMEFPath const &)*arg1);
-    } catch(Idmef::PreludeError &e) {
-      SWIG_Python_Raise(SWIG_NewPointerObj(new PreludeError(e),
-          SWIGTYPE_p_Idmef__PreludeError, SWIG_POINTER_OWN),
-        "PreludeError", SWIGTYPE_p_Idmef__PreludeError);
+    } catch(Idmef::LibIdmefError &e) {
+      SWIG_Python_Raise(SWIG_NewPointerObj(new LibIdmefError(e),
+          SWIGTYPE_p_Idmef__LibIdmefError, SWIG_POINTER_OWN),
+        "LibIdmefError", SWIGTYPE_p_Idmef__LibIdmefError);
       SWIG_fail;
     }
   }
@@ -8634,10 +8634,10 @@ SWIGINTERN PyObject *_wrap_delete_IDMEFPath(PyObject *self, PyObject *args) {
   {
     try {
       delete arg1;
-    } catch(Idmef::PreludeError &e) {
-      SWIG_Python_Raise(SWIG_NewPointerObj(new PreludeError(e),
-          SWIGTYPE_p_Idmef__PreludeError, SWIG_POINTER_OWN),
-        "PreludeError", SWIGTYPE_p_Idmef__PreludeError);
+    } catch(Idmef::LibIdmefError &e) {
+      SWIG_Python_Raise(SWIG_NewPointerObj(new LibIdmefError(e),
+          SWIGTYPE_p_Idmef__LibIdmefError, SWIG_POINTER_OWN),
+        "LibIdmefError", SWIGTYPE_p_Idmef__LibIdmefError);
       SWIG_fail;
     }
   }
@@ -8687,10 +8687,10 @@ SWIGINTERN PyObject *_wrap_IDMEFPath_set__SWIG_0(PyObject *self, int nobjs, PyOb
   {
     try {
       ((Idmef::IDMEFPath const *)arg1)->set(*arg2,(std::vector< Idmef::IDMEF,std::allocator< Idmef::IDMEF > > const &)*arg3);
-    } catch(Idmef::PreludeError &e) {
-      SWIG_Python_Raise(SWIG_NewPointerObj(new PreludeError(e),
-          SWIGTYPE_p_Idmef__PreludeError, SWIG_POINTER_OWN),
-        "PreludeError", SWIGTYPE_p_Idmef__PreludeError);
+    } catch(Idmef::LibIdmefError &e) {
+      SWIG_Python_Raise(SWIG_NewPointerObj(new LibIdmefError(e),
+          SWIGTYPE_p_Idmef__LibIdmefError, SWIG_POINTER_OWN),
+        "LibIdmefError", SWIGTYPE_p_Idmef__LibIdmefError);
       SWIG_fail;
     }
   }
@@ -8737,10 +8737,10 @@ SWIGINTERN PyObject *_wrap_IDMEFPath_set__SWIG_1(PyObject *self, int nobjs, PyOb
   {
     try {
       ((Idmef::IDMEFPath const *)arg1)->set(*arg2,arg3);
-    } catch(Idmef::PreludeError &e) {
-      SWIG_Python_Raise(SWIG_NewPointerObj(new PreludeError(e),
-          SWIGTYPE_p_Idmef__PreludeError, SWIG_POINTER_OWN),
-        "PreludeError", SWIGTYPE_p_Idmef__PreludeError);
+    } catch(Idmef::LibIdmefError &e) {
+      SWIG_Python_Raise(SWIG_NewPointerObj(new LibIdmefError(e),
+          SWIGTYPE_p_Idmef__LibIdmefError, SWIG_POINTER_OWN),
+        "LibIdmefError", SWIGTYPE_p_Idmef__LibIdmefError);
       SWIG_fail;
     }
   }
@@ -8790,10 +8790,10 @@ SWIGINTERN PyObject *_wrap_IDMEFPath_set__SWIG_2(PyObject *self, int nobjs, PyOb
   {
     try {
       ((Idmef::IDMEFPath const *)arg1)->set(*arg2,(std::vector< Idmef::IDMEFValue,std::allocator< Idmef::IDMEFValue > > const &)*arg3);
-    } catch(Idmef::PreludeError &e) {
-      SWIG_Python_Raise(SWIG_NewPointerObj(new PreludeError(e),
-          SWIGTYPE_p_Idmef__PreludeError, SWIG_POINTER_OWN),
-        "PreludeError", SWIGTYPE_p_Idmef__PreludeError);
+    } catch(Idmef::LibIdmefError &e) {
+      SWIG_Python_Raise(SWIG_NewPointerObj(new LibIdmefError(e),
+          SWIGTYPE_p_Idmef__LibIdmefError, SWIG_POINTER_OWN),
+        "LibIdmefError", SWIGTYPE_p_Idmef__LibIdmefError);
       SWIG_fail;
     }
   }
@@ -8840,10 +8840,10 @@ SWIGINTERN PyObject *_wrap_IDMEFPath_set__SWIG_3(PyObject *self, int nobjs, PyOb
   {
     try {
       ((Idmef::IDMEFPath const *)arg1)->set(*arg2,arg3);
-    } catch(Idmef::PreludeError &e) {
-      SWIG_Python_Raise(SWIG_NewPointerObj(new PreludeError(e),
-          SWIGTYPE_p_Idmef__PreludeError, SWIG_POINTER_OWN),
-        "PreludeError", SWIGTYPE_p_Idmef__PreludeError);
+    } catch(Idmef::LibIdmefError &e) {
+      SWIG_Python_Raise(SWIG_NewPointerObj(new LibIdmefError(e),
+          SWIGTYPE_p_Idmef__LibIdmefError, SWIG_POINTER_OWN),
+        "LibIdmefError", SWIGTYPE_p_Idmef__LibIdmefError);
       SWIG_fail;
     }
   }
@@ -8891,10 +8891,10 @@ SWIGINTERN PyObject *_wrap_IDMEFPath_set__SWIG_4(PyObject *self, int nobjs, PyOb
   {
     try {
       ((Idmef::IDMEFPath const *)arg1)->set(*arg2,*arg3);
-    } catch(Idmef::PreludeError &e) {
-      SWIG_Python_Raise(SWIG_NewPointerObj(new PreludeError(e),
-          SWIGTYPE_p_Idmef__PreludeError, SWIG_POINTER_OWN),
-        "PreludeError", SWIGTYPE_p_Idmef__PreludeError);
+    } catch(Idmef::LibIdmefError &e) {
+      SWIG_Python_Raise(SWIG_NewPointerObj(new LibIdmefError(e),
+          SWIGTYPE_p_Idmef__LibIdmefError, SWIG_POINTER_OWN),
+        "LibIdmefError", SWIGTYPE_p_Idmef__LibIdmefError);
       SWIG_fail;
     }
   }
@@ -8944,10 +8944,10 @@ SWIGINTERN PyObject *_wrap_IDMEFPath_set__SWIG_5(PyObject *self, int nobjs, PyOb
   {
     try {
       ((Idmef::IDMEFPath const *)arg1)->set(*arg2,(std::string const &)*arg3);
-    } catch(Idmef::PreludeError &e) {
-      SWIG_Python_Raise(SWIG_NewPointerObj(new PreludeError(e),
-          SWIGTYPE_p_Idmef__PreludeError, SWIG_POINTER_OWN),
-        "PreludeError", SWIGTYPE_p_Idmef__PreludeError);
+    } catch(Idmef::LibIdmefError &e) {
+      SWIG_Python_Raise(SWIG_NewPointerObj(new LibIdmefError(e),
+          SWIGTYPE_p_Idmef__LibIdmefError, SWIG_POINTER_OWN),
+        "LibIdmefError", SWIGTYPE_p_Idmef__LibIdmefError);
       SWIG_fail;
     }
   }
@@ -8994,10 +8994,10 @@ SWIGINTERN PyObject *_wrap_IDMEFPath_set__SWIG_6(PyObject *self, int nobjs, PyOb
   {
     try {
       ((Idmef::IDMEFPath const *)arg1)->set(*arg2,arg3);
-    } catch(Idmef::PreludeError &e) {
-      SWIG_Python_Raise(SWIG_NewPointerObj(new PreludeError(e),
-          SWIGTYPE_p_Idmef__PreludeError, SWIG_POINTER_OWN),
-        "PreludeError", SWIGTYPE_p_Idmef__PreludeError);
+    } catch(Idmef::LibIdmefError &e) {
+      SWIG_Python_Raise(SWIG_NewPointerObj(new LibIdmefError(e),
+          SWIGTYPE_p_Idmef__LibIdmefError, SWIG_POINTER_OWN),
+        "LibIdmefError", SWIGTYPE_p_Idmef__LibIdmefError);
       SWIG_fail;
     }
   }
@@ -9042,10 +9042,10 @@ SWIGINTERN PyObject *_wrap_IDMEFPath_set__SWIG_7(PyObject *self, int nobjs, PyOb
   {
     try {
       ((Idmef::IDMEFPath const *)arg1)->set(*arg2,arg3);
-    } catch(Idmef::PreludeError &e) {
-      SWIG_Python_Raise(SWIG_NewPointerObj(new PreludeError(e),
-          SWIGTYPE_p_Idmef__PreludeError, SWIG_POINTER_OWN),
-        "PreludeError", SWIGTYPE_p_Idmef__PreludeError);
+    } catch(Idmef::LibIdmefError &e) {
+      SWIG_Python_Raise(SWIG_NewPointerObj(new LibIdmefError(e),
+          SWIGTYPE_p_Idmef__LibIdmefError, SWIG_POINTER_OWN),
+        "LibIdmefError", SWIGTYPE_p_Idmef__LibIdmefError);
       SWIG_fail;
     }
   }
@@ -9090,10 +9090,10 @@ SWIGINTERN PyObject *_wrap_IDMEFPath_set__SWIG_8(PyObject *self, int nobjs, PyOb
   {
     try {
       ((Idmef::IDMEFPath const *)arg1)->set(*arg2,arg3);
-    } catch(Idmef::PreludeError &e) {
-      SWIG_Python_Raise(SWIG_NewPointerObj(new PreludeError(e),
-          SWIGTYPE_p_Idmef__PreludeError, SWIG_POINTER_OWN),
-        "PreludeError", SWIGTYPE_p_Idmef__PreludeError);
+    } catch(Idmef::LibIdmefError &e) {
+      SWIG_Python_Raise(SWIG_NewPointerObj(new LibIdmefError(e),
+          SWIGTYPE_p_Idmef__LibIdmefError, SWIG_POINTER_OWN),
+        "LibIdmefError", SWIGTYPE_p_Idmef__LibIdmefError);
       SWIG_fail;
     }
   }
@@ -9138,10 +9138,10 @@ SWIGINTERN PyObject *_wrap_IDMEFPath_set__SWIG_9(PyObject *self, int nobjs, PyOb
   {
     try {
       ((Idmef::IDMEFPath const *)arg1)->set(*arg2,arg3);
-    } catch(Idmef::PreludeError &e) {
-      SWIG_Python_Raise(SWIG_NewPointerObj(new PreludeError(e),
-          SWIGTYPE_p_Idmef__PreludeError, SWIG_POINTER_OWN),
-        "PreludeError", SWIGTYPE_p_Idmef__PreludeError);
+    } catch(Idmef::LibIdmefError &e) {
+      SWIG_Python_Raise(SWIG_NewPointerObj(new LibIdmefError(e),
+          SWIGTYPE_p_Idmef__LibIdmefError, SWIG_POINTER_OWN),
+        "LibIdmefError", SWIGTYPE_p_Idmef__LibIdmefError);
       SWIG_fail;
     }
   }
@@ -9186,10 +9186,10 @@ SWIGINTERN PyObject *_wrap_IDMEFPath_set__SWIG_10(PyObject *self, int nobjs, PyO
   {
     try {
       ((Idmef::IDMEFPath const *)arg1)->set(*arg2,arg3);
-    } catch(Idmef::PreludeError &e) {
-      SWIG_Python_Raise(SWIG_NewPointerObj(new PreludeError(e),
-          SWIGTYPE_p_Idmef__PreludeError, SWIG_POINTER_OWN),
-        "PreludeError", SWIGTYPE_p_Idmef__PreludeError);
+    } catch(Idmef::LibIdmefError &e) {
+      SWIG_Python_Raise(SWIG_NewPointerObj(new LibIdmefError(e),
+          SWIGTYPE_p_Idmef__LibIdmefError, SWIG_POINTER_OWN),
+        "LibIdmefError", SWIGTYPE_p_Idmef__LibIdmefError);
       SWIG_fail;
     }
   }
@@ -9385,10 +9385,10 @@ SWIGINTERN PyObject *_wrap_IDMEFPath_getClass(PyObject *self, PyObject *args, Py
   {
     try {
       result = ((Idmef::IDMEFPath const *)arg1)->getClass(arg2);
-    } catch(Idmef::PreludeError &e) {
-      SWIG_Python_Raise(SWIG_NewPointerObj(new PreludeError(e),
-          SWIGTYPE_p_Idmef__PreludeError, SWIG_POINTER_OWN),
-        "PreludeError", SWIGTYPE_p_Idmef__PreludeError);
+    } catch(Idmef::LibIdmefError &e) {
+      SWIG_Python_Raise(SWIG_NewPointerObj(new LibIdmefError(e),
+          SWIGTYPE_p_Idmef__LibIdmefError, SWIG_POINTER_OWN),
+        "LibIdmefError", SWIGTYPE_p_Idmef__LibIdmefError);
       SWIG_fail;
     }
   }
@@ -9429,10 +9429,10 @@ SWIGINTERN PyObject *_wrap_IDMEFPath_getValueType(PyObject *self, PyObject *args
   {
     try {
       result = (Idmef::IDMEFValue::IDMEFValueTypeEnum)((Idmef::IDMEFPath const *)arg1)->getValueType(arg2);
-    } catch(Idmef::PreludeError &e) {
-      SWIG_Python_Raise(SWIG_NewPointerObj(new PreludeError(e),
-          SWIGTYPE_p_Idmef__PreludeError, SWIG_POINTER_OWN),
-        "PreludeError", SWIGTYPE_p_Idmef__PreludeError);
+    } catch(Idmef::LibIdmefError &e) {
+      SWIG_Python_Raise(SWIG_NewPointerObj(new LibIdmefError(e),
+          SWIGTYPE_p_Idmef__LibIdmefError, SWIG_POINTER_OWN),
+        "LibIdmefError", SWIGTYPE_p_Idmef__LibIdmefError);
       SWIG_fail;
     }
   }
@@ -9482,10 +9482,10 @@ SWIGINTERN PyObject *_wrap_IDMEFPath_setIndex(PyObject *self, PyObject *args, Py
   {
     try {
       result = (int)(arg1)->setIndex(arg2,arg3);
-    } catch(Idmef::PreludeError &e) {
-      SWIG_Python_Raise(SWIG_NewPointerObj(new PreludeError(e),
-          SWIGTYPE_p_Idmef__PreludeError, SWIG_POINTER_OWN),
-        "PreludeError", SWIGTYPE_p_Idmef__PreludeError);
+    } catch(Idmef::LibIdmefError &e) {
+      SWIG_Python_Raise(SWIG_NewPointerObj(new LibIdmefError(e),
+          SWIGTYPE_p_Idmef__LibIdmefError, SWIG_POINTER_OWN),
+        "LibIdmefError", SWIGTYPE_p_Idmef__LibIdmefError);
       SWIG_fail;
     }
   }
@@ -9526,10 +9526,10 @@ SWIGINTERN PyObject *_wrap_IDMEFPath_undefineIndex(PyObject *self, PyObject *arg
   {
     try {
       result = (int)(arg1)->undefineIndex(arg2);
-    } catch(Idmef::PreludeError &e) {
-      SWIG_Python_Raise(SWIG_NewPointerObj(new PreludeError(e),
-          SWIGTYPE_p_Idmef__PreludeError, SWIG_POINTER_OWN),
-        "PreludeError", SWIGTYPE_p_Idmef__PreludeError);
+    } catch(Idmef::LibIdmefError &e) {
+      SWIG_Python_Raise(SWIG_NewPointerObj(new LibIdmefError(e),
+          SWIGTYPE_p_Idmef__LibIdmefError, SWIG_POINTER_OWN),
+        "LibIdmefError", SWIGTYPE_p_Idmef__LibIdmefError);
       SWIG_fail;
     }
   }
@@ -9570,10 +9570,10 @@ SWIGINTERN PyObject *_wrap_IDMEFPath_getIndex(PyObject *self, PyObject *args, Py
   {
     try {
       result = (int)((Idmef::IDMEFPath const *)arg1)->getIndex(arg2);
-    } catch(Idmef::PreludeError &e) {
-      SWIG_Python_Raise(SWIG_NewPointerObj(new PreludeError(e),
-          SWIGTYPE_p_Idmef__PreludeError, SWIG_POINTER_OWN),
-        "PreludeError", SWIGTYPE_p_Idmef__PreludeError);
+    } catch(Idmef::LibIdmefError &e) {
+      SWIG_Python_Raise(SWIG_NewPointerObj(new LibIdmefError(e),
+          SWIGTYPE_p_Idmef__LibIdmefError, SWIG_POINTER_OWN),
+        "LibIdmefError", SWIGTYPE_p_Idmef__LibIdmefError);
       SWIG_fail;
     }
   }
@@ -9618,10 +9618,10 @@ SWIGINTERN PyObject *_wrap_IDMEFPath_makeChild(PyObject *self, PyObject *args) {
   {
     try {
       result = (int)(arg1)->makeChild((char const *)arg2,arg3);
-    } catch(Idmef::PreludeError &e) {
-      SWIG_Python_Raise(SWIG_NewPointerObj(new PreludeError(e),
-          SWIGTYPE_p_Idmef__PreludeError, SWIG_POINTER_OWN),
-        "PreludeError", SWIGTYPE_p_Idmef__PreludeError);
+    } catch(Idmef::LibIdmefError &e) {
+      SWIG_Python_Raise(SWIG_NewPointerObj(new LibIdmefError(e),
+          SWIGTYPE_p_Idmef__LibIdmefError, SWIG_POINTER_OWN),
+        "LibIdmefError", SWIGTYPE_p_Idmef__LibIdmefError);
       SWIG_fail;
     }
   }
@@ -9651,10 +9651,10 @@ SWIGINTERN PyObject *_wrap_IDMEFPath_makeParent(PyObject *self, PyObject *args) 
   {
     try {
       result = (int)(arg1)->makeParent();
-    } catch(Idmef::PreludeError &e) {
-      SWIG_Python_Raise(SWIG_NewPointerObj(new PreludeError(e),
-          SWIGTYPE_p_Idmef__PreludeError, SWIG_POINTER_OWN),
-        "PreludeError", SWIGTYPE_p_Idmef__PreludeError);
+    } catch(Idmef::LibIdmefError &e) {
+      SWIG_Python_Raise(SWIG_NewPointerObj(new LibIdmefError(e),
+          SWIGTYPE_p_Idmef__LibIdmefError, SWIG_POINTER_OWN),
+        "LibIdmefError", SWIGTYPE_p_Idmef__LibIdmefError);
       SWIG_fail;
     }
   }
@@ -9704,10 +9704,10 @@ SWIGINTERN PyObject *_wrap_IDMEFPath_compare(PyObject *self, PyObject *args, PyO
   {
     try {
       result = (int)((Idmef::IDMEFPath const *)arg1)->compare(arg2,arg3);
-    } catch(Idmef::PreludeError &e) {
-      SWIG_Python_Raise(SWIG_NewPointerObj(new PreludeError(e),
-          SWIGTYPE_p_Idmef__PreludeError, SWIG_POINTER_OWN),
-        "PreludeError", SWIGTYPE_p_Idmef__PreludeError);
+    } catch(Idmef::LibIdmefError &e) {
+      SWIG_Python_Raise(SWIG_NewPointerObj(new LibIdmefError(e),
+          SWIGTYPE_p_Idmef__LibIdmefError, SWIG_POINTER_OWN),
+        "LibIdmefError", SWIGTYPE_p_Idmef__LibIdmefError);
       SWIG_fail;
     }
   }
@@ -9735,10 +9735,10 @@ SWIGINTERN PyObject *_wrap_IDMEFPath_clone(PyObject *self, PyObject *args) {
   {
     try {
       result = ((Idmef::IDMEFPath const *)arg1)->clone();
-    } catch(Idmef::PreludeError &e) {
-      SWIG_Python_Raise(SWIG_NewPointerObj(new PreludeError(e),
-          SWIGTYPE_p_Idmef__PreludeError, SWIG_POINTER_OWN),
-        "PreludeError", SWIGTYPE_p_Idmef__PreludeError);
+    } catch(Idmef::LibIdmefError &e) {
+      SWIG_Python_Raise(SWIG_NewPointerObj(new LibIdmefError(e),
+          SWIGTYPE_p_Idmef__LibIdmefError, SWIG_POINTER_OWN),
+        "LibIdmefError", SWIGTYPE_p_Idmef__LibIdmefError);
       SWIG_fail;
     }
   }
@@ -9783,10 +9783,10 @@ SWIGINTERN PyObject *_wrap_IDMEFPath_checkOperator(PyObject *self, PyObject *arg
   {
     try {
       result = (int)((Idmef::IDMEFPath const *)arg1)->checkOperator(arg2);
-    } catch(Idmef::PreludeError &e) {
-      SWIG_Python_Raise(SWIG_NewPointerObj(new PreludeError(e),
-          SWIGTYPE_p_Idmef__PreludeError, SWIG_POINTER_OWN),
-        "PreludeError", SWIGTYPE_p_Idmef__PreludeError);
+    } catch(Idmef::LibIdmefError &e) {
+      SWIG_Python_Raise(SWIG_NewPointerObj(new LibIdmefError(e),
+          SWIGTYPE_p_Idmef__LibIdmefError, SWIG_POINTER_OWN),
+        "LibIdmefError", SWIGTYPE_p_Idmef__LibIdmefError);
       SWIG_fail;
     }
   }
@@ -9814,10 +9814,10 @@ SWIGINTERN PyObject *_wrap_IDMEFPath_getApplicableOperators(PyObject *self, PyOb
   {
     try {
       result = ((Idmef::IDMEFPath const *)arg1)->getApplicableOperators();
-    } catch(Idmef::PreludeError &e) {
-      SWIG_Python_Raise(SWIG_NewPointerObj(new PreludeError(e),
-          SWIGTYPE_p_Idmef__PreludeError, SWIG_POINTER_OWN),
-        "PreludeError", SWIGTYPE_p_Idmef__PreludeError);
+    } catch(Idmef::LibIdmefError &e) {
+      SWIG_Python_Raise(SWIG_NewPointerObj(new LibIdmefError(e),
+          SWIGTYPE_p_Idmef__LibIdmefError, SWIG_POINTER_OWN),
+        "LibIdmefError", SWIGTYPE_p_Idmef__LibIdmefError);
       SWIG_fail;
     }
   }
@@ -9858,10 +9858,10 @@ SWIGINTERN PyObject *_wrap_IDMEFPath_getName(PyObject *self, PyObject *args, PyO
   {
     try {
       result = (char *)((Idmef::IDMEFPath const *)arg1)->getName(arg2);
-    } catch(Idmef::PreludeError &e) {
-      SWIG_Python_Raise(SWIG_NewPointerObj(new PreludeError(e),
-          SWIGTYPE_p_Idmef__PreludeError, SWIG_POINTER_OWN),
-        "PreludeError", SWIGTYPE_p_Idmef__PreludeError);
+    } catch(Idmef::LibIdmefError &e) {
+      SWIG_Python_Raise(SWIG_NewPointerObj(new LibIdmefError(e),
+          SWIGTYPE_p_Idmef__LibIdmefError, SWIG_POINTER_OWN),
+        "LibIdmefError", SWIGTYPE_p_Idmef__LibIdmefError);
       SWIG_fail;
     }
   }
@@ -9889,10 +9889,10 @@ SWIGINTERN PyObject *_wrap_IDMEFPath_isAmbiguous(PyObject *self, PyObject *args)
   {
     try {
       result = (bool)((Idmef::IDMEFPath const *)arg1)->isAmbiguous();
-    } catch(Idmef::PreludeError &e) {
-      SWIG_Python_Raise(SWIG_NewPointerObj(new PreludeError(e),
-          SWIGTYPE_p_Idmef__PreludeError, SWIG_POINTER_OWN),
-        "PreludeError", SWIGTYPE_p_Idmef__PreludeError);
+    } catch(Idmef::LibIdmefError &e) {
+      SWIG_Python_Raise(SWIG_NewPointerObj(new LibIdmefError(e),
+          SWIGTYPE_p_Idmef__LibIdmefError, SWIG_POINTER_OWN),
+        "LibIdmefError", SWIGTYPE_p_Idmef__LibIdmefError);
       SWIG_fail;
     }
   }
@@ -9920,10 +9920,10 @@ SWIGINTERN PyObject *_wrap_IDMEFPath_hasLists(PyObject *self, PyObject *args) {
   {
     try {
       result = (int)((Idmef::IDMEFPath const *)arg1)->hasLists();
-    } catch(Idmef::PreludeError &e) {
-      SWIG_Python_Raise(SWIG_NewPointerObj(new PreludeError(e),
-          SWIGTYPE_p_Idmef__PreludeError, SWIG_POINTER_OWN),
-        "PreludeError", SWIGTYPE_p_Idmef__PreludeError);
+    } catch(Idmef::LibIdmefError &e) {
+      SWIG_Python_Raise(SWIG_NewPointerObj(new LibIdmefError(e),
+          SWIGTYPE_p_Idmef__LibIdmefError, SWIG_POINTER_OWN),
+        "LibIdmefError", SWIGTYPE_p_Idmef__LibIdmefError);
       SWIG_fail;
     }
   }
@@ -9964,10 +9964,10 @@ SWIGINTERN PyObject *_wrap_IDMEFPath_isList(PyObject *self, PyObject *args, PyOb
   {
     try {
       result = (bool)((Idmef::IDMEFPath const *)arg1)->isList(arg2);
-    } catch(Idmef::PreludeError &e) {
-      SWIG_Python_Raise(SWIG_NewPointerObj(new PreludeError(e),
-          SWIGTYPE_p_Idmef__PreludeError, SWIG_POINTER_OWN),
-        "PreludeError", SWIGTYPE_p_Idmef__PreludeError);
+    } catch(Idmef::LibIdmefError &e) {
+      SWIG_Python_Raise(SWIG_NewPointerObj(new LibIdmefError(e),
+          SWIGTYPE_p_Idmef__LibIdmefError, SWIG_POINTER_OWN),
+        "LibIdmefError", SWIGTYPE_p_Idmef__LibIdmefError);
       SWIG_fail;
     }
   }
@@ -9995,10 +9995,10 @@ SWIGINTERN PyObject *_wrap_IDMEFPath_getDepth(PyObject *self, PyObject *args) {
   {
     try {
       result = (unsigned int)((Idmef::IDMEFPath const *)arg1)->getDepth();
-    } catch(Idmef::PreludeError &e) {
-      SWIG_Python_Raise(SWIG_NewPointerObj(new PreludeError(e),
-          SWIGTYPE_p_Idmef__PreludeError, SWIG_POINTER_OWN),
-        "PreludeError", SWIGTYPE_p_Idmef__PreludeError);
+    } catch(Idmef::LibIdmefError &e) {
+      SWIG_Python_Raise(SWIG_NewPointerObj(new LibIdmefError(e),
+          SWIGTYPE_p_Idmef__LibIdmefError, SWIG_POINTER_OWN),
+        "LibIdmefError", SWIGTYPE_p_Idmef__LibIdmefError);
       SWIG_fail;
     }
   }
@@ -10038,10 +10038,10 @@ SWIGINTERN PyObject *_wrap_IDMEFPath_get(PyObject *self, PyObject *args) {
   {
     try {
       result = Idmef_IDMEFPath_get(arg1,*arg2);
-    } catch(Idmef::PreludeError &e) {
-      SWIG_Python_Raise(SWIG_NewPointerObj(new PreludeError(e),
-          SWIGTYPE_p_Idmef__PreludeError, SWIG_POINTER_OWN),
-        "PreludeError", SWIGTYPE_p_Idmef__PreludeError);
+    } catch(Idmef::LibIdmefError &e) {
+      SWIG_Python_Raise(SWIG_NewPointerObj(new LibIdmefError(e),
+          SWIGTYPE_p_Idmef__LibIdmefError, SWIG_POINTER_OWN),
+        "LibIdmefError", SWIGTYPE_p_Idmef__LibIdmefError);
       SWIG_fail;
     }
   }
@@ -10078,10 +10078,10 @@ SWIGINTERN int _wrap_new_IDMEFTime__SWIG_0(PyObject *self, int nobjs, PyObject *
   {
     try {
       result = (Idmef::IDMEFTime *)new Idmef::IDMEFTime();
-    } catch(Idmef::PreludeError &e) {
-      SWIG_Python_Raise(SWIG_NewPointerObj(new PreludeError(e),
-          SWIGTYPE_p_Idmef__PreludeError, SWIG_POINTER_OWN),
-        "PreludeError", SWIGTYPE_p_Idmef__PreludeError);
+    } catch(Idmef::LibIdmefError &e) {
+      SWIG_Python_Raise(SWIG_NewPointerObj(new LibIdmefError(e),
+          SWIGTYPE_p_Idmef__LibIdmefError, SWIG_POINTER_OWN),
+        "LibIdmefError", SWIGTYPE_p_Idmef__LibIdmefError);
       SWIG_fail;
     }
   }
@@ -10108,10 +10108,10 @@ SWIGINTERN int _wrap_new_IDMEFTime__SWIG_1(PyObject *self, int nobjs, PyObject *
   {
     try {
       result = (Idmef::IDMEFTime *)new Idmef::IDMEFTime(arg1);
-    } catch(Idmef::PreludeError &e) {
-      SWIG_Python_Raise(SWIG_NewPointerObj(new PreludeError(e),
-          SWIGTYPE_p_Idmef__PreludeError, SWIG_POINTER_OWN),
-        "PreludeError", SWIGTYPE_p_Idmef__PreludeError);
+    } catch(Idmef::LibIdmefError &e) {
+      SWIG_Python_Raise(SWIG_NewPointerObj(new LibIdmefError(e),
+          SWIGTYPE_p_Idmef__LibIdmefError, SWIG_POINTER_OWN),
+        "LibIdmefError", SWIGTYPE_p_Idmef__LibIdmefError);
       SWIG_fail;
     }
   }
@@ -10138,10 +10138,10 @@ SWIGINTERN int _wrap_new_IDMEFTime__SWIG_2(PyObject *self, int nobjs, PyObject *
   {
     try {
       result = (Idmef::IDMEFTime *)new Idmef::IDMEFTime(arg1);
-    } catch(Idmef::PreludeError &e) {
-      SWIG_Python_Raise(SWIG_NewPointerObj(new PreludeError(e),
-          SWIGTYPE_p_Idmef__PreludeError, SWIG_POINTER_OWN),
-        "PreludeError", SWIGTYPE_p_Idmef__PreludeError);
+    } catch(Idmef::LibIdmefError &e) {
+      SWIG_Python_Raise(SWIG_NewPointerObj(new LibIdmefError(e),
+          SWIGTYPE_p_Idmef__LibIdmefError, SWIG_POINTER_OWN),
+        "LibIdmefError", SWIGTYPE_p_Idmef__LibIdmefError);
       SWIG_fail;
     }
   }
@@ -10169,10 +10169,10 @@ SWIGINTERN int _wrap_new_IDMEFTime__SWIG_3(PyObject *self, int nobjs, PyObject *
   {
     try {
       result = (Idmef::IDMEFTime *)new Idmef::IDMEFTime((char const *)arg1);
-    } catch(Idmef::PreludeError &e) {
-      SWIG_Python_Raise(SWIG_NewPointerObj(new PreludeError(e),
-          SWIGTYPE_p_Idmef__PreludeError, SWIG_POINTER_OWN),
-        "PreludeError", SWIGTYPE_p_Idmef__PreludeError);
+    } catch(Idmef::LibIdmefError &e) {
+      SWIG_Python_Raise(SWIG_NewPointerObj(new LibIdmefError(e),
+          SWIGTYPE_p_Idmef__LibIdmefError, SWIG_POINTER_OWN),
+        "LibIdmefError", SWIGTYPE_p_Idmef__LibIdmefError);
       SWIG_fail;
     }
   }
@@ -10201,10 +10201,10 @@ SWIGINTERN int _wrap_new_IDMEFTime__SWIG_4(PyObject *self, int nobjs, PyObject *
   {
     try {
       result = (Idmef::IDMEFTime *)new Idmef::IDMEFTime((timeval const *)arg1);
-    } catch(Idmef::PreludeError &e) {
-      SWIG_Python_Raise(SWIG_NewPointerObj(new PreludeError(e),
-          SWIGTYPE_p_Idmef__PreludeError, SWIG_POINTER_OWN),
-        "PreludeError", SWIGTYPE_p_Idmef__PreludeError);
+    } catch(Idmef::LibIdmefError &e) {
+      SWIG_Python_Raise(SWIG_NewPointerObj(new LibIdmefError(e),
+          SWIGTYPE_p_Idmef__LibIdmefError, SWIG_POINTER_OWN),
+        "LibIdmefError", SWIGTYPE_p_Idmef__LibIdmefError);
       SWIG_fail;
     }
   }
@@ -10234,10 +10234,10 @@ SWIGINTERN int _wrap_new_IDMEFTime__SWIG_5(PyObject *self, int nobjs, PyObject *
   {
     try {
       result = (Idmef::IDMEFTime *)new Idmef::IDMEFTime((Idmef::IDMEFTime const &)*arg1);
-    } catch(Idmef::PreludeError &e) {
-      SWIG_Python_Raise(SWIG_NewPointerObj(new PreludeError(e),
-          SWIGTYPE_p_Idmef__PreludeError, SWIG_POINTER_OWN),
-        "PreludeError", SWIGTYPE_p_Idmef__PreludeError);
+    } catch(Idmef::LibIdmefError &e) {
+      SWIG_Python_Raise(SWIG_NewPointerObj(new LibIdmefError(e),
+          SWIGTYPE_p_Idmef__LibIdmefError, SWIG_POINTER_OWN),
+        "LibIdmefError", SWIGTYPE_p_Idmef__LibIdmefError);
       SWIG_fail;
     }
   }
@@ -10340,10 +10340,10 @@ SWIGINTERN PyObject *_wrap_delete_IDMEFTime(PyObject *self, PyObject *args) {
   {
     try {
       delete arg1;
-    } catch(Idmef::PreludeError &e) {
-      SWIG_Python_Raise(SWIG_NewPointerObj(new PreludeError(e),
-          SWIGTYPE_p_Idmef__PreludeError, SWIG_POINTER_OWN),
-        "PreludeError", SWIGTYPE_p_Idmef__PreludeError);
+    } catch(Idmef::LibIdmefError &e) {
+      SWIG_Python_Raise(SWIG_NewPointerObj(new LibIdmefError(e),
+          SWIGTYPE_p_Idmef__LibIdmefError, SWIG_POINTER_OWN),
+        "LibIdmefError", SWIGTYPE_p_Idmef__LibIdmefError);
       SWIG_fail;
     }
   }
@@ -10369,10 +10369,10 @@ SWIGINTERN PyObject *_wrap_IDMEFTime_set__SWIG_0(PyObject *self, int nobjs, PyOb
   {
     try {
       (arg1)->set();
-    } catch(Idmef::PreludeError &e) {
-      SWIG_Python_Raise(SWIG_NewPointerObj(new PreludeError(e),
-          SWIGTYPE_p_Idmef__PreludeError, SWIG_POINTER_OWN),
-        "PreludeError", SWIGTYPE_p_Idmef__PreludeError);
+    } catch(Idmef::LibIdmefError &e) {
+      SWIG_Python_Raise(SWIG_NewPointerObj(new LibIdmefError(e),
+          SWIGTYPE_p_Idmef__LibIdmefError, SWIG_POINTER_OWN),
+        "LibIdmefError", SWIGTYPE_p_Idmef__LibIdmefError);
       SWIG_fail;
     }
   }
@@ -10406,10 +10406,10 @@ SWIGINTERN PyObject *_wrap_IDMEFTime_set__SWIG_1(PyObject *self, int nobjs, PyOb
   {
     try {
       (arg1)->set((time_t const *)arg2);
-    } catch(Idmef::PreludeError &e) {
-      SWIG_Python_Raise(SWIG_NewPointerObj(new PreludeError(e),
-          SWIGTYPE_p_Idmef__PreludeError, SWIG_POINTER_OWN),
-        "PreludeError", SWIGTYPE_p_Idmef__PreludeError);
+    } catch(Idmef::LibIdmefError &e) {
+      SWIG_Python_Raise(SWIG_NewPointerObj(new LibIdmefError(e),
+          SWIGTYPE_p_Idmef__LibIdmefError, SWIG_POINTER_OWN),
+        "LibIdmefError", SWIGTYPE_p_Idmef__LibIdmefError);
       SWIG_fail;
     }
   }
@@ -10444,10 +10444,10 @@ SWIGINTERN PyObject *_wrap_IDMEFTime_set__SWIG_2(PyObject *self, int nobjs, PyOb
   {
     try {
       (arg1)->set((char const *)arg2);
-    } catch(Idmef::PreludeError &e) {
-      SWIG_Python_Raise(SWIG_NewPointerObj(new PreludeError(e),
-          SWIGTYPE_p_Idmef__PreludeError, SWIG_POINTER_OWN),
-        "PreludeError", SWIGTYPE_p_Idmef__PreludeError);
+    } catch(Idmef::LibIdmefError &e) {
+      SWIG_Python_Raise(SWIG_NewPointerObj(new LibIdmefError(e),
+          SWIGTYPE_p_Idmef__LibIdmefError, SWIG_POINTER_OWN),
+        "LibIdmefError", SWIGTYPE_p_Idmef__LibIdmefError);
       SWIG_fail;
     }
   }
@@ -10483,10 +10483,10 @@ SWIGINTERN PyObject *_wrap_IDMEFTime_set__SWIG_3(PyObject *self, int nobjs, PyOb
   {
     try {
       (arg1)->set((timeval const *)arg2);
-    } catch(Idmef::PreludeError &e) {
-      SWIG_Python_Raise(SWIG_NewPointerObj(new PreludeError(e),
-          SWIGTYPE_p_Idmef__PreludeError, SWIG_POINTER_OWN),
-        "PreludeError", SWIGTYPE_p_Idmef__PreludeError);
+    } catch(Idmef::LibIdmefError &e) {
+      SWIG_Python_Raise(SWIG_NewPointerObj(new LibIdmefError(e),
+          SWIGTYPE_p_Idmef__LibIdmefError, SWIG_POINTER_OWN),
+        "LibIdmefError", SWIGTYPE_p_Idmef__LibIdmefError);
       SWIG_fail;
     }
   }
@@ -10574,10 +10574,10 @@ SWIGINTERN PyObject *_wrap_IDMEFTime_setSec(PyObject *self, PyObject *args) {
   {
     try {
       (arg1)->setSec(arg2);
-    } catch(Idmef::PreludeError &e) {
-      SWIG_Python_Raise(SWIG_NewPointerObj(new PreludeError(e),
-          SWIGTYPE_p_Idmef__PreludeError, SWIG_POINTER_OWN),
-        "PreludeError", SWIGTYPE_p_Idmef__PreludeError);
+    } catch(Idmef::LibIdmefError &e) {
+      SWIG_Python_Raise(SWIG_NewPointerObj(new LibIdmefError(e),
+          SWIGTYPE_p_Idmef__LibIdmefError, SWIG_POINTER_OWN),
+        "LibIdmefError", SWIGTYPE_p_Idmef__LibIdmefError);
       SWIG_fail;
     }
   }
@@ -10613,10 +10613,10 @@ SWIGINTERN PyObject *_wrap_IDMEFTime_setUSec(PyObject *self, PyObject *args) {
   {
     try {
       (arg1)->setUSec(arg2);
-    } catch(Idmef::PreludeError &e) {
-      SWIG_Python_Raise(SWIG_NewPointerObj(new PreludeError(e),
-          SWIGTYPE_p_Idmef__PreludeError, SWIG_POINTER_OWN),
-        "PreludeError", SWIGTYPE_p_Idmef__PreludeError);
+    } catch(Idmef::LibIdmefError &e) {
+      SWIG_Python_Raise(SWIG_NewPointerObj(new LibIdmefError(e),
+          SWIGTYPE_p_Idmef__LibIdmefError, SWIG_POINTER_OWN),
+        "LibIdmefError", SWIGTYPE_p_Idmef__LibIdmefError);
       SWIG_fail;
     }
   }
@@ -10652,10 +10652,10 @@ SWIGINTERN PyObject *_wrap_IDMEFTime_setGmtOffset(PyObject *self, PyObject *args
   {
     try {
       (arg1)->setGmtOffset(arg2);
-    } catch(Idmef::PreludeError &e) {
-      SWIG_Python_Raise(SWIG_NewPointerObj(new PreludeError(e),
-          SWIGTYPE_p_Idmef__PreludeError, SWIG_POINTER_OWN),
-        "PreludeError", SWIGTYPE_p_Idmef__PreludeError);
+    } catch(Idmef::LibIdmefError &e) {
+      SWIG_Python_Raise(SWIG_NewPointerObj(new LibIdmefError(e),
+          SWIGTYPE_p_Idmef__LibIdmefError, SWIG_POINTER_OWN),
+        "LibIdmefError", SWIGTYPE_p_Idmef__LibIdmefError);
       SWIG_fail;
     }
   }
@@ -10683,10 +10683,10 @@ SWIGINTERN PyObject *_wrap_IDMEFTime_getSec(PyObject *self, PyObject *args) {
   {
     try {
       result = (uint32_t)((Idmef::IDMEFTime const *)arg1)->getSec();
-    } catch(Idmef::PreludeError &e) {
-      SWIG_Python_Raise(SWIG_NewPointerObj(new PreludeError(e),
-          SWIGTYPE_p_Idmef__PreludeError, SWIG_POINTER_OWN),
-        "PreludeError", SWIGTYPE_p_Idmef__PreludeError);
+    } catch(Idmef::LibIdmefError &e) {
+      SWIG_Python_Raise(SWIG_NewPointerObj(new LibIdmefError(e),
+          SWIGTYPE_p_Idmef__LibIdmefError, SWIG_POINTER_OWN),
+        "LibIdmefError", SWIGTYPE_p_Idmef__LibIdmefError);
       SWIG_fail;
     }
   }
@@ -10716,10 +10716,10 @@ SWIGINTERN PyObject *_wrap_IDMEFTime_getUSec(PyObject *self, PyObject *args) {
   {
     try {
       result = (uint32_t)((Idmef::IDMEFTime const *)arg1)->getUSec();
-    } catch(Idmef::PreludeError &e) {
-      SWIG_Python_Raise(SWIG_NewPointerObj(new PreludeError(e),
-          SWIGTYPE_p_Idmef__PreludeError, SWIG_POINTER_OWN),
-        "PreludeError", SWIGTYPE_p_Idmef__PreludeError);
+    } catch(Idmef::LibIdmefError &e) {
+      SWIG_Python_Raise(SWIG_NewPointerObj(new LibIdmefError(e),
+          SWIGTYPE_p_Idmef__LibIdmefError, SWIG_POINTER_OWN),
+        "LibIdmefError", SWIGTYPE_p_Idmef__LibIdmefError);
       SWIG_fail;
     }
   }
@@ -10747,10 +10747,10 @@ SWIGINTERN PyObject *_wrap_IDMEFTime_getGmtOffset(PyObject *self, PyObject *args
   {
     try {
       result = (int32_t)((Idmef::IDMEFTime const *)arg1)->getGmtOffset();
-    } catch(Idmef::PreludeError &e) {
-      SWIG_Python_Raise(SWIG_NewPointerObj(new PreludeError(e),
-          SWIGTYPE_p_Idmef__PreludeError, SWIG_POINTER_OWN),
-        "PreludeError", SWIGTYPE_p_Idmef__PreludeError);
+    } catch(Idmef::LibIdmefError &e) {
+      SWIG_Python_Raise(SWIG_NewPointerObj(new LibIdmefError(e),
+          SWIGTYPE_p_Idmef__LibIdmefError, SWIG_POINTER_OWN),
+        "LibIdmefError", SWIGTYPE_p_Idmef__LibIdmefError);
       SWIG_fail;
     }
   }
@@ -10778,10 +10778,10 @@ SWIGINTERN PyObject *_wrap_IDMEFTime_getTime(PyObject *self, PyObject *args) {
   {
     try {
       result = (double)((Idmef::IDMEFTime const *)arg1)->getTime();
-    } catch(Idmef::PreludeError &e) {
-      SWIG_Python_Raise(SWIG_NewPointerObj(new PreludeError(e),
-          SWIGTYPE_p_Idmef__PreludeError, SWIG_POINTER_OWN),
-        "PreludeError", SWIGTYPE_p_Idmef__PreludeError);
+    } catch(Idmef::LibIdmefError &e) {
+      SWIG_Python_Raise(SWIG_NewPointerObj(new LibIdmefError(e),
+          SWIGTYPE_p_Idmef__LibIdmefError, SWIG_POINTER_OWN),
+        "LibIdmefError", SWIGTYPE_p_Idmef__LibIdmefError);
       SWIG_fail;
     }
   }
@@ -10811,10 +10811,10 @@ SWIGINTERN PyObject *_wrap_IDMEFTime_clone(PyObject *self, PyObject *args) {
   {
     try {
       result = ((Idmef::IDMEFTime const *)arg1)->clone();
-    } catch(Idmef::PreludeError &e) {
-      SWIG_Python_Raise(SWIG_NewPointerObj(new PreludeError(e),
-          SWIGTYPE_p_Idmef__PreludeError, SWIG_POINTER_OWN),
-        "PreludeError", SWIGTYPE_p_Idmef__PreludeError);
+    } catch(Idmef::LibIdmefError &e) {
+      SWIG_Python_Raise(SWIG_NewPointerObj(new LibIdmefError(e),
+          SWIGTYPE_p_Idmef__LibIdmefError, SWIG_POINTER_OWN),
+        "LibIdmefError", SWIGTYPE_p_Idmef__LibIdmefError);
       SWIG_fail;
     }
   }
@@ -10842,10 +10842,10 @@ SWIGINTERN PyObject *_wrap_IDMEFTime_toString(PyObject *self, PyObject *args) {
   {
     try {
       result = ((Idmef::IDMEFTime const *)arg1)->toString();
-    } catch(Idmef::PreludeError &e) {
-      SWIG_Python_Raise(SWIG_NewPointerObj(new PreludeError(e),
-          SWIGTYPE_p_Idmef__PreludeError, SWIG_POINTER_OWN),
-        "PreludeError", SWIGTYPE_p_Idmef__PreludeError);
+    } catch(Idmef::LibIdmefError &e) {
+      SWIG_Python_Raise(SWIG_NewPointerObj(new LibIdmefError(e),
+          SWIGTYPE_p_Idmef__LibIdmefError, SWIG_POINTER_OWN),
+        "LibIdmefError", SWIGTYPE_p_Idmef__LibIdmefError);
       SWIG_fail;
     }
   }
@@ -10889,10 +10889,10 @@ SWIGINTERN PyObject *_wrap_IDMEFTime___ne__(PyObject *self, PyObject *args) {
   {
     try {
       result = (bool)((Idmef::IDMEFTime const *)arg1)->operator !=((Idmef::IDMEFTime const &)*arg2);
-    } catch(Idmef::PreludeError &e) {
-      SWIG_Python_Raise(SWIG_NewPointerObj(new PreludeError(e),
-          SWIGTYPE_p_Idmef__PreludeError, SWIG_POINTER_OWN),
-        "PreludeError", SWIGTYPE_p_Idmef__PreludeError);
+    } catch(Idmef::LibIdmefError &e) {
+      SWIG_Python_Raise(SWIG_NewPointerObj(new LibIdmefError(e),
+          SWIGTYPE_p_Idmef__LibIdmefError, SWIG_POINTER_OWN),
+        "LibIdmefError", SWIGTYPE_p_Idmef__LibIdmefError);
       SWIG_fail;
     }
   }
@@ -10934,10 +10934,10 @@ SWIGINTERN PyObject *_wrap_IDMEFTime___ge__(PyObject *self, PyObject *args) {
   {
     try {
       result = (bool)((Idmef::IDMEFTime const *)arg1)->operator >=((Idmef::IDMEFTime const &)*arg2);
-    } catch(Idmef::PreludeError &e) {
-      SWIG_Python_Raise(SWIG_NewPointerObj(new PreludeError(e),
-          SWIGTYPE_p_Idmef__PreludeError, SWIG_POINTER_OWN),
-        "PreludeError", SWIGTYPE_p_Idmef__PreludeError);
+    } catch(Idmef::LibIdmefError &e) {
+      SWIG_Python_Raise(SWIG_NewPointerObj(new LibIdmefError(e),
+          SWIGTYPE_p_Idmef__LibIdmefError, SWIG_POINTER_OWN),
+        "LibIdmefError", SWIGTYPE_p_Idmef__LibIdmefError);
       SWIG_fail;
     }
   }
@@ -10979,10 +10979,10 @@ SWIGINTERN PyObject *_wrap_IDMEFTime___le__(PyObject *self, PyObject *args) {
   {
     try {
       result = (bool)((Idmef::IDMEFTime const *)arg1)->operator <=((Idmef::IDMEFTime const &)*arg2);
-    } catch(Idmef::PreludeError &e) {
-      SWIG_Python_Raise(SWIG_NewPointerObj(new PreludeError(e),
-          SWIGTYPE_p_Idmef__PreludeError, SWIG_POINTER_OWN),
-        "PreludeError", SWIGTYPE_p_Idmef__PreludeError);
+    } catch(Idmef::LibIdmefError &e) {
+      SWIG_Python_Raise(SWIG_NewPointerObj(new LibIdmefError(e),
+          SWIGTYPE_p_Idmef__LibIdmefError, SWIG_POINTER_OWN),
+        "LibIdmefError", SWIGTYPE_p_Idmef__LibIdmefError);
       SWIG_fail;
     }
   }
@@ -11024,10 +11024,10 @@ SWIGINTERN PyObject *_wrap_IDMEFTime___eq__(PyObject *self, PyObject *args) {
   {
     try {
       result = (bool)((Idmef::IDMEFTime const *)arg1)->operator ==((Idmef::IDMEFTime const &)*arg2);
-    } catch(Idmef::PreludeError &e) {
-      SWIG_Python_Raise(SWIG_NewPointerObj(new PreludeError(e),
-          SWIGTYPE_p_Idmef__PreludeError, SWIG_POINTER_OWN),
-        "PreludeError", SWIGTYPE_p_Idmef__PreludeError);
+    } catch(Idmef::LibIdmefError &e) {
+      SWIG_Python_Raise(SWIG_NewPointerObj(new LibIdmefError(e),
+          SWIGTYPE_p_Idmef__LibIdmefError, SWIG_POINTER_OWN),
+        "LibIdmefError", SWIGTYPE_p_Idmef__LibIdmefError);
       SWIG_fail;
     }
   }
@@ -11069,10 +11069,10 @@ SWIGINTERN PyObject *_wrap_IDMEFTime___gt__(PyObject *self, PyObject *args) {
   {
     try {
       result = (bool)((Idmef::IDMEFTime const *)arg1)->operator >((Idmef::IDMEFTime const &)*arg2);
-    } catch(Idmef::PreludeError &e) {
-      SWIG_Python_Raise(SWIG_NewPointerObj(new PreludeError(e),
-          SWIGTYPE_p_Idmef__PreludeError, SWIG_POINTER_OWN),
-        "PreludeError", SWIGTYPE_p_Idmef__PreludeError);
+    } catch(Idmef::LibIdmefError &e) {
+      SWIG_Python_Raise(SWIG_NewPointerObj(new LibIdmefError(e),
+          SWIGTYPE_p_Idmef__LibIdmefError, SWIG_POINTER_OWN),
+        "LibIdmefError", SWIGTYPE_p_Idmef__LibIdmefError);
       SWIG_fail;
     }
   }
@@ -11114,10 +11114,10 @@ SWIGINTERN PyObject *_wrap_IDMEFTime___lt__(PyObject *self, PyObject *args) {
   {
     try {
       result = (bool)((Idmef::IDMEFTime const *)arg1)->operator <((Idmef::IDMEFTime const &)*arg2);
-    } catch(Idmef::PreludeError &e) {
-      SWIG_Python_Raise(SWIG_NewPointerObj(new PreludeError(e),
-          SWIGTYPE_p_Idmef__PreludeError, SWIG_POINTER_OWN),
-        "PreludeError", SWIGTYPE_p_Idmef__PreludeError);
+    } catch(Idmef::LibIdmefError &e) {
+      SWIG_Python_Raise(SWIG_NewPointerObj(new LibIdmefError(e),
+          SWIGTYPE_p_Idmef__LibIdmefError, SWIG_POINTER_OWN),
+        "LibIdmefError", SWIGTYPE_p_Idmef__LibIdmefError);
       SWIG_fail;
     }
   }
@@ -11145,10 +11145,10 @@ SWIGINTERN PyObject *_wrap_IDMEFTime__getSec2(PyObject *self, PyObject *args) {
   {
     try {
       result = (long)Idmef_IDMEFTime__getSec2(arg1);
-    } catch(Idmef::PreludeError &e) {
-      SWIG_Python_Raise(SWIG_NewPointerObj(new PreludeError(e),
-          SWIGTYPE_p_Idmef__PreludeError, SWIG_POINTER_OWN),
-        "PreludeError", SWIGTYPE_p_Idmef__PreludeError);
+    } catch(Idmef::LibIdmefError &e) {
+      SWIG_Python_Raise(SWIG_NewPointerObj(new LibIdmefError(e),
+          SWIGTYPE_p_Idmef__LibIdmefError, SWIG_POINTER_OWN),
+        "LibIdmefError", SWIGTYPE_p_Idmef__LibIdmefError);
       SWIG_fail;
     }
   }
@@ -11177,10 +11177,10 @@ SWIGINTERN int _wrap_new_IDMEFClass__SWIG_0(PyObject *self, int nobjs, PyObject 
   {
     try {
       result = (Idmef::IDMEFClass *)new Idmef::IDMEFClass(arg1);
-    } catch(Idmef::PreludeError &e) {
-      SWIG_Python_Raise(SWIG_NewPointerObj(new PreludeError(e),
-          SWIGTYPE_p_Idmef__PreludeError, SWIG_POINTER_OWN),
-        "PreludeError", SWIGTYPE_p_Idmef__PreludeError);
+    } catch(Idmef::LibIdmefError &e) {
+      SWIG_Python_Raise(SWIG_NewPointerObj(new LibIdmefError(e),
+          SWIGTYPE_p_Idmef__LibIdmefError, SWIG_POINTER_OWN),
+        "LibIdmefError", SWIGTYPE_p_Idmef__LibIdmefError);
       SWIG_fail;
     }
   }
@@ -11199,10 +11199,10 @@ SWIGINTERN int _wrap_new_IDMEFClass__SWIG_1(PyObject *self, int nobjs, PyObject 
   {
     try {
       result = (Idmef::IDMEFClass *)new Idmef::IDMEFClass();
-    } catch(Idmef::PreludeError &e) {
-      SWIG_Python_Raise(SWIG_NewPointerObj(new PreludeError(e),
-          SWIGTYPE_p_Idmef__PreludeError, SWIG_POINTER_OWN),
-        "PreludeError", SWIGTYPE_p_Idmef__PreludeError);
+    } catch(Idmef::LibIdmefError &e) {
+      SWIG_Python_Raise(SWIG_NewPointerObj(new LibIdmefError(e),
+          SWIGTYPE_p_Idmef__LibIdmefError, SWIG_POINTER_OWN),
+        "LibIdmefError", SWIGTYPE_p_Idmef__LibIdmefError);
       SWIG_fail;
     }
   }
@@ -11232,10 +11232,10 @@ SWIGINTERN int _wrap_new_IDMEFClass__SWIG_2(PyObject *self, int nobjs, PyObject 
   {
     try {
       result = (Idmef::IDMEFClass *)new Idmef::IDMEFClass((Idmef::IDMEFPath const &)*arg1);
-    } catch(Idmef::PreludeError &e) {
-      SWIG_Python_Raise(SWIG_NewPointerObj(new PreludeError(e),
-          SWIGTYPE_p_Idmef__PreludeError, SWIG_POINTER_OWN),
-        "PreludeError", SWIGTYPE_p_Idmef__PreludeError);
+    } catch(Idmef::LibIdmefError &e) {
+      SWIG_Python_Raise(SWIG_NewPointerObj(new LibIdmefError(e),
+          SWIGTYPE_p_Idmef__LibIdmefError, SWIG_POINTER_OWN),
+        "LibIdmefError", SWIGTYPE_p_Idmef__LibIdmefError);
       SWIG_fail;
     }
   }
@@ -11267,10 +11267,10 @@ SWIGINTERN int _wrap_new_IDMEFClass__SWIG_3(PyObject *self, int nobjs, PyObject 
   {
     try {
       result = (Idmef::IDMEFClass *)new Idmef::IDMEFClass((std::string const &)*arg1);
-    } catch(Idmef::PreludeError &e) {
-      SWIG_Python_Raise(SWIG_NewPointerObj(new PreludeError(e),
-          SWIGTYPE_p_Idmef__PreludeError, SWIG_POINTER_OWN),
-        "PreludeError", SWIGTYPE_p_Idmef__PreludeError);
+    } catch(Idmef::LibIdmefError &e) {
+      SWIG_Python_Raise(SWIG_NewPointerObj(new LibIdmefError(e),
+          SWIGTYPE_p_Idmef__LibIdmefError, SWIG_POINTER_OWN),
+        "LibIdmefError", SWIGTYPE_p_Idmef__LibIdmefError);
       SWIG_fail;
     }
   }
@@ -11350,10 +11350,10 @@ SWIGINTERN PyObject *_wrap_IDMEFClass_getDepth(PyObject *self, PyObject *args) {
   {
     try {
       result = (arg1)->getDepth();
-    } catch(Idmef::PreludeError &e) {
-      SWIG_Python_Raise(SWIG_NewPointerObj(new PreludeError(e),
-          SWIGTYPE_p_Idmef__PreludeError, SWIG_POINTER_OWN),
-        "PreludeError", SWIGTYPE_p_Idmef__PreludeError);
+    } catch(Idmef::LibIdmefError &e) {
+      SWIG_Python_Raise(SWIG_NewPointerObj(new LibIdmefError(e),
+          SWIGTYPE_p_Idmef__LibIdmefError, SWIG_POINTER_OWN),
+        "LibIdmefError", SWIGTYPE_p_Idmef__LibIdmefError);
       SWIG_fail;
     }
   }
@@ -11388,10 +11388,10 @@ SWIGINTERN PyObject *_wrap_IDMEFClass_get__SWIG_0(PyObject *self, int nobjs, PyO
   {
     try {
       result = (arg1)->get(arg2);
-    } catch(Idmef::PreludeError &e) {
-      SWIG_Python_Raise(SWIG_NewPointerObj(new PreludeError(e),
-          SWIGTYPE_p_Idmef__PreludeError, SWIG_POINTER_OWN),
-        "PreludeError", SWIGTYPE_p_Idmef__PreludeError);
+    } catch(Idmef::LibIdmefError &e) {
+      SWIG_Python_Raise(SWIG_NewPointerObj(new LibIdmefError(e),
+          SWIGTYPE_p_Idmef__LibIdmefError, SWIG_POINTER_OWN),
+        "LibIdmefError", SWIGTYPE_p_Idmef__LibIdmefError);
       SWIG_fail;
     }
   }
@@ -11431,10 +11431,10 @@ SWIGINTERN PyObject *_wrap_IDMEFClass_get__SWIG_1(PyObject *self, int nobjs, PyO
   {
     try {
       result = (arg1)->get((std::string const &)*arg2);
-    } catch(Idmef::PreludeError &e) {
-      SWIG_Python_Raise(SWIG_NewPointerObj(new PreludeError(e),
-          SWIGTYPE_p_Idmef__PreludeError, SWIG_POINTER_OWN),
-        "PreludeError", SWIGTYPE_p_Idmef__PreludeError);
+    } catch(Idmef::LibIdmefError &e) {
+      SWIG_Python_Raise(SWIG_NewPointerObj(new LibIdmefError(e),
+          SWIGTYPE_p_Idmef__LibIdmefError, SWIG_POINTER_OWN),
+        "LibIdmefError", SWIGTYPE_p_Idmef__LibIdmefError);
       SWIG_fail;
     }
   }
@@ -11500,10 +11500,10 @@ SWIGINTERN PyObject *_wrap_IDMEFClass_getChildCount(PyObject *self, PyObject *ar
   {
     try {
       result = (arg1)->getChildCount();
-    } catch(Idmef::PreludeError &e) {
-      SWIG_Python_Raise(SWIG_NewPointerObj(new PreludeError(e),
-          SWIGTYPE_p_Idmef__PreludeError, SWIG_POINTER_OWN),
-        "PreludeError", SWIGTYPE_p_Idmef__PreludeError);
+    } catch(Idmef::LibIdmefError &e) {
+      SWIG_Python_Raise(SWIG_NewPointerObj(new LibIdmefError(e),
+          SWIGTYPE_p_Idmef__LibIdmefError, SWIG_POINTER_OWN),
+        "LibIdmefError", SWIGTYPE_p_Idmef__LibIdmefError);
       SWIG_fail;
     }
   }
@@ -11533,10 +11533,10 @@ SWIGINTERN PyObject *_wrap_IDMEFClass_isList(PyObject *self, PyObject *args) {
   {
     try {
       result = (bool)(arg1)->isList();
-    } catch(Idmef::PreludeError &e) {
-      SWIG_Python_Raise(SWIG_NewPointerObj(new PreludeError(e),
-          SWIGTYPE_p_Idmef__PreludeError, SWIG_POINTER_OWN),
-        "PreludeError", SWIGTYPE_p_Idmef__PreludeError);
+    } catch(Idmef::LibIdmefError &e) {
+      SWIG_Python_Raise(SWIG_NewPointerObj(new LibIdmefError(e),
+          SWIGTYPE_p_Idmef__LibIdmefError, SWIG_POINTER_OWN),
+        "LibIdmefError", SWIGTYPE_p_Idmef__LibIdmefError);
       SWIG_fail;
     }
   }
@@ -11564,10 +11564,10 @@ SWIGINTERN PyObject *_wrap_IDMEFClass_isKeyedList(PyObject *self, PyObject *args
   {
     try {
       result = (bool)(arg1)->isKeyedList();
-    } catch(Idmef::PreludeError &e) {
-      SWIG_Python_Raise(SWIG_NewPointerObj(new PreludeError(e),
-          SWIGTYPE_p_Idmef__PreludeError, SWIG_POINTER_OWN),
-        "PreludeError", SWIGTYPE_p_Idmef__PreludeError);
+    } catch(Idmef::LibIdmefError &e) {
+      SWIG_Python_Raise(SWIG_NewPointerObj(new LibIdmefError(e),
+          SWIGTYPE_p_Idmef__LibIdmefError, SWIG_POINTER_OWN),
+        "LibIdmefError", SWIGTYPE_p_Idmef__LibIdmefError);
       SWIG_fail;
     }
   }
@@ -11595,10 +11595,10 @@ SWIGINTERN PyObject *_wrap_IDMEFClass_getName(PyObject *self, PyObject *args) {
   {
     try {
       result = (arg1)->getName();
-    } catch(Idmef::PreludeError &e) {
-      SWIG_Python_Raise(SWIG_NewPointerObj(new PreludeError(e),
-          SWIGTYPE_p_Idmef__PreludeError, SWIG_POINTER_OWN),
-        "PreludeError", SWIGTYPE_p_Idmef__PreludeError);
+    } catch(Idmef::LibIdmefError &e) {
+      SWIG_Python_Raise(SWIG_NewPointerObj(new LibIdmefError(e),
+          SWIGTYPE_p_Idmef__LibIdmefError, SWIG_POINTER_OWN),
+        "LibIdmefError", SWIGTYPE_p_Idmef__LibIdmefError);
       SWIG_fail;
     }
   }
@@ -11628,10 +11628,10 @@ SWIGINTERN PyObject *_wrap_IDMEFClass_toString(PyObject *self, PyObject *args) {
   {
     try {
       result = (arg1)->toString();
-    } catch(Idmef::PreludeError &e) {
-      SWIG_Python_Raise(SWIG_NewPointerObj(new PreludeError(e),
-          SWIGTYPE_p_Idmef__PreludeError, SWIG_POINTER_OWN),
-        "PreludeError", SWIGTYPE_p_Idmef__PreludeError);
+    } catch(Idmef::LibIdmefError &e) {
+      SWIG_Python_Raise(SWIG_NewPointerObj(new LibIdmefError(e),
+          SWIGTYPE_p_Idmef__LibIdmefError, SWIG_POINTER_OWN),
+        "LibIdmefError", SWIGTYPE_p_Idmef__LibIdmefError);
       SWIG_fail;
     }
   }
@@ -11661,10 +11661,10 @@ SWIGINTERN PyObject *_wrap_IDMEFClass_getValueType(PyObject *self, PyObject *arg
   {
     try {
       result = (Idmef::IDMEFValue::IDMEFValueTypeEnum)(arg1)->getValueType();
-    } catch(Idmef::PreludeError &e) {
-      SWIG_Python_Raise(SWIG_NewPointerObj(new PreludeError(e),
-          SWIGTYPE_p_Idmef__PreludeError, SWIG_POINTER_OWN),
-        "PreludeError", SWIGTYPE_p_Idmef__PreludeError);
+    } catch(Idmef::LibIdmefError &e) {
+      SWIG_Python_Raise(SWIG_NewPointerObj(new LibIdmefError(e),
+          SWIGTYPE_p_Idmef__LibIdmefError, SWIG_POINTER_OWN),
+        "LibIdmefError", SWIGTYPE_p_Idmef__LibIdmefError);
       SWIG_fail;
     }
   }
@@ -11750,10 +11750,10 @@ SWIGINTERN PyObject *_wrap_IDMEFClass_getPath(PyObject *self, PyObject *args, Py
   {
     try {
       result = (arg1)->getPath(arg2,arg3,(std::string const &)*arg4,(std::string const &)*arg5);
-    } catch(Idmef::PreludeError &e) {
-      SWIG_Python_Raise(SWIG_NewPointerObj(new PreludeError(e),
-          SWIGTYPE_p_Idmef__PreludeError, SWIG_POINTER_OWN),
-        "PreludeError", SWIGTYPE_p_Idmef__PreludeError);
+    } catch(Idmef::LibIdmefError &e) {
+      SWIG_Python_Raise(SWIG_NewPointerObj(new LibIdmefError(e),
+          SWIGTYPE_p_Idmef__LibIdmefError, SWIG_POINTER_OWN),
+        "LibIdmefError", SWIGTYPE_p_Idmef__LibIdmefError);
       SWIG_fail;
     }
   }
@@ -11785,10 +11785,10 @@ SWIGINTERN PyObject *_wrap_IDMEFClass_getEnumValues(PyObject *self, PyObject *ar
   {
     try {
       result = (arg1)->getEnumValues();
-    } catch(Idmef::PreludeError &e) {
-      SWIG_Python_Raise(SWIG_NewPointerObj(new PreludeError(e),
-          SWIGTYPE_p_Idmef__PreludeError, SWIG_POINTER_OWN),
-        "PreludeError", SWIGTYPE_p_Idmef__PreludeError);
+    } catch(Idmef::LibIdmefError &e) {
+      SWIG_Python_Raise(SWIG_NewPointerObj(new LibIdmefError(e),
+          SWIGTYPE_p_Idmef__LibIdmefError, SWIG_POINTER_OWN),
+        "LibIdmefError", SWIGTYPE_p_Idmef__LibIdmefError);
       SWIG_fail;
     }
   }
@@ -11816,10 +11816,10 @@ SWIGINTERN PyObject *_wrap_IDMEFClass_getApplicableOperator(PyObject *self, PyOb
   {
     try {
       result = (Idmef::IDMEFCriterion::IDMEFCriterionOperatorEnum)(arg1)->getApplicableOperator();
-    } catch(Idmef::PreludeError &e) {
-      SWIG_Python_Raise(SWIG_NewPointerObj(new PreludeError(e),
-          SWIGTYPE_p_Idmef__PreludeError, SWIG_POINTER_OWN),
-        "PreludeError", SWIGTYPE_p_Idmef__PreludeError);
+    } catch(Idmef::LibIdmefError &e) {
+      SWIG_Python_Raise(SWIG_NewPointerObj(new LibIdmefError(e),
+          SWIGTYPE_p_Idmef__LibIdmefError, SWIG_POINTER_OWN),
+        "LibIdmefError", SWIGTYPE_p_Idmef__LibIdmefError);
       SWIG_fail;
     }
   }
@@ -11856,9 +11856,9 @@ SWIGINTERN PyObject *_wrap_IDMEFClass__get2(PyObject *self, PyObject *args) {
   {
     try {
       result = Idmef_IDMEFClass__get2(arg1,arg2);;
-    } catch(Idmef::PreludeError &e) {
-      if ( e.getCode() == PRELUDE_ERROR_IDMEF_CLASS_UNKNOWN_CHILD ||
-        e.getCode() == PRELUDE_ERROR_IDMEF_PATH_DEPTH )
+    } catch(Idmef::LibIdmefError &e) {
+      if ( e.getCode() == LIBIDMEF_ERROR_IDMEF_CLASS_UNKNOWN_CHILD ||
+        e.getCode() == LIBIDMEF_ERROR_IDMEF_PATH_DEPTH )
       SWIG_exception_fail(SWIG_IndexError, e.what());
     }
   }
@@ -11887,10 +11887,10 @@ SWIGINTERN PyObject *_wrap_delete_IDMEFClass(PyObject *self, PyObject *args) {
   {
     try {
       delete arg1;
-    } catch(Idmef::PreludeError &e) {
-      SWIG_Python_Raise(SWIG_NewPointerObj(new PreludeError(e),
-          SWIGTYPE_p_Idmef__PreludeError, SWIG_POINTER_OWN),
-        "PreludeError", SWIGTYPE_p_Idmef__PreludeError);
+    } catch(Idmef::LibIdmefError &e) {
+      SWIG_Python_Raise(SWIG_NewPointerObj(new LibIdmefError(e),
+          SWIGTYPE_p_Idmef__LibIdmefError, SWIG_POINTER_OWN),
+        "LibIdmefError", SWIGTYPE_p_Idmef__LibIdmefError);
       SWIG_fail;
     }
   }
@@ -11917,10 +11917,10 @@ SWIGINTERN PyObject *_wrap_delete_IDMEF(PyObject *self, PyObject *args) {
   {
     try {
       delete arg1;
-    } catch(Idmef::PreludeError &e) {
-      SWIG_Python_Raise(SWIG_NewPointerObj(new PreludeError(e),
-          SWIGTYPE_p_Idmef__PreludeError, SWIG_POINTER_OWN),
-        "PreludeError", SWIGTYPE_p_Idmef__PreludeError);
+    } catch(Idmef::LibIdmefError &e) {
+      SWIG_Python_Raise(SWIG_NewPointerObj(new LibIdmefError(e),
+          SWIGTYPE_p_Idmef__LibIdmefError, SWIG_POINTER_OWN),
+        "LibIdmefError", SWIGTYPE_p_Idmef__LibIdmefError);
       SWIG_fail;
     }
   }
@@ -11939,10 +11939,10 @@ SWIGINTERN int _wrap_new_IDMEF__SWIG_0(PyObject *self, int nobjs, PyObject **SWI
   {
     try {
       result = (Idmef::IDMEF *)new Idmef::IDMEF();
-    } catch(Idmef::PreludeError &e) {
-      SWIG_Python_Raise(SWIG_NewPointerObj(new PreludeError(e),
-          SWIGTYPE_p_Idmef__PreludeError, SWIG_POINTER_OWN),
-        "PreludeError", SWIGTYPE_p_Idmef__PreludeError);
+    } catch(Idmef::LibIdmefError &e) {
+      SWIG_Python_Raise(SWIG_NewPointerObj(new LibIdmefError(e),
+          SWIGTYPE_p_Idmef__LibIdmefError, SWIG_POINTER_OWN),
+        "LibIdmefError", SWIGTYPE_p_Idmef__LibIdmefError);
       SWIG_fail;
     }
   }
@@ -11970,10 +11970,10 @@ SWIGINTERN int _wrap_new_IDMEF__SWIG_1(PyObject *self, int nobjs, PyObject **swi
   {
     try {
       result = (Idmef::IDMEF *)new Idmef::IDMEF((char const *)arg1);
-    } catch(Idmef::PreludeError &e) {
-      SWIG_Python_Raise(SWIG_NewPointerObj(new PreludeError(e),
-          SWIGTYPE_p_Idmef__PreludeError, SWIG_POINTER_OWN),
-        "PreludeError", SWIGTYPE_p_Idmef__PreludeError);
+    } catch(Idmef::LibIdmefError &e) {
+      SWIG_Python_Raise(SWIG_NewPointerObj(new LibIdmefError(e),
+          SWIGTYPE_p_Idmef__LibIdmefError, SWIG_POINTER_OWN),
+        "LibIdmefError", SWIGTYPE_p_Idmef__LibIdmefError);
       SWIG_fail;
     }
   }
@@ -12005,10 +12005,10 @@ SWIGINTERN int _wrap_new_IDMEF__SWIG_2(PyObject *self, int nobjs, PyObject **swi
   {
     try {
       result = (Idmef::IDMEF *)new Idmef::IDMEF((Idmef::IDMEF const &)*arg1);
-    } catch(Idmef::PreludeError &e) {
-      SWIG_Python_Raise(SWIG_NewPointerObj(new PreludeError(e),
-          SWIGTYPE_p_Idmef__PreludeError, SWIG_POINTER_OWN),
-        "PreludeError", SWIGTYPE_p_Idmef__PreludeError);
+    } catch(Idmef::LibIdmefError &e) {
+      SWIG_Python_Raise(SWIG_NewPointerObj(new LibIdmefError(e),
+          SWIGTYPE_p_Idmef__LibIdmefError, SWIG_POINTER_OWN),
+        "LibIdmefError", SWIGTYPE_p_Idmef__LibIdmefError);
       SWIG_fail;
     }
   }
@@ -12035,10 +12035,10 @@ SWIGINTERN int _wrap_new_IDMEF__SWIG_3(PyObject *self, int nobjs, PyObject **swi
   {
     try {
       result = (Idmef::IDMEF *)new Idmef::IDMEF(arg1);
-    } catch(Idmef::PreludeError &e) {
-      SWIG_Python_Raise(SWIG_NewPointerObj(new PreludeError(e),
-          SWIGTYPE_p_Idmef__PreludeError, SWIG_POINTER_OWN),
-        "PreludeError", SWIGTYPE_p_Idmef__PreludeError);
+    } catch(Idmef::LibIdmefError &e) {
+      SWIG_Python_Raise(SWIG_NewPointerObj(new LibIdmefError(e),
+          SWIGTYPE_p_Idmef__LibIdmefError, SWIG_POINTER_OWN),
+        "LibIdmefError", SWIGTYPE_p_Idmef__LibIdmefError);
       SWIG_fail;
     }
   }
@@ -12135,10 +12135,10 @@ SWIGINTERN PyObject *_wrap_IDMEF_set__SWIG_0(PyObject *self, int nobjs, PyObject
   {
     try {
       (arg1)->set((char const *)arg2,(std::vector< Idmef::IDMEF,std::allocator< Idmef::IDMEF > > const &)*arg3);
-    } catch(Idmef::PreludeError &e) {
-      SWIG_Python_Raise(SWIG_NewPointerObj(new PreludeError(e),
-          SWIGTYPE_p_Idmef__PreludeError, SWIG_POINTER_OWN),
-        "PreludeError", SWIGTYPE_p_Idmef__PreludeError);
+    } catch(Idmef::LibIdmefError &e) {
+      SWIG_Python_Raise(SWIG_NewPointerObj(new LibIdmefError(e),
+          SWIGTYPE_p_Idmef__LibIdmefError, SWIG_POINTER_OWN),
+        "LibIdmefError", SWIGTYPE_p_Idmef__LibIdmefError);
       SWIG_fail;
     }
   }
@@ -12185,10 +12185,10 @@ SWIGINTERN PyObject *_wrap_IDMEF_set__SWIG_1(PyObject *self, int nobjs, PyObject
   {
     try {
       (arg1)->set((char const *)arg2,arg3);
-    } catch(Idmef::PreludeError &e) {
-      SWIG_Python_Raise(SWIG_NewPointerObj(new PreludeError(e),
-          SWIGTYPE_p_Idmef__PreludeError, SWIG_POINTER_OWN),
-        "PreludeError", SWIGTYPE_p_Idmef__PreludeError);
+    } catch(Idmef::LibIdmefError &e) {
+      SWIG_Python_Raise(SWIG_NewPointerObj(new LibIdmefError(e),
+          SWIGTYPE_p_Idmef__LibIdmefError, SWIG_POINTER_OWN),
+        "LibIdmefError", SWIGTYPE_p_Idmef__LibIdmefError);
       SWIG_fail;
     }
   }
@@ -12238,10 +12238,10 @@ SWIGINTERN PyObject *_wrap_IDMEF_set__SWIG_2(PyObject *self, int nobjs, PyObject
   {
     try {
       (arg1)->set((char const *)arg2,(std::vector< Idmef::IDMEFValue,std::allocator< Idmef::IDMEFValue > > const &)*arg3);
-    } catch(Idmef::PreludeError &e) {
-      SWIG_Python_Raise(SWIG_NewPointerObj(new PreludeError(e),
-          SWIGTYPE_p_Idmef__PreludeError, SWIG_POINTER_OWN),
-        "PreludeError", SWIGTYPE_p_Idmef__PreludeError);
+    } catch(Idmef::LibIdmefError &e) {
+      SWIG_Python_Raise(SWIG_NewPointerObj(new LibIdmefError(e),
+          SWIGTYPE_p_Idmef__LibIdmefError, SWIG_POINTER_OWN),
+        "LibIdmefError", SWIGTYPE_p_Idmef__LibIdmefError);
       SWIG_fail;
     }
   }
@@ -12293,10 +12293,10 @@ SWIGINTERN PyObject *_wrap_IDMEF_set__SWIG_3(PyObject *self, int nobjs, PyObject
   {
     try {
       (arg1)->set((char const *)arg2,(std::string const &)*arg3);
-    } catch(Idmef::PreludeError &e) {
-      SWIG_Python_Raise(SWIG_NewPointerObj(new PreludeError(e),
-          SWIGTYPE_p_Idmef__PreludeError, SWIG_POINTER_OWN),
-        "PreludeError", SWIGTYPE_p_Idmef__PreludeError);
+    } catch(Idmef::LibIdmefError &e) {
+      SWIG_Python_Raise(SWIG_NewPointerObj(new LibIdmefError(e),
+          SWIGTYPE_p_Idmef__LibIdmefError, SWIG_POINTER_OWN),
+        "LibIdmefError", SWIGTYPE_p_Idmef__LibIdmefError);
       SWIG_fail;
     }
   }
@@ -12343,10 +12343,10 @@ SWIGINTERN PyObject *_wrap_IDMEF_set__SWIG_4(PyObject *self, int nobjs, PyObject
   {
     try {
       (arg1)->set((char const *)arg2,arg3);
-    } catch(Idmef::PreludeError &e) {
-      SWIG_Python_Raise(SWIG_NewPointerObj(new PreludeError(e),
-          SWIGTYPE_p_Idmef__PreludeError, SWIG_POINTER_OWN),
-        "PreludeError", SWIGTYPE_p_Idmef__PreludeError);
+    } catch(Idmef::LibIdmefError &e) {
+      SWIG_Python_Raise(SWIG_NewPointerObj(new LibIdmefError(e),
+          SWIGTYPE_p_Idmef__LibIdmefError, SWIG_POINTER_OWN),
+        "LibIdmefError", SWIGTYPE_p_Idmef__LibIdmefError);
       SWIG_fail;
     }
   }
@@ -12394,10 +12394,10 @@ SWIGINTERN PyObject *_wrap_IDMEF_set__SWIG_5(PyObject *self, int nobjs, PyObject
   {
     try {
       (arg1)->set((char const *)arg2,*arg3);
-    } catch(Idmef::PreludeError &e) {
-      SWIG_Python_Raise(SWIG_NewPointerObj(new PreludeError(e),
-          SWIGTYPE_p_Idmef__PreludeError, SWIG_POINTER_OWN),
-        "PreludeError", SWIGTYPE_p_Idmef__PreludeError);
+    } catch(Idmef::LibIdmefError &e) {
+      SWIG_Python_Raise(SWIG_NewPointerObj(new LibIdmefError(e),
+          SWIGTYPE_p_Idmef__LibIdmefError, SWIG_POINTER_OWN),
+        "LibIdmefError", SWIGTYPE_p_Idmef__LibIdmefError);
       SWIG_fail;
     }
   }
@@ -12442,10 +12442,10 @@ SWIGINTERN PyObject *_wrap_IDMEF_set__SWIG_6(PyObject *self, int nobjs, PyObject
   {
     try {
       (arg1)->set((char const *)arg2,arg3);
-    } catch(Idmef::PreludeError &e) {
-      SWIG_Python_Raise(SWIG_NewPointerObj(new PreludeError(e),
-          SWIGTYPE_p_Idmef__PreludeError, SWIG_POINTER_OWN),
-        "PreludeError", SWIGTYPE_p_Idmef__PreludeError);
+    } catch(Idmef::LibIdmefError &e) {
+      SWIG_Python_Raise(SWIG_NewPointerObj(new LibIdmefError(e),
+          SWIGTYPE_p_Idmef__LibIdmefError, SWIG_POINTER_OWN),
+        "LibIdmefError", SWIGTYPE_p_Idmef__LibIdmefError);
       SWIG_fail;
     }
   }
@@ -12490,10 +12490,10 @@ SWIGINTERN PyObject *_wrap_IDMEF_set__SWIG_7(PyObject *self, int nobjs, PyObject
   {
     try {
       (arg1)->set((char const *)arg2,arg3);
-    } catch(Idmef::PreludeError &e) {
-      SWIG_Python_Raise(SWIG_NewPointerObj(new PreludeError(e),
-          SWIGTYPE_p_Idmef__PreludeError, SWIG_POINTER_OWN),
-        "PreludeError", SWIGTYPE_p_Idmef__PreludeError);
+    } catch(Idmef::LibIdmefError &e) {
+      SWIG_Python_Raise(SWIG_NewPointerObj(new LibIdmefError(e),
+          SWIGTYPE_p_Idmef__LibIdmefError, SWIG_POINTER_OWN),
+        "LibIdmefError", SWIGTYPE_p_Idmef__LibIdmefError);
       SWIG_fail;
     }
   }
@@ -12538,10 +12538,10 @@ SWIGINTERN PyObject *_wrap_IDMEF_set__SWIG_8(PyObject *self, int nobjs, PyObject
   {
     try {
       (arg1)->set((char const *)arg2,arg3);
-    } catch(Idmef::PreludeError &e) {
-      SWIG_Python_Raise(SWIG_NewPointerObj(new PreludeError(e),
-          SWIGTYPE_p_Idmef__PreludeError, SWIG_POINTER_OWN),
-        "PreludeError", SWIGTYPE_p_Idmef__PreludeError);
+    } catch(Idmef::LibIdmefError &e) {
+      SWIG_Python_Raise(SWIG_NewPointerObj(new LibIdmefError(e),
+          SWIGTYPE_p_Idmef__LibIdmefError, SWIG_POINTER_OWN),
+        "LibIdmefError", SWIGTYPE_p_Idmef__LibIdmefError);
       SWIG_fail;
     }
   }
@@ -12586,10 +12586,10 @@ SWIGINTERN PyObject *_wrap_IDMEF_set__SWIG_9(PyObject *self, int nobjs, PyObject
   {
     try {
       (arg1)->set((char const *)arg2,arg3);
-    } catch(Idmef::PreludeError &e) {
-      SWIG_Python_Raise(SWIG_NewPointerObj(new PreludeError(e),
-          SWIGTYPE_p_Idmef__PreludeError, SWIG_POINTER_OWN),
-        "PreludeError", SWIGTYPE_p_Idmef__PreludeError);
+    } catch(Idmef::LibIdmefError &e) {
+      SWIG_Python_Raise(SWIG_NewPointerObj(new LibIdmefError(e),
+          SWIGTYPE_p_Idmef__LibIdmefError, SWIG_POINTER_OWN),
+        "LibIdmefError", SWIGTYPE_p_Idmef__LibIdmefError);
       SWIG_fail;
     }
   }
@@ -12634,10 +12634,10 @@ SWIGINTERN PyObject *_wrap_IDMEF_set__SWIG_10(PyObject *self, int nobjs, PyObjec
   {
     try {
       (arg1)->set((char const *)arg2,arg3);
-    } catch(Idmef::PreludeError &e) {
-      SWIG_Python_Raise(SWIG_NewPointerObj(new PreludeError(e),
-          SWIGTYPE_p_Idmef__PreludeError, SWIG_POINTER_OWN),
-        "PreludeError", SWIGTYPE_p_Idmef__PreludeError);
+    } catch(Idmef::LibIdmefError &e) {
+      SWIG_Python_Raise(SWIG_NewPointerObj(new LibIdmefError(e),
+          SWIGTYPE_p_Idmef__LibIdmefError, SWIG_POINTER_OWN),
+        "LibIdmefError", SWIGTYPE_p_Idmef__LibIdmefError);
       SWIG_fail;
     }
   }
@@ -12822,10 +12822,10 @@ SWIGINTERN PyObject *_wrap_IDMEF_clone(PyObject *self, PyObject *args) {
   {
     try {
       result = (arg1)->clone();
-    } catch(Idmef::PreludeError &e) {
-      SWIG_Python_Raise(SWIG_NewPointerObj(new PreludeError(e),
-          SWIGTYPE_p_Idmef__PreludeError, SWIG_POINTER_OWN),
-        "PreludeError", SWIGTYPE_p_Idmef__PreludeError);
+    } catch(Idmef::LibIdmefError &e) {
+      SWIG_Python_Raise(SWIG_NewPointerObj(new LibIdmefError(e),
+          SWIGTYPE_p_Idmef__LibIdmefError, SWIG_POINTER_OWN),
+        "LibIdmefError", SWIGTYPE_p_Idmef__LibIdmefError);
       SWIG_fail;
     }
   }
@@ -12853,10 +12853,10 @@ SWIGINTERN PyObject *_wrap_IDMEF_getId(PyObject *self, PyObject *args) {
   {
     try {
       result = (idmef_class_id_t)((Idmef::IDMEF const *)arg1)->getId();
-    } catch(Idmef::PreludeError &e) {
-      SWIG_Python_Raise(SWIG_NewPointerObj(new PreludeError(e),
-          SWIGTYPE_p_Idmef__PreludeError, SWIG_POINTER_OWN),
-        "PreludeError", SWIGTYPE_p_Idmef__PreludeError);
+    } catch(Idmef::LibIdmefError &e) {
+      SWIG_Python_Raise(SWIG_NewPointerObj(new LibIdmefError(e),
+          SWIGTYPE_p_Idmef__LibIdmefError, SWIG_POINTER_OWN),
+        "LibIdmefError", SWIGTYPE_p_Idmef__LibIdmefError);
       SWIG_fail;
     }
   }
@@ -12884,10 +12884,10 @@ SWIGINTERN PyObject *_wrap_IDMEF_toString(PyObject *self, PyObject *args) {
   {
     try {
       result = ((Idmef::IDMEF const *)arg1)->toString();
-    } catch(Idmef::PreludeError &e) {
-      SWIG_Python_Raise(SWIG_NewPointerObj(new PreludeError(e),
-          SWIGTYPE_p_Idmef__PreludeError, SWIG_POINTER_OWN),
-        "PreludeError", SWIGTYPE_p_Idmef__PreludeError);
+    } catch(Idmef::LibIdmefError &e) {
+      SWIG_Python_Raise(SWIG_NewPointerObj(new LibIdmefError(e),
+          SWIGTYPE_p_Idmef__LibIdmefError, SWIG_POINTER_OWN),
+        "LibIdmefError", SWIGTYPE_p_Idmef__LibIdmefError);
       SWIG_fail;
     }
   }
@@ -12917,10 +12917,10 @@ SWIGINTERN PyObject *_wrap_IDMEF_toJSON(PyObject *self, PyObject *args) {
   {
     try {
       result = ((Idmef::IDMEF const *)arg1)->toJSON();
-    } catch(Idmef::PreludeError &e) {
-      SWIG_Python_Raise(SWIG_NewPointerObj(new PreludeError(e),
-          SWIGTYPE_p_Idmef__PreludeError, SWIG_POINTER_OWN),
-        "PreludeError", SWIGTYPE_p_Idmef__PreludeError);
+    } catch(Idmef::LibIdmefError &e) {
+      SWIG_Python_Raise(SWIG_NewPointerObj(new LibIdmefError(e),
+          SWIGTYPE_p_Idmef__LibIdmefError, SWIG_POINTER_OWN),
+        "LibIdmefError", SWIGTYPE_p_Idmef__LibIdmefError);
       SWIG_fail;
     }
   }
@@ -12948,10 +12948,10 @@ SWIGINTERN PyObject *_wrap_IDMEF_toBinary(PyObject *self, PyObject *args) {
   {
     try {
       result = ((Idmef::IDMEF const *)arg1)->toBinary();
-    } catch(Idmef::PreludeError &e) {
-      SWIG_Python_Raise(SWIG_NewPointerObj(new PreludeError(e),
-          SWIGTYPE_p_Idmef__PreludeError, SWIG_POINTER_OWN),
-        "PreludeError", SWIGTYPE_p_Idmef__PreludeError);
+    } catch(Idmef::LibIdmefError &e) {
+      SWIG_Python_Raise(SWIG_NewPointerObj(new LibIdmefError(e),
+          SWIGTYPE_p_Idmef__LibIdmefError, SWIG_POINTER_OWN),
+        "LibIdmefError", SWIGTYPE_p_Idmef__LibIdmefError);
       SWIG_fail;
     }
   }
@@ -12988,10 +12988,10 @@ SWIGINTERN PyObject *_wrap_IDMEF___eq__(PyObject *self, PyObject *args) {
   {
     try {
       result = (int)(arg1)->operator ==((Idmef::IDMEF const *)arg2);
-    } catch(Idmef::PreludeError &e) {
-      SWIG_Python_Raise(SWIG_NewPointerObj(new PreludeError(e),
-          SWIGTYPE_p_Idmef__PreludeError, SWIG_POINTER_OWN),
-        "PreludeError", SWIGTYPE_p_Idmef__PreludeError);
+    } catch(Idmef::LibIdmefError &e) {
+      SWIG_Python_Raise(SWIG_NewPointerObj(new LibIdmefError(e),
+          SWIGTYPE_p_Idmef__LibIdmefError, SWIG_POINTER_OWN),
+        "LibIdmefError", SWIGTYPE_p_Idmef__LibIdmefError);
       SWIG_fail;
     }
   }
@@ -13029,10 +13029,10 @@ SWIGINTERN PyObject *_wrap_IDMEF_get(PyObject *self, PyObject *args) {
   {
     try {
       result = Idmef_IDMEF_get(arg1,(char const *)arg2);
-    } catch(Idmef::PreludeError &e) {
-      SWIG_Python_Raise(SWIG_NewPointerObj(new PreludeError(e),
-          SWIGTYPE_p_Idmef__PreludeError, SWIG_POINTER_OWN),
-        "PreludeError", SWIGTYPE_p_Idmef__PreludeError);
+    } catch(Idmef::LibIdmefError &e) {
+      SWIG_Python_Raise(SWIG_NewPointerObj(new LibIdmefError(e),
+          SWIGTYPE_p_Idmef__LibIdmefError, SWIG_POINTER_OWN),
+        "LibIdmefError", SWIGTYPE_p_Idmef__LibIdmefError);
       SWIG_fail;
     }
   }
@@ -13305,16 +13305,16 @@ static PyHeapTypeObject SwigPyBuiltin__swig__SwigPyIterator_type = {
 
 SWIGINTERN SwigPyClientData SwigPyBuiltin__swig__SwigPyIterator_clientdata = {0, 0, 0, 0, 0, 0, (PyTypeObject *)&SwigPyBuiltin__swig__SwigPyIterator_type};
 
-SWIGPY_DESTRUCTOR_CLOSURE(_wrap_delete_PreludeError)
-static SwigPyGetSet PreludeError___dict___getset = { SwigPyObject_get___dict__, 0 };
-SWIGINTERN PyGetSetDef SwigPyBuiltin__Idmef__PreludeError_getset[] = {
-    { (char*) "__dict__", (getter) SwigPyBuiltin_FunpackGetterClosure, (setter) 0, (char*)"Idmef::PreludeError.__dict__", (void*) &PreludeError___dict___getset }
+SWIGPY_DESTRUCTOR_CLOSURE(_wrap_delete_LibIdmefError)
+static SwigPyGetSet LibIdmefError___dict___getset = { SwigPyObject_get___dict__, 0 };
+SWIGINTERN PyGetSetDef SwigPyBuiltin__Idmef__LibIdmefError_getset[] = {
+    { (char*) "__dict__", (getter) SwigPyBuiltin_FunpackGetterClosure, (setter) 0, (char*)"Idmef::LibIdmefError.__dict__", (void*) &LibIdmefError___dict___getset }
 ,
     {NULL, NULL, NULL, NULL, NULL} /* Sentinel */
 };
 
 SWIGINTERN PyObject *
-SwigPyBuiltin__Idmef__PreludeError_richcompare(PyObject *self, PyObject *other, int op) {
+SwigPyBuiltin__Idmef__LibIdmefError_richcompare(PyObject *self, PyObject *other, int op) {
   PyObject *result = NULL;
   if (!result) {
     if (SwigPyObject_Check(self) && SwigPyObject_Check(other)) {
@@ -13327,13 +13327,13 @@ SwigPyBuiltin__Idmef__PreludeError_richcompare(PyObject *self, PyObject *other, 
   return result;
 }
 
-SWIGINTERN PyMethodDef SwigPyBuiltin__Idmef__PreludeError_methods[] = {
-  { "getCode", (PyCFunction) _wrap_PreludeError_getCode, METH_NOARGS, (char*) "" },
-  { "what", (PyCFunction) _wrap_PreludeError_what, METH_NOARGS, (char*) "" },
+SWIGINTERN PyMethodDef SwigPyBuiltin__Idmef__LibIdmefError_methods[] = {
+  { "getCode", (PyCFunction) _wrap_LibIdmefError_getCode, METH_NOARGS, (char*) "" },
+  { "what", (PyCFunction) _wrap_LibIdmefError_what, METH_NOARGS, (char*) "" },
   { NULL, NULL, 0, NULL } /* Sentinel */
 };
 
-static PyHeapTypeObject SwigPyBuiltin__Idmef__PreludeError_type = {
+static PyHeapTypeObject SwigPyBuiltin__Idmef__LibIdmefError_type = {
   {
 #if PY_VERSION_HEX >= 0x03000000
     PyVarObject_HEAD_INIT(NULL, 0)
@@ -13341,10 +13341,10 @@ static PyHeapTypeObject SwigPyBuiltin__Idmef__PreludeError_type = {
     PyObject_HEAD_INIT(NULL)
     0,                                        /* ob_size */
 #endif
-    "idmef.PreludeError",                     /* tp_name */
+    "idmef.LibIdmefError",                    /* tp_name */
     sizeof(SwigPyObject),                     /* tp_basicsize */
     0,                                        /* tp_itemsize */
-    (destructor) _wrap_delete_PreludeError_closure, /* tp_dealloc */
+    (destructor) _wrap_delete_LibIdmefError_closure, /* tp_dealloc */
     (printfunc) 0,                            /* tp_print */
     (getattrfunc) 0,                          /* tp_getattr */
     (setattrfunc) 0,                          /* tp_setattr */
@@ -13354,36 +13354,36 @@ static PyHeapTypeObject SwigPyBuiltin__Idmef__PreludeError_type = {
     (cmpfunc) 0,                              /* tp_compare */
 #endif
     (reprfunc) 0,                             /* tp_repr */
-    &SwigPyBuiltin__Idmef__PreludeError_type.as_number,      /* tp_as_number */
-    &SwigPyBuiltin__Idmef__PreludeError_type.as_sequence,    /* tp_as_sequence */
-    &SwigPyBuiltin__Idmef__PreludeError_type.as_mapping,     /* tp_as_mapping */
+    &SwigPyBuiltin__Idmef__LibIdmefError_type.as_number,      /* tp_as_number */
+    &SwigPyBuiltin__Idmef__LibIdmefError_type.as_sequence,    /* tp_as_sequence */
+    &SwigPyBuiltin__Idmef__LibIdmefError_type.as_mapping,     /* tp_as_mapping */
     (hashfunc) 0,                             /* tp_hash */
     (ternaryfunc) 0,                          /* tp_call */
-    (reprfunc) (reprfunc) _wrap_PreludeError_what_closure, /* tp_str */
+    (reprfunc) (reprfunc) _wrap_LibIdmefError_what_closure, /* tp_str */
     (getattrofunc) 0,                         /* tp_getattro */
     (setattrofunc) 0,                         /* tp_setattro */
-    &SwigPyBuiltin__Idmef__PreludeError_type.as_buffer,      /* tp_as_buffer */
+    &SwigPyBuiltin__Idmef__LibIdmefError_type.as_buffer,      /* tp_as_buffer */
 #if PY_VERSION_HEX >= 0x03000000
     Py_TPFLAGS_DEFAULT|Py_TPFLAGS_BASETYPE,   /* tp_flags */
 #else
     Py_TPFLAGS_DEFAULT|Py_TPFLAGS_BASETYPE|Py_TPFLAGS_CHECKTYPES, /* tp_flags */
 #endif
-    "Idmef::PreludeError",                    /* tp_doc */
+    "Idmef::LibIdmefError",                   /* tp_doc */
     (traverseproc) 0,                         /* tp_traverse */
     (inquiry) 0,                              /* tp_clear */
-    (richcmpfunc) SwigPyBuiltin__Idmef__PreludeError_richcompare, /* feature:python:tp_richcompare */
+    (richcmpfunc) SwigPyBuiltin__Idmef__LibIdmefError_richcompare, /* feature:python:tp_richcompare */
     0,                                        /* tp_weaklistoffset */
     (getiterfunc) 0,                          /* tp_iter */
     (iternextfunc) 0,                         /* tp_iternext */
-    SwigPyBuiltin__Idmef__PreludeError_methods, /* tp_methods */
+    SwigPyBuiltin__Idmef__LibIdmefError_methods, /* tp_methods */
     0,                                        /* tp_members */
-    SwigPyBuiltin__Idmef__PreludeError_getset, /* tp_getset */
+    SwigPyBuiltin__Idmef__LibIdmefError_getset, /* tp_getset */
     0,                                        /* tp_base */
     0,                                        /* tp_dict */
     (descrgetfunc) 0,                         /* tp_descr_get */
     (descrsetfunc) 0,                         /* tp_descr_set */
     (Py_ssize_t)offsetof(SwigPyObject, dict), /* tp_dictoffset */
-    (initproc) _wrap_new_PreludeError,        /* tp_init */
+    (initproc) _wrap_new_LibIdmefError,       /* tp_init */
     (allocfunc) 0,                            /* tp_alloc */
     (newfunc) 0,                              /* tp_new */
     (freefunc) 0,                             /* tp_free */
@@ -13521,7 +13521,7 @@ static PyHeapTypeObject SwigPyBuiltin__Idmef__PreludeError_type = {
 #endif
 };
 
-SWIGINTERN SwigPyClientData SwigPyBuiltin__Idmef__PreludeError_clientdata = {0, 0, 0, 0, 0, 0, (PyTypeObject *)&SwigPyBuiltin__Idmef__PreludeError_type};
+SWIGINTERN SwigPyClientData SwigPyBuiltin__Idmef__LibIdmefError_clientdata = {0, 0, 0, 0, 0, 0, (PyTypeObject *)&SwigPyBuiltin__Idmef__LibIdmefError_type};
 
 SWIGPY_DESTRUCTOR_CLOSURE(_wrap_delete_IDMEFCriterion)
 static SwigPyGetSet IDMEFCriterion___dict___getset = { SwigPyObject_get___dict__, 0 };
@@ -15131,8 +15131,8 @@ SWIGINTERN SwigPyClientData SwigPyBuiltin__Idmef__IDMEF_clientdata = {0, 0, 0, 0
 
 /* -------- TYPE CONVERSION AND EQUIVALENCE RULES (BEGIN) -------- */
 
-static void *_p_Idmef__PreludeErrorTo_p_std__exception(void *x, int *SWIGUNUSEDPARM(newmemory)) {
-    return (void *)((std::exception *)  ((Idmef::PreludeError *) x));
+static void *_p_Idmef__LibIdmefErrorTo_p_std__exception(void *x, int *SWIGUNUSEDPARM(newmemory)) {
+    return (void *)((std::exception *)  ((Idmef::LibIdmefError *) x));
 }
 static swig_type_info _swigt__p_Idmef__IDMEF = {"_p_Idmef__IDMEF", "Idmef::IDMEF *", 0, 0, (void*)&SwigPyBuiltin__Idmef__IDMEF_clientdata, 0};
 static swig_type_info _swigt__p_Idmef__IDMEFClass = {"_p_Idmef__IDMEFClass", "Idmef::IDMEFClass *", 0, 0, (void*)&SwigPyBuiltin__Idmef__IDMEFClass_clientdata, 0};
@@ -15141,7 +15141,7 @@ static swig_type_info _swigt__p_Idmef__IDMEFCriterion = {"_p_Idmef__IDMEFCriteri
 static swig_type_info _swigt__p_Idmef__IDMEFPath = {"_p_Idmef__IDMEFPath", "Idmef::IDMEFPath *", 0, 0, (void*)&SwigPyBuiltin__Idmef__IDMEFPath_clientdata, 0};
 static swig_type_info _swigt__p_Idmef__IDMEFTime = {"_p_Idmef__IDMEFTime", "Idmef::IDMEFTime *", 0, 0, (void*)&SwigPyBuiltin__Idmef__IDMEFTime_clientdata, 0};
 static swig_type_info _swigt__p_Idmef__IDMEFValue = {"_p_Idmef__IDMEFValue", "Idmef::IDMEFValue *", 0, 0, (void*)&SwigPyBuiltin__Idmef__IDMEFValue_clientdata, 0};
-static swig_type_info _swigt__p_Idmef__PreludeError = {"_p_Idmef__PreludeError", "Idmef::PreludeError *", 0, 0, (void*)&SwigPyBuiltin__Idmef__PreludeError_clientdata, 0};
+static swig_type_info _swigt__p_Idmef__LibIdmefError = {"_p_Idmef__LibIdmefError", "Idmef::LibIdmefError *", 0, 0, (void*)&SwigPyBuiltin__Idmef__LibIdmefError_clientdata, 0};
 static swig_type_info _swigt__p_SwigPyObject = {"_p_SwigPyObject", "SwigPyObject *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_allocator_type = {"_p_allocator_type", "allocator_type *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_char = {"_p_char", "char *|int8_t *", 0, 0, (void*)0, 0};
@@ -15174,7 +15174,7 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_Idmef__IDMEFPath,
   &_swigt__p_Idmef__IDMEFTime,
   &_swigt__p_Idmef__IDMEFValue,
-  &_swigt__p_Idmef__PreludeError,
+  &_swigt__p_Idmef__LibIdmefError,
   &_swigt__p_SwigPyObject,
   &_swigt__p_allocator_type,
   &_swigt__p_char,
@@ -15207,7 +15207,7 @@ static swig_cast_info _swigc__p_Idmef__IDMEFCriterion[] = {  {&_swigt__p_Idmef__
 static swig_cast_info _swigc__p_Idmef__IDMEFPath[] = {  {&_swigt__p_Idmef__IDMEFPath, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_Idmef__IDMEFTime[] = {  {&_swigt__p_Idmef__IDMEFTime, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_Idmef__IDMEFValue[] = {  {&_swigt__p_Idmef__IDMEFValue, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_Idmef__PreludeError[] = {  {&_swigt__p_Idmef__PreludeError, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_Idmef__LibIdmefError[] = {  {&_swigt__p_Idmef__LibIdmefError, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_SwigPyObject[] = {  {&_swigt__p_SwigPyObject, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_allocator_type[] = {  {&_swigt__p_allocator_type, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_char[] = {  {&_swigt__p_char, 0, 0, 0},{0, 0, 0, 0}};
@@ -15222,7 +15222,7 @@ static swig_cast_info _swigc__p_int[] = {  {&_swigt__p_int, 0, 0, 0},{0, 0, 0, 0
 static swig_cast_info _swigc__p_long_long[] = {  {&_swigt__p_long_long, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_short[] = {  {&_swigt__p_short, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_size_type[] = {  {&_swigt__p_size_type, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_std__exception[] = {  {&_swigt__p_std__exception, 0, 0, 0},  {&_swigt__p_Idmef__PreludeError, _p_Idmef__PreludeErrorTo_p_std__exception, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_std__exception[] = {  {&_swigt__p_std__exception, 0, 0, 0},  {&_swigt__p_Idmef__LibIdmefError, _p_Idmef__LibIdmefErrorTo_p_std__exception, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_std__invalid_argument[] = {  {&_swigt__p_std__invalid_argument, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_swig__SwigPyIterator[] = {  {&_swigt__p_swig__SwigPyIterator, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_timeval[] = {  {&_swigt__p_timeval, 0, 0, 0},{0, 0, 0, 0}};
@@ -15240,7 +15240,7 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_Idmef__IDMEFPath,
   _swigc__p_Idmef__IDMEFTime,
   _swigc__p_Idmef__IDMEFValue,
-  _swigc__p_Idmef__PreludeError,
+  _swigc__p_Idmef__LibIdmefError,
   _swigc__p_SwigPyObject,
   _swigc__p_allocator_type,
   _swigc__p_char,
@@ -15984,8 +15984,8 @@ SWIG_init(void) {
   SwigPyBuiltin_AddPublicSymbol(public_interface, "SwigPyIterator");
   d = md;
   
-  /* type 'Idmef::PreludeError' */
-  builtin_pytype = (PyTypeObject *)&SwigPyBuiltin__Idmef__PreludeError_type;
+  /* type 'Idmef::LibIdmefError' */
+  builtin_pytype = (PyTypeObject *)&SwigPyBuiltin__Idmef__LibIdmefError_type;
   builtin_pytype->tp_dict = d = PyDict_New();
   SwigPyBuiltin_SetMetaType(builtin_pytype, metatype);
   builtin_pytype->tp_new = PyType_GenericNew;
@@ -15995,7 +15995,7 @@ SWIG_init(void) {
   PyDict_SetItemString(d, "this", this_descr);
   PyDict_SetItemString(d, "thisown", thisown_descr);
   if (PyType_Ready(builtin_pytype) < 0) {
-    PyErr_SetString(PyExc_TypeError, "Could not create type 'PreludeError'.");
+    PyErr_SetString(PyExc_TypeError, "Could not create type 'LibIdmefError'.");
 #if PY_VERSION_HEX >= 0x03000000
     return NULL;
 #else
@@ -16003,8 +16003,8 @@ SWIG_init(void) {
 #endif
   }
   Py_INCREF(builtin_pytype);
-  PyModule_AddObject(m, "PreludeError", (PyObject*) builtin_pytype);
-  SwigPyBuiltin_AddPublicSymbol(public_interface, "PreludeError");
+  PyModule_AddObject(m, "LibIdmefError", (PyObject*) builtin_pytype);
+  SwigPyBuiltin_AddPublicSymbol(public_interface, "LibIdmefError");
   d = md;
   
   /* type 'Idmef::IDMEFCriterion' */

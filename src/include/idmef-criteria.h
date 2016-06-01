@@ -1,9 +1,9 @@
 /*****
 *
 * Copyright (C) 2004-2016 CS-SI. All Rights Reserved.
-* Author: Yoann Vandoorselaere <yoann.v@prelude-ids.com>
+* Author: Yoann Vandoorselaere <yoann.v@libidmef-ids.com>
 *
-* This file is part of the Prelude library.
+* This file is part of the LibIdmef library.
 *
 * This program is free software; you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -21,8 +21,8 @@
 *
 *****/
 
-#ifndef _LIBPRELUDE_IDMEF_CRITERIA_H
-#define _LIBPRELUDE_IDMEF_CRITERIA_H
+#ifndef _LIBIDMEF_IDMEF_CRITERIA_H
+#define _LIBIDMEF_IDMEF_CRITERIA_H
 
 #ifdef __cplusplus
  extern "C" {
@@ -72,8 +72,8 @@ int idmef_criterion_new(idmef_criterion_t **criterion, idmef_path_t *path,
 void idmef_criterion_destroy(idmef_criterion_t *criterion);
 idmef_criteria_t *idmef_criteria_ref(idmef_criteria_t *criteria);
 int idmef_criterion_clone(const idmef_criterion_t *criterion, idmef_criterion_t **dst);
-int idmef_criterion_print(const idmef_criterion_t *criterion, prelude_io_t *fd);
-int idmef_criterion_to_string(const idmef_criterion_t *criterion, prelude_string_t *out);
+int idmef_criterion_print(const idmef_criterion_t *criterion, libidmef_io_t *fd);
+int idmef_criterion_to_string(const idmef_criterion_t *criterion, libidmef_string_t *out);
 idmef_path_t *idmef_criterion_get_path(const idmef_criterion_t *criterion);
 idmef_criterion_value_t *idmef_criterion_get_value(const idmef_criterion_t *criterion);
 idmef_criterion_operator_t idmef_criterion_get_operator(const idmef_criterion_t *criterion);
@@ -82,9 +82,9 @@ int idmef_criterion_match(const idmef_criterion_t *criterion, void *object);
 int idmef_criteria_new(idmef_criteria_t **criteria);
 void idmef_criteria_destroy(idmef_criteria_t *criteria);
 int idmef_criteria_clone(idmef_criteria_t *src, idmef_criteria_t **dst);
-int idmef_criteria_print(const idmef_criteria_t *criteria, prelude_io_t *fd);
-int idmef_criteria_to_string(const idmef_criteria_t *criteria, prelude_string_t *out);
-prelude_bool_t idmef_criteria_is_criterion(const idmef_criteria_t *criteria);
+int idmef_criteria_print(const idmef_criteria_t *criteria, libidmef_io_t *fd);
+int idmef_criteria_to_string(const idmef_criteria_t *criteria, libidmef_string_t *out);
+libidmef_bool_t idmef_criteria_is_criterion(const idmef_criteria_t *criteria);
 idmef_criterion_t *idmef_criteria_get_criterion(const idmef_criteria_t *criteria);
 void idmef_criteria_set_criterion(idmef_criteria_t *criteria, idmef_criterion_t *criterion);
 
@@ -100,12 +100,12 @@ idmef_criteria_t *idmef_criteria_get_and(const idmef_criteria_t *criteria);
 
 int idmef_criteria_new_from_string(idmef_criteria_t **criteria, const char *str);
 
-void idmef_criteria_set_negation(idmef_criteria_t *criteria, prelude_bool_t negate);
+void idmef_criteria_set_negation(idmef_criteria_t *criteria, libidmef_bool_t negate);
 
-prelude_bool_t idmef_criteria_get_negation(const idmef_criteria_t *criteria);
+libidmef_bool_t idmef_criteria_get_negation(const idmef_criteria_t *criteria);
 
 #ifdef __cplusplus
  }
 #endif
 
-#endif /* _LIBPRELUDE_IDMEF_CRITERIA_H */
+#endif /* _LIBIDMEF_IDMEF_CRITERIA_H */

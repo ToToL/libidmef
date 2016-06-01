@@ -1,9 +1,9 @@
 /*****
 *
 * Copyright (C) 2008-2016 CS-SI. All Rights Reserved.
-* Author: Yoann Vandoorselaere <yoann@prelude-ids.com>
+* Author: Yoann Vandoorselaere <yoann@libidmef-ids.com>
 *
-* This file is part of the Prelude library.
+* This file is part of the LibIdmef library.
 *
 * This program is free software; you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -24,7 +24,7 @@
 #include "idmef.hxx"
 #include "idmef-path.hxx"
 #include "idmef-class.hxx"
-#include "prelude-error.hxx"
+#include "libidmef-error.hxx"
 
 #include "idmef-object-prv.h"
 
@@ -37,7 +37,7 @@ IDMEFPath::IDMEFPath(const char *buffer)
 
         ret = idmef_path_new_fast(&_path, buffer);
         if ( ret < 0 )
-                throw PreludeError(ret);
+                throw LibIdmefError(ret);
 }
 
 
@@ -49,7 +49,7 @@ IDMEFPath::IDMEFPath(IDMEF &idmef, const char *buffer)
 
         ret = idmef_path_new_from_root_fast(&_path, obj->_idmef_object_id, buffer);
         if ( ret < 0 )
-                throw PreludeError(ret);
+                throw LibIdmefError(ret);
 }
 
 
@@ -79,7 +79,7 @@ IDMEFValue IDMEFPath::get(const IDMEF &message) const
 
         ret = idmef_path_get(_path, message, &value);
         if ( ret < 0 )
-                throw PreludeError(ret);
+                throw LibIdmefError(ret);
 
         else if ( ret == 0 )
                 return IDMEFValue((idmef_value_t *) NULL);
@@ -109,7 +109,7 @@ idmef_criterion_operator_t IDMEFPath::getApplicableOperators() const
 
         ret = idmef_path_get_applicable_operators(_path, &res);
         if ( ret < 0 )
-                throw PreludeError(ret);
+                throw LibIdmefError(ret);
 
         return res;
 }
@@ -123,7 +123,7 @@ void IDMEFPath::set(IDMEF &message, const std::vector<IDMEF> &value) const
 
         ret = idmef_path_set(_path, message, v);
         if ( ret < 0 )
-                throw PreludeError(ret);
+                throw LibIdmefError(ret);
 }
 
 
@@ -137,7 +137,7 @@ void IDMEFPath::set(IDMEF &message, IDMEF *value) const
                 ret = idmef_path_set(_path, message, IDMEFValue(value));
 
         if ( ret < 0 )
-                throw PreludeError(ret);
+                throw LibIdmefError(ret);
 }
 
 
@@ -151,7 +151,7 @@ void IDMEFPath::set(IDMEF &message, IDMEFValue *value) const
                 ret = idmef_path_set(_path, message, *value);
 
         if ( ret < 0 )
-                throw PreludeError(ret);
+                throw LibIdmefError(ret);
 }
 
 
@@ -162,7 +162,7 @@ void IDMEFPath::set(IDMEF &message, const std::vector<IDMEFValue> &value) const
 
         ret = idmef_path_set(_path, message, v);
         if ( ret < 0 )
-                throw PreludeError(ret);
+                throw LibIdmefError(ret);
 }
 
 
@@ -172,7 +172,7 @@ void IDMEFPath::set(IDMEF &message, IDMEFValue &value) const
 
         ret = idmef_path_set(_path, message, value);
         if ( ret < 0 )
-                throw PreludeError(ret);
+                throw LibIdmefError(ret);
 }
 
 
@@ -182,7 +182,7 @@ void IDMEFPath::set(IDMEF &message, const std::string &value) const
 
         ret = idmef_path_set(_path, message, IDMEFValue(value));
         if ( ret < 0 )
-                throw PreludeError(ret);
+                throw LibIdmefError(ret);
 }
 
 
@@ -196,7 +196,7 @@ void IDMEFPath::set(IDMEF &message, const char *value) const
                 ret = idmef_path_set(_path, message, (idmef_value_t *) NULL);
 
         if ( ret < 0 )
-                throw PreludeError(ret);
+                throw LibIdmefError(ret);
 }
 
 
@@ -207,7 +207,7 @@ void IDMEFPath::set(IDMEF &message, int32_t value) const
 
         ret = idmef_path_set(_path, message, IDMEFValue(value));
         if ( ret < 0 )
-                throw PreludeError(ret);
+                throw LibIdmefError(ret);
 }
 
 
@@ -218,7 +218,7 @@ void IDMEFPath::set(IDMEF &message, int64_t value) const
 
         ret = idmef_path_set(_path, message, IDMEFValue(value));
         if ( ret < 0 )
-                throw PreludeError(ret);
+                throw LibIdmefError(ret);
 }
 
 
@@ -228,7 +228,7 @@ void IDMEFPath::set(IDMEF &message, uint64_t value) const
 
         ret = idmef_path_set(_path, message, IDMEFValue(value));
         if ( ret < 0 )
-                throw PreludeError(ret);
+                throw LibIdmefError(ret);
 }
 
 
@@ -238,7 +238,7 @@ void IDMEFPath::set(IDMEF &message, float value) const
 
         ret = idmef_path_set(_path, message, IDMEFValue(value));
         if ( ret < 0 )
-                throw PreludeError(ret);
+                throw LibIdmefError(ret);
 }
 
 
@@ -248,7 +248,7 @@ void IDMEFPath::set(IDMEF &message, double value) const
 
         ret = idmef_path_set(_path, message, IDMEFValue(value));
         if ( ret < 0 )
-                throw PreludeError(ret);
+                throw LibIdmefError(ret);
 }
 
 
@@ -258,7 +258,7 @@ void IDMEFPath::set(IDMEF &message, IDMEFTime &time) const
 
         ret = idmef_path_set(_path, message, IDMEFValue(time));
         if ( ret < 0 )
-                throw PreludeError(ret);
+                throw LibIdmefError(ret);
 }
 
 
@@ -329,7 +329,7 @@ IDMEFPath IDMEFPath::clone() const
 
         ret = idmef_path_clone(_path, &cpath);
         if ( ret < 0 )
-                throw PreludeError(ret);
+                throw LibIdmefError(ret);
 
         return IDMEFPath(cpath);
 }

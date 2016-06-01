@@ -4,39 +4,39 @@
 int main(){
     FILE *file;
     int ret;
-    prelude_io_t *pio;
+    libidmef_io_t *pio;
     idmef_message_t *idmef, *idmef_heartbeat;
     idmef_alert_t *alert;
     idmef_heartbeat_t *heartbeat;
     idmef_classification_t *class;
-    prelude_string_t *str;
+    libidmef_string_t *str;
     idmef_time_t * time;
 
     file = fopen("/tmp/example.idmef", "a");
 
-    prelude_io_new(&pio);
-    prelude_io_set_file_io(pio, file);
+    libidmef_io_new(&pio);
+    libidmef_io_set_file_io(pio, file);
 
     ret = idmef_message_new(&idmef);
     if ( ret < 0 ) {
-            prelude_perror(ret, "unable to create IDMEF message");
+            libidmef_perror(ret, "unable to create IDMEF message");
             return -1;
     }
     ret = idmef_message_new_alert(idmef, &alert);
     if ( ret < 0 ) {
-            prelude_perror(ret, "unable to create IDMEF alert");
+            libidmef_perror(ret, "unable to create IDMEF alert");
             idmef_message_destroy(idmef);
             return -1;
     }
 
     ret = idmef_message_new(&idmef_heartbeat);
     if ( ret < 0 ) {
-            prelude_perror(ret, "unable to create IDMEF message");
+            libidmef_perror(ret, "unable to create IDMEF message");
             return -1;
     }
     ret = idmef_message_new_heartbeat(idmef_heartbeat, &heartbeat);
     if ( ret < 0 ) {
-            prelude_perror(ret, "unable to create IDMEF alert");
+            libidmef_perror(ret, "unable to create IDMEF alert");
             idmef_message_destroy(idmef_heartbeat);
             return -1;
     }
@@ -263,10 +263,10 @@ int main(){
     idmef_heartbeat_set_analyzer_time(heartbeat, time);
 
     idmef_message_new_version(idmef_heartbeat, &str);
-    prelude_string_set_constant(str, "1.0");
+    libidmef_string_set_constant(str, "1.0");
 
     idmef_message_new_version(idmef, &str);
-    prelude_string_set_constant(str, "1.0");
+    libidmef_string_set_constant(str, "1.0");
 
     idmef_message_print(idmef, pio);
     idmef_message_write(idmef, pio);

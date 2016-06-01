@@ -1,0 +1,148 @@
+<!-- ##### SECTION Title ##### -->
+libidmef-timer
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### SECTION Image ##### -->
+
+
+<!-- ##### STRUCT libidmef_timer_t ##### -->
+<para>
+
+</para>
+
+@list: 
+@expire: 
+@start_time: 
+@data: 
+@function: 
+
+<!-- ##### MACRO libidmef_timer_get_expire ##### -->
+<para>
+
+</para>
+
+@timer: 
+
+
+<!-- ##### MACRO libidmef_timer_get_data ##### -->
+<para>
+
+</para>
+
+@timer: 
+
+
+<!-- ##### MACRO libidmef_timer_get_callback ##### -->
+<para>
+
+</para>
+
+@timer: 
+
+
+<!-- ##### MACRO libidmef_timer_set_expire ##### -->
+<para>
+
+</para>
+
+@timer: 
+@x: 
+
+
+<!-- ##### MACRO libidmef_timer_set_data ##### -->
+<para>
+
+</para>
+
+@timer: 
+@x: 
+
+
+<!-- ##### MACRO libidmef_timer_set_callback ##### -->
+<para>
+
+</para>
+
+@timer: 
+@x: 
+
+
+<!-- ##### FUNCTION libidmef_timer_init ##### -->
+<para>
+
+</para>
+
+@timer: 
+
+
+<!-- ##### FUNCTION libidmef_timer_init_list ##### -->
+<para>
+
+</para>
+
+@timer: 
+
+
+<!-- ##### FUNCTION libidmef_timer_reset ##### -->
+<para>
+
+</para>
+
+@timer: 
+
+
+<!-- ##### FUNCTION libidmef_timer_destroy ##### -->
+<para>
+
+</para>
+
+@timer: 
+
+
+<!-- ##### FUNCTION libidmef_timer_wake_up ##### -->
+<para>
+
+</para>
+
+@void: 
+
+
+<!-- ##### FUNCTION libidmef_timer_flush ##### -->
+<para>
+
+</para>
+
+@void: 
+
+
+<!-- ##### FUNCTION libidmef_timer_lock_critical_region ##### -->
+<para>
+
+</para>
+
+@void: 
+
+
+<!-- ##### FUNCTION libidmef_timer_unlock_critical_region ##### -->
+<para>
+
+</para>
+
+@void: 
+
+

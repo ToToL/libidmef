@@ -1,9 +1,9 @@
 /*****
 *
 * Copyright (C) 2005-2016 CS-SI. All Rights Reserved.
-* Author: Yoann Vandoorselaere <yoann.v@prelude-ids.com>
+* Author: Yoann Vandoorselaere <yoann.v@libidmef-ids.com>
 *
-* This file is part of the Prelude library.
+* This file is part of the LibIdmef library.
 *
 * This program is free software; you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -98,16 +98,16 @@
 %exception {
         try {
                 $action
-        } catch(Idmef::PreludeError &e) {
-                SWIG_Python_Raise(SWIG_NewPointerObj(new PreludeError(e),
-                                                     SWIGTYPE_p_Idmef__PreludeError, SWIG_POINTER_OWN),
-                                  "PreludeError", SWIGTYPE_p_Idmef__PreludeError);
+        } catch(Idmef::LibIdmefError &e) {
+                SWIG_Python_Raise(SWIG_NewPointerObj(new LibIdmefError(e),
+                                                     SWIGTYPE_p_Idmef__LibIdmefError, SWIG_POINTER_OWN),
+                                  "LibIdmefError", SWIGTYPE_p_Idmef__LibIdmefError);
                 SWIG_fail;
         }
 }
 
 
-#ifdef SWIG_COMPILE_LIBPRELUDE
+#ifdef SWIG_COMPILE_LIBIDMEF
 
 %{
 typedef PyObject SwigPyObjectState;
@@ -140,7 +140,7 @@ typedef PyObject SwigPyObjectState;
         }
 
         if ( ret < 0 )
-                throw PreludeError("error setting internal __idmef_data__ key");
+                throw LibIdmefError("error setting internal __idmef_data__ key");
 
         $result = state;
 }
@@ -160,7 +160,7 @@ typedef PyObject SwigPyObjectState;
         if ( ! pytype ) {
                 swig_type_info *sti = SWIG_TypeQuery("Idmef::IDMEF *");
                 if ( ! sti )
-                        throw PreludeError("could not find type SWIG type info for 'Idmef::IDMEF'");
+                        throw LibIdmefError("could not find type SWIG type info for 'Idmef::IDMEF'");
 
                 pytype = ((SwigPyClientData *) sti->clientdata)->pytype;
         }
@@ -170,7 +170,7 @@ typedef PyObject SwigPyObjectState;
         Py_DECREF(obj);
 
         if ( ret < 0 )
-                throw PreludeError("error calling Idmef::IDMEF tp_init()");
+                throw LibIdmefError("error calling Idmef::IDMEF tp_init()");
 
 }
 
@@ -189,10 +189,10 @@ typedef PyObject SwigPyObjectState;
                  */
                 pyobj->dict = arg2;
                 Py_INCREF(arg2);
-        } catch(Idmef::PreludeError &e) {
-                SWIG_Python_Raise(SWIG_NewPointerObj(new PreludeError(e),
-                                                     SWIGTYPE_p_Idmef__PreludeError, SWIG_POINTER_OWN),
-                                  "PreludeError", SWIGTYPE_p_Idmef__PreludeError);
+        } catch(Idmef::LibIdmefError &e) {
+                SWIG_Python_Raise(SWIG_NewPointerObj(new LibIdmefError(e),
+                                                     SWIGTYPE_p_Idmef__LibIdmefError, SWIG_POINTER_OWN),
+                                  "LibIdmefError", SWIGTYPE_p_Idmef__LibIdmefError);
                 SWIG_fail;
         }
 }
@@ -232,9 +232,9 @@ typedef PyObject SwigPyObjectState;
 %exception Idmef::IDMEFClass::_get2 {
         try {
                 $action;
-        } catch(Idmef::PreludeError &e) {
-                if ( e.getCode() == PRELUDE_ERROR_IDMEF_CLASS_UNKNOWN_CHILD ||
-                     e.getCode() == PRELUDE_ERROR_IDMEF_PATH_DEPTH )
+        } catch(Idmef::LibIdmefError &e) {
+                if ( e.getCode() == LIBIDMEF_ERROR_IDMEF_CLASS_UNKNOWN_CHILD ||
+                     e.getCode() == LIBIDMEF_ERROR_IDMEF_PATH_DEPTH )
                         SWIG_exception_fail(SWIG_IndexError, e.what());
         }
 }

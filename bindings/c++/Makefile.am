@@ -5,7 +5,7 @@ SUBDIRS = include
 lib_LTLIBRARIES = libidmefcpp.la
 libidmefcpp_ladir = ${prefix}/lib
 libidmefcpp_la_SOURCES = \
-	prelude-error.cxx \
+	libidmef-error.cxx \
 	idmef.cxx \
 	idmef-class.cxx \
 	idmef-criteria.cxx \

@@ -1,9 +1,9 @@
 /*****
 *
 * Copyright (C) 2004-2016 CS-SI. All Rights Reserved.
-* Author: Yoann Vandoorselaere <yoann.v@prelude-ids.com>
+* Author: Yoann Vandoorselaere <yoann.v@libidmef-ids.com>
 *
-* This file is part of the Prelude library.
+* This file is part of the LibIdmef library.
 *
 * This program is free software; you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -21,8 +21,8 @@
 *
 *****/
 
-#ifndef _LIBPRELUDE_IDMEF_ADDITIONAL_DATA_H
-#define _LIBPRELUDE_IDMEF_ADDITIONAL_DATA_H
+#ifndef _LIBIDMEF_IDMEF_ADDITIONAL_DATA_H
+#define _LIBIDMEF_IDMEF_ADDITIONAL_DATA_H
 
 #ifdef __cplusplus
  extern "C" {
@@ -34,13 +34,13 @@
 int idmef_additional_data_new_real(idmef_additional_data_t **ret, float data);
 int idmef_additional_data_new_byte(idmef_additional_data_t **ret, uint8_t byte);
 int idmef_additional_data_new_integer(idmef_additional_data_t **ret, uint32_t data);
-int idmef_additional_data_new_boolean(idmef_additional_data_t **ret, prelude_bool_t data);
+int idmef_additional_data_new_boolean(idmef_additional_data_t **ret, libidmef_bool_t data);
 int idmef_additional_data_new_character(idmef_additional_data_t **ret, char data);
 
 void idmef_additional_data_set_real(idmef_additional_data_t *ptr, float data);
 void idmef_additional_data_set_byte(idmef_additional_data_t *ptr, uint8_t byte);
 void idmef_additional_data_set_integer(idmef_additional_data_t *ptr, uint32_t data);
-void idmef_additional_data_set_boolean(idmef_additional_data_t *ptr, prelude_bool_t data);
+void idmef_additional_data_set_boolean(idmef_additional_data_t *ptr, libidmef_bool_t data);
 void idmef_additional_data_set_character(idmef_additional_data_t *ptr, char data);
 
 
@@ -85,18 +85,18 @@ int idmef_additional_data_copy_dup(idmef_additional_data_t *src, idmef_additiona
 
 float idmef_additional_data_get_real(idmef_additional_data_t *data);
 uint32_t idmef_additional_data_get_integer(idmef_additional_data_t *data);
-prelude_bool_t idmef_additional_data_get_boolean(idmef_additional_data_t *data);
+libidmef_bool_t idmef_additional_data_get_boolean(idmef_additional_data_t *data);
 char idmef_additional_data_get_character(idmef_additional_data_t *data);
 uint8_t idmef_additional_data_get_byte(idmef_additional_data_t *data);
 
 size_t idmef_additional_data_get_len(idmef_additional_data_t *data);
 
-prelude_bool_t idmef_additional_data_is_empty(idmef_additional_data_t *data);
+libidmef_bool_t idmef_additional_data_is_empty(idmef_additional_data_t *data);
 
-int idmef_additional_data_data_to_string(idmef_additional_data_t *ad, prelude_string_t *out);
+int idmef_additional_data_data_to_string(idmef_additional_data_t *ad, libidmef_string_t *out);
 
 #ifdef __cplusplus
  }
 #endif
          
-#endif /* _LIBPRELUDE_IDMEF_DATA_H */
+#endif /* _LIBIDMEF_IDMEF_DATA_H */

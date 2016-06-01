@@ -1,0 +1,126 @@
+<!-- ##### SECTION Title ##### -->
+libidmef-msgbuf
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### SECTION Image ##### -->
+
+
+<!-- ##### TYPEDEF libidmef_msgbuf_t ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### ENUM libidmef_msgbuf_flags_t ##### -->
+<para>
+
+</para>
+
+@LIBIDMEF_MSGBUF_FLAGS_ASYNC: 
+
+<!-- ##### FUNCTION libidmef_msgbuf_new ##### -->
+<para>
+
+</para>
+
+@msgbuf: 
+@Returns: 
+
+
+<!-- ##### FUNCTION libidmef_msgbuf_destroy ##### -->
+<para>
+
+</para>
+
+@msgbuf: 
+
+
+<!-- ##### FUNCTION libidmef_msgbuf_mark_end ##### -->
+<para>
+
+</para>
+
+@msgbuf: 
+
+
+<!-- ##### FUNCTION libidmef_msgbuf_set ##### -->
+<para>
+
+</para>
+
+@msgbuf: 
+@tag: 
+@len: 
+@data: 
+@Returns: 
+
+
+<!-- ##### FUNCTION libidmef_msgbuf_get_msg ##### -->
+<para>
+
+</para>
+
+@msgbuf: 
+@Returns: 
+
+
+<!-- ##### FUNCTION libidmef_msgbuf_set_callback ##### -->
+<para>
+
+</para>
+
+@msgbuf: 
+@send_msg: 
+
+
+<!-- ##### FUNCTION libidmef_msgbuf_set_data ##### -->
+<para>
+
+</para>
+
+@msgbuf: 
+@data: 
+
+
+<!-- ##### FUNCTION libidmef_msgbuf_get_data ##### -->
+<para>
+
+</para>
+
+@msgbuf: 
+@Returns: 
+
+
+<!-- ##### FUNCTION libidmef_msgbuf_set_flags ##### -->
+<para>
+
+</para>
+
+@msgbuf: 
+@flags: 
+
+
+<!-- ##### FUNCTION libidmef_msgbuf_get_flags ##### -->
+<para>
+
+</para>
+
+@msgbuf: 
+@Returns: 
+
+

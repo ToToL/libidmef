@@ -1,9 +1,9 @@
 /*****
 *
 * Copyright (C) 2005-2016 CS-SI. All Rights Reserved.
-* Author: Yoann Vandoorselaere <yoann.v@prelude-ids.com>
+* Author: Yoann Vandoorselaere <yoann.v@libidmef-ids.com>
 *
-* This file is part of the Prelude library.
+* This file is part of the LibIdmef library.
 *
 * This program is free software; you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -40,16 +40,16 @@
 %ignore IDMEFValue(uint64_t);
 %ignore IDMEFValue(float);
 %ignore IDMEFValue(std::string);
-%ignore Set(Prelude::IDMEF &, int8_t);
-%ignore Set(Prelude::IDMEF &, uint8_t);
-%ignore Set(Prelude::IDMEF &, int16_t);
-%ignore Set(Prelude::IDMEF &, uint16_t);
-%ignore Set(Prelude::IDMEF &, int32_t);
-%ignore Set(Prelude::IDMEF &, uint32_t);
-%ignore Set(Prelude::IDMEF &, int64_t);
-%ignore Set(Prelude::IDMEF &, uint64_t);
-%ignore Set(Prelude::IDMEF &, float);
-%ignore Set(Prelude::IDMEF &, std::string);
+%ignore Set(LibIdmef::IDMEF &, int8_t);
+%ignore Set(LibIdmef::IDMEF &, uint8_t);
+%ignore Set(LibIdmef::IDMEF &, int16_t);
+%ignore Set(LibIdmef::IDMEF &, uint16_t);
+%ignore Set(LibIdmef::IDMEF &, int32_t);
+%ignore Set(LibIdmef::IDMEF &, uint32_t);
+%ignore Set(LibIdmef::IDMEF &, int64_t);
+%ignore Set(LibIdmef::IDMEF &, uint64_t);
+%ignore Set(LibIdmef::IDMEF &, float);
+%ignore Set(LibIdmef::IDMEF &, std::string);
 %ignore Set(char const *, int8_t);
 %ignore Set(char const *, uint8_t);
 %ignore Set(char const *, int16_t);
@@ -74,7 +74,7 @@
 %ignore *::operator uint64_t() const;
 %ignore *::operator float() const;
 %ignore *::operator double() const;
-%ignore *::operator Prelude::IDMEFTime() const;
+%ignore *::operator LibIdmef::IDMEFTime() const;
 %ignore operator <<;
 %ignore operator >>;
 
@@ -94,21 +94,21 @@
         }
 }
 
-%ignore Prelude::IDMEFCriteria::operator const std::string() const;
-%newobject Prelude::IDMEFCriteria::__str__;
-%extend Prelude::IDMEFCriteria {
+%ignore LibIdmef::IDMEFCriteria::operator const std::string() const;
+%newobject LibIdmef::IDMEFCriteria::__str__;
+%extend LibIdmef::IDMEFCriteria {
         char *__str__() { return my_strdup(self->toString().c_str()); }
 }
 
-%ignore Prelude::IDMEFTime::operator const std::string() const;
-%newobject Prelude::IDMEFTime::__str__;
-%extend Prelude::IDMEFTime {
+%ignore LibIdmef::IDMEFTime::operator const std::string() const;
+%newobject LibIdmef::IDMEFTime::__str__;
+%extend LibIdmef::IDMEFTime {
         char *__str__() { return my_strdup(self->toString().c_str()); }
 }
 
-%ignore Prelude::IDMEF::operator const std::string() const;
-%newobject Prelude::IDMEF::__str__;
-%extend Prelude::IDMEF {
+%ignore LibIdmef::IDMEF::operator const std::string() const;
+%newobject LibIdmef::IDMEF::__str__;
+%extend LibIdmef::IDMEF {
         char *__str__() { return my_strdup(self->toString().c_str()); }
 }
 
@@ -134,7 +134,7 @@ int strsize2lua(lua_State *L, const char *str, size_t len)
 }
 
 
-int _SWIG_Prelude_NewPointerObj(lua_State *L, void *obj, swig_type_info *objtype, int val)
+int _SWIG_LibIdmef_NewPointerObj(lua_State *L, void *obj, swig_type_info *objtype, int val)
 {
         SWIG_NewPointerObj(L, obj, objtype, val);
         return 0;
@@ -153,7 +153,7 @@ int _SWIG_Prelude_NewPointerObj(lua_State *L, void *obj, swig_type_info *objtype
 }
 
 %fragment("TransitionFunc", "header") {
-static int __prelude_log_func;
+static int __libidmef_log_func;
 static lua_State *__lua_state = NULL;
 static gl_thread_t __initial_thread;
 
@@ -162,38 +162,38 @@ static void _cb_lua_log(int level, const char *str)
         if ( (gl_thread_t) gl_thread_self() != __initial_thread )
                 return;
 
-        lua_rawgeti(__lua_state, LUA_REGISTRYINDEX, __prelude_log_func);
+        lua_rawgeti(__lua_state, LUA_REGISTRYINDEX, __libidmef_log_func);
         lua_pushnumber(__lua_state, level);
         lua_pushstring(__lua_state, str);
         lua_call(__lua_state, 2, 0);
 }
 
 
-static int _cb_lua_write(prelude_msgbuf_t *fd, prelude_msg_t *msg)
+static int _cb_lua_write(libidmef_msgbuf_t *fd, libidmef_msg_t *msg)
 {
         size_t ret;
-        FILE *f = (FILE *) prelude_msgbuf_get_data(fd);
+        FILE *f = (FILE *) libidmef_msgbuf_get_data(fd);
 
-        ret = fwrite((const char *)prelude_msg_get_message_data(msg), 1, prelude_msg_get_len(msg), f);
-        if ( ret != prelude_msg_get_len(msg) )
-                return prelude_error_from_errno(errno);
+        ret = fwrite((const char *)libidmef_msg_get_message_data(msg), 1, libidmef_msg_get_len(msg), f);
+        if ( ret != libidmef_msg_get_len(msg) )
+                return libidmef_error_from_errno(errno);
 
-        prelude_msg_recycle(msg);
+        libidmef_msg_recycle(msg);
         return 0;
 }
 
 
-static ssize_t _cb_lua_read(prelude_io_t *fd, void *buf, size_t size)
+static ssize_t _cb_lua_read(libidmef_io_t *fd, void *buf, size_t size)
 {
         ssize_t ret;
-        FILE *f = (FILE *) prelude_io_get_fdptr(fd);
+        FILE *f = (FILE *) libidmef_io_get_fdptr(fd);
 
         ret = fread(buf, 1, size, f);
         if ( ret < 0 )
-                ret = prelude_error_from_errno(errno);
+                ret = libidmef_error_from_errno(errno);
 
         else if ( ret == 0 )
-                ret = prelude_error(PRELUDE_ERROR_EOF);
+                ret = libidmef_error(LIBIDMEF_ERROR_EOF);
 
         return ret;
 }
@@ -206,9 +206,9 @@ static ssize_t _cb_lua_read(prelude_io_t *fd, void *buf, size_t size)
                 SWIG_exception(SWIG_ValueError, "Argument should be a function");
 
         if ( __lua_state )
-                luaL_unref(L, LUA_REGISTRYINDEX, __prelude_log_func);
+                luaL_unref(L, LUA_REGISTRYINDEX, __libidmef_log_func);
 
-        __prelude_log_func = luaL_ref(L, LUA_REGISTRYINDEX);
+        __libidmef_log_func = luaL_ref(L, LUA_REGISTRYINDEX);
         $1 = _cb_lua_log;
         __lua_state = L;
 };
@@ -217,7 +217,7 @@ static ssize_t _cb_lua_read(prelude_io_t *fd, void *buf, size_t size)
 %exception {
         try {
                 $action
-        } catch(Prelude::PreludeError &e) {
+        } catch(LibIdmef::LibIdmefError &e) {
                 SWIG_exception(SWIG_RuntimeError, e.what());
                 SWIG_fail;
         }
@@ -226,8 +226,8 @@ static ssize_t _cb_lua_read(prelude_io_t *fd, void *buf, size_t size)
 %exception read(void *nocast_p) {
         try {
                 $action
-        } catch(Prelude::PreludeError &e) {
-                if ( e.getCode() == PRELUDE_ERROR_EOF )
+        } catch(LibIdmef::LibIdmefError &e) {
+                if ( e.getCode() == LIBIDMEF_ERROR_EOF )
                         return 0;
                 else {
                         SWIG_exception(SWIG_RuntimeError, e.what());
@@ -237,7 +237,7 @@ static ssize_t _cb_lua_read(prelude_io_t *fd, void *buf, size_t size)
 }
 
 
-%extend Prelude::IDMEF {
+%extend LibIdmef::IDMEF {
         void write(void *nocast_p) {
                 self->_genericWrite(_cb_lua_write, nocast_p);
         }
@@ -251,7 +251,7 @@ static ssize_t _cb_lua_read(prelude_io_t *fd, void *buf, size_t size)
 
 
 %fragment("SWIG_NewPointerObj", "header") {
-#define SWIG_NewPointerObj(obj, objtype, val) _SWIG_Prelude_NewPointerObj((lua_State *) extra, obj, objtype, val);
+#define SWIG_NewPointerObj(obj, objtype, val) _SWIG_LibIdmef_NewPointerObj((lua_State *) extra, obj, objtype, val);
 }
 
 %fragment("SWIG_FromCharPtr", "header") {
@@ -293,14 +293,14 @@ static ssize_t _cb_lua_read(prelude_io_t *fd, void *buf, size_t size)
 
 
 %fragment("IDMEFValueList_to_SWIG", "header") {
-int IDMEFValue_to_SWIG(TARGET_LANGUAGE_SELF self, const Prelude::IDMEFValue &result, void *extra, TARGET_LANGUAGE_OUTPUT_TYPE ret);
+int IDMEFValue_to_SWIG(TARGET_LANGUAGE_SELF self, const LibIdmef::IDMEFValue &result, void *extra, TARGET_LANGUAGE_OUTPUT_TYPE ret);
 
-int IDMEFValueList_to_SWIG(TARGET_LANGUAGE_SELF self, const Prelude::IDMEFValue &value, void *extra)
+int IDMEFValueList_to_SWIG(TARGET_LANGUAGE_SELF self, const LibIdmef::IDMEFValue &value, void *extra)
 {
         bool is_list;
         int index = 0, ret, unused;
-        std::vector<Prelude::IDMEFValue> result = value;
-        std::vector<Prelude::IDMEFValue>::const_iterator i;
+        std::vector<LibIdmef::IDMEFValue> result = value;
+        std::vector<LibIdmef::IDMEFValue>::const_iterator i;
 
         lua_newtable((lua_State *) extra);
 
@@ -332,7 +332,7 @@ int IDMEFValueList_to_SWIG(TARGET_LANGUAGE_SELF self, const Prelude::IDMEFValue 
 }
 }
 
-%typemap(out, fragment="IDMEFValue_to_SWIG") Prelude::IDMEFValue {
+%typemap(out, fragment="IDMEFValue_to_SWIG") LibIdmef::IDMEFValue {
         int ret, unused;
 
         if ( $1.isNull() ) {
@@ -375,7 +375,7 @@ int IDMEFValueList_to_SWIG(TARGET_LANGUAGE_SELF self, const Prelude::IDMEFValue 
                         continue;
 
                 if ( idx >= ((sizeof(argv) / sizeof(char *)) - 1) )
-                        throw PreludeError("Argument index too large");
+                        throw LibIdmefError("Argument index too large");
 
                 argv[idx] = strdup(val);
                 argc = MAX(idx, argc);
@@ -384,9 +384,9 @@ int IDMEFValueList_to_SWIG(TARGET_LANGUAGE_SELF self, const Prelude::IDMEFValue 
         argc++;
         argv[argc] = NULL;
 
-        ret = prelude_init(&argc, argv);
+        ret = libidmef_init(&argc, argv);
         if ( ret < 0 )
-                throw PreludeError(ret);
+                throw LibIdmefError(ret);
 }
 
 

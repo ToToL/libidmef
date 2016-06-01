@@ -1,9 +1,9 @@
 /*****
 *
 * Copyright (C) 2001-2016 CS-SI. All Rights Reserved.
-* Author: Yoann Vandoorselaere <yoann.v@prelude-ids.com>
+* Author: Yoann Vandoorselaere <yoann.v@libidmef-ids.com>
 *
-* This file is part of the Prelude library.
+* This file is part of the LibIdmef library.
 *
 * This program is free software; you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -46,21 +46,21 @@
  */
 
 
-#ifndef _LIBPRELUDE_IDMEF_TREE_H
-#define _LIBPRELUDE_IDMEF_TREE_H
+#ifndef _LIBIDMEF_IDMEF_TREE_H
+#define _LIBIDMEF_IDMEF_TREE_H
 
 #ifndef _GENERATE
 
-#include "prelude-inttypes.h"
+#include "libidmef-inttypes.h"
 
-#include "prelude-hash.h"
+#include "libidmef-hash.h"
 
-#include "prelude-io.h"
-#include "prelude-message.h"
+#include "libidmef-io.h"
+#include "libidmef-message.h"
 
-#define LISTED_OBJECT(name, type) prelude_list_t name
+#define LISTED_OBJECT(name, type) libidmef_list_t name
 
-#define IS_KEY_LISTED(keyfield) IDMEF_LINKED_OBJECT; prelude_string_t *keyfield
+#define IS_KEY_LISTED(keyfield) IDMEF_LINKED_OBJECT; libidmef_string_t *keyfield
 
 #define UNION(type, var) type var; union
 
@@ -95,7 +95,7 @@
 #define IDMEF_VERSION "0.6"
 
 #ifndef _GENERATE
-#include "prelude-string.h"
+#include "libidmef-string.h"
 #include "idmef-time.h"
 #include "idmef-data.h"
 #endif
@@ -110,7 +110,7 @@ PRIMITIVE_TYPE(uint64_t)
 PRIMITIVE_TYPE(uchar_t)
 PRIMITIVE_TYPE(float)
 
-PRIMITIVE_TYPE_STRUCT(prelude_string_t)
+PRIMITIVE_TYPE_STRUCT(libidmef_string_t)
 PRIMITIVE_TYPE_STRUCT(idmef_time_t)
 PRIMITIVE_TYPE_STRUCT(idmef_data_t)
 
@@ -138,7 +138,7 @@ ENUM() {
 struct {
         IS_KEY_LISTED(meaning);
         REFCOUNT;
-        IGNORED(prelude_bool_t, _type_is_set);
+        IGNORED(libidmef_bool_t, _type_is_set);
         idmef_additional_data_type_t type;
         REQUIRED(idmef_data_t, *data);
 } TYPE_ID(idmef_additional_data_t, 4);
@@ -164,9 +164,9 @@ struct {
         REFCOUNT;
         idmef_reference_origin_t origin;
 
-        REQUIRED(prelude_string_t, *name);
-        REQUIRED(prelude_string_t, *url);
-        prelude_string_t *meaning;
+        REQUIRED(libidmef_string_t, *name);
+        REQUIRED(libidmef_string_t, *url);
+        libidmef_string_t *meaning;
 } TYPE_ID(idmef_reference_t, 50);
 
 
@@ -179,8 +179,8 @@ struct {
 struct {
         IDMEF_OBJECT;
         REFCOUNT;
-        prelude_string_t *ident;
-        REQUIRED(prelude_string_t, *text);
+        libidmef_string_t *ident;
+        REQUIRED(libidmef_string_t, *text);
         LISTED_OBJECT(reference_list, idmef_reference_t);
 
 } TYPE_ID(idmef_classification_t, 6);
@@ -207,10 +207,10 @@ ENUM() {
 struct {
         IDMEF_LINKED_OBJECT;
         REFCOUNT;
-        prelude_string_t *ident;
+        libidmef_string_t *ident;
         idmef_user_id_type_t type;
-        prelude_string_t *tty;
-        prelude_string_t *name;
+        libidmef_string_t *tty;
+        libidmef_string_t *name;
         OPTIONAL_INT(uint32_t, number);
 } TYPE_ID(idmef_user_id_t, 8);
 
@@ -234,7 +234,7 @@ ENUM(cat) {
 struct {
         IDMEF_OBJECT;
         REFCOUNT;
-        prelude_string_t *ident;
+        libidmef_string_t *ident;
         idmef_user_category_t category;
         LISTED_OBJECT(user_id_list, idmef_user_id_t);
 } TYPE_ID(idmef_user_t, 10);
@@ -270,12 +270,12 @@ ENUM(addr) {
 struct {
         IDMEF_LINKED_OBJECT;
         REFCOUNT;
-        prelude_string_t *ident;
+        libidmef_string_t *ident;
         idmef_address_category_t category;
-        prelude_string_t *vlan_name;
+        libidmef_string_t *vlan_name;
         OPTIONAL_INT(int32_t, vlan_num);
-        REQUIRED(prelude_string_t, *address);
-        prelude_string_t *netmask;
+        REQUIRED(libidmef_string_t, *address);
+        libidmef_string_t *netmask;
 } TYPE_ID(idmef_address_t, 12);
 
 
@@ -287,13 +287,13 @@ struct {
 struct {
         IDMEF_OBJECT;
         REFCOUNT;
-        prelude_string_t *ident;
-        REQUIRED(prelude_string_t, *name);
+        libidmef_string_t *ident;
+        REQUIRED(libidmef_string_t, *name);
         OPTIONAL_INT(uint32_t, pid);
-        prelude_string_t *path;
+        libidmef_string_t *path;
 
-        LISTED_OBJECT(arg_list, prelude_string_t);
-        LISTED_OBJECT(env_list, prelude_string_t);
+        LISTED_OBJECT(arg_list, libidmef_string_t);
+        LISTED_OBJECT(env_list, libidmef_string_t);
 } TYPE_ID(idmef_process_t, 13);
 
 
@@ -301,10 +301,10 @@ struct {
 struct {
         IDMEF_OBJECT;
         REFCOUNT;
-        REQUIRED(prelude_string_t, *url);
-        prelude_string_t *cgi;
-        prelude_string_t *http_method;
-        LISTED_OBJECT(arg_list, prelude_string_t);
+        REQUIRED(libidmef_string_t, *url);
+        libidmef_string_t *cgi;
+        libidmef_string_t *http_method;
+        LISTED_OBJECT(arg_list, libidmef_string_t);
 } TYPE_ID(idmef_web_service_t, 14);
 
 
@@ -316,14 +316,14 @@ struct {
 struct {
         IDMEF_OBJECT;
         REFCOUNT;
-        prelude_string_t *oid;
+        libidmef_string_t *oid;
         OPTIONAL_INT(uint32_t, message_processing_model);
         OPTIONAL_INT(uint32_t, security_model);
-        prelude_string_t *security_name;
+        libidmef_string_t *security_name;
         OPTIONAL_INT(uint32_t, security_level);
-        prelude_string_t *context_name;
-        prelude_string_t *context_engine_id;
-        prelude_string_t *command;
+        libidmef_string_t *context_name;
+        libidmef_string_t *context_engine_id;
+        libidmef_string_t *command;
 } TYPE_ID(idmef_snmp_service_t, 15);
 
 
@@ -343,16 +343,16 @@ ENUM() {
 struct {
         IDMEF_OBJECT;
         REFCOUNT;
-        prelude_string_t *ident;
+        libidmef_string_t *ident;
 
         OPTIONAL_INT(uint8_t, ip_version);
         OPTIONAL_INT(uint8_t, iana_protocol_number);
-        prelude_string_t *iana_protocol_name;
+        libidmef_string_t *iana_protocol_name;
 
-        prelude_string_t *name;
+        libidmef_string_t *name;
         OPTIONAL_INT(uint16_t, port);
-        prelude_string_t *portlist;
-        prelude_string_t *protocol;
+        libidmef_string_t *portlist;
+        libidmef_string_t *protocol;
 
         UNION(idmef_service_type_t, type) {
                 UNION_MEMBER(IDMEF_SERVICE_TYPE_WEB, idmef_web_service_t, *web_service);
@@ -388,10 +388,10 @@ ENUM(node) {
 struct {
         IDMEF_OBJECT;
         REFCOUNT;
-        prelude_string_t *ident;
+        libidmef_string_t *ident;
         idmef_node_category_t category;
-        prelude_string_t *location;
-        prelude_string_t *name;
+        libidmef_string_t *location;
+        libidmef_string_t *name;
         LISTED_OBJECT(address_list, idmef_address_t);
 } TYPE_ID(idmef_node_t, 19);
 
@@ -413,10 +413,10 @@ ENUM() {
 struct {
         IDMEF_LINKED_OBJECT;
         REFCOUNT;
-        prelude_string_t *ident;
+        libidmef_string_t *ident;
 
         idmef_source_spoofed_t spoofed;
-        prelude_string_t *interface;
+        libidmef_string_t *interface;
 
         idmef_node_t *node;
         idmef_user_t *user;
@@ -431,7 +431,7 @@ struct {
         REFCOUNT;
 
         REQUIRED(idmef_user_id_t, *user_id);
-        LISTED_OBJECT(permission_list, prelude_string_t);
+        LISTED_OBJECT(permission_list, libidmef_string_t);
 } TYPE_ID(idmef_file_access_t, 22);
 
 
@@ -478,8 +478,8 @@ ENUM() {
 struct {
         IDMEF_LINKED_OBJECT;
         REFCOUNT;
-        REQUIRED(prelude_string_t, *value);
-        prelude_string_t *key;
+        REQUIRED(libidmef_string_t, *value);
+        libidmef_string_t *key;
         idmef_checksum_algorithm_t algorithm;
 } TYPE_ID(idmef_checksum_t, 52);
 
@@ -513,10 +513,10 @@ ENUM(fstype) {
 struct {
         IDMEF_LINKED_OBJECT;
         REFCOUNT;
-        prelude_string_t *ident;
+        libidmef_string_t *ident;
 
-        REQUIRED(prelude_string_t, *name);
-        REQUIRED(prelude_string_t, *path);
+        REQUIRED(libidmef_string_t, *name);
+        REQUIRED(libidmef_string_t, *path);
 
         idmef_time_t *create_time;
         idmef_time_t *modify_time;
@@ -534,7 +534,7 @@ struct {
 
         idmef_file_category_t category;
         OPTIONAL_INT(idmef_file_fstype_t, fstype);
-        prelude_string_t *file_type;
+        libidmef_string_t *file_type;
 
 } TYPE_ID(idmef_file_t, 26);
 
@@ -558,8 +558,8 @@ struct {
         REFCOUNT;
 
         idmef_linkage_category_t category;
-        REQUIRED(prelude_string_t, *name);
-        REQUIRED(prelude_string_t, *path);
+        REQUIRED(libidmef_string_t, *name);
+        REQUIRED(libidmef_string_t, *path);
         REQUIRED(idmef_file_t, *file);
 } TYPE_ID(idmef_linkage_t, 28);
 
@@ -581,10 +581,10 @@ ENUM() {
 struct {
         IDMEF_LINKED_OBJECT;
         REFCOUNT;
-        prelude_string_t *ident;
+        libidmef_string_t *ident;
 
         idmef_target_decoy_t decoy;
-        prelude_string_t *interface;
+        libidmef_string_t *interface;
 
         idmef_node_t *node;
         idmef_user_t *user;
@@ -603,15 +603,15 @@ struct {
 struct {
         IDMEF_LINKED_OBJECT;
         REFCOUNT;
-        prelude_string_t *analyzerid;
+        libidmef_string_t *analyzerid;
 
-        prelude_string_t *name;
-        prelude_string_t *manufacturer;
-        prelude_string_t *model;
-        prelude_string_t *version;
-        prelude_string_t *class;
-        prelude_string_t *ostype;
-        prelude_string_t *osversion;
+        libidmef_string_t *name;
+        libidmef_string_t *manufacturer;
+        libidmef_string_t *model;
+        libidmef_string_t *version;
+        libidmef_string_t *class;
+        libidmef_string_t *ostype;
+        libidmef_string_t *osversion;
 
         idmef_node_t *node;
         idmef_process_t *process;
@@ -629,8 +629,8 @@ struct {
         IDMEF_LINKED_OBJECT;
         REFCOUNT;
 
-        REQUIRED(prelude_string_t, *alertident);
-        prelude_string_t *analyzerid;
+        REQUIRED(libidmef_string_t, *alertident);
+        libidmef_string_t *analyzerid;
 
 } TYPE_ID(idmef_alertident_t, 32);
 
@@ -673,7 +673,7 @@ struct {
         OPTIONAL_INT(idmef_impact_severity_t, severity);
         OPTIONAL_INT(idmef_impact_completion_t, completion);
         idmef_impact_type_t type;
-        prelude_string_t *description;
+        libidmef_string_t *description;
 } TYPE_ID(idmef_impact_t, 36);
 
 
@@ -694,7 +694,7 @@ struct {
         REFCOUNT;
 
         idmef_action_category_t category;
-        prelude_string_t *description;
+        libidmef_string_t *description;
 } TYPE_ID(idmef_action_t, 38);
 
 
@@ -741,8 +741,8 @@ struct {
         IDMEF_OBJECT;
         REFCOUNT;
 
-        REQUIRED(prelude_string_t, *name);
-        prelude_string_t *command;
+        REQUIRED(libidmef_string_t, *name);
+        libidmef_string_t *command;
         LISTED_OBJECT(alertident_list, idmef_alertident_t);
 } TYPE_ID(idmef_tool_alert_t, 42);
 
@@ -757,7 +757,7 @@ struct {
         IDMEF_OBJECT;
         REFCOUNT;
 
-        REQUIRED(prelude_string_t, *name);
+        REQUIRED(libidmef_string_t, *name);
         LISTED_OBJECT(alertident_list, idmef_alertident_t);
 } TYPE_ID(idmef_correlation_alert_t, 43);
 
@@ -771,7 +771,7 @@ struct {
         IDMEF_OBJECT;
         REFCOUNT;
 
-        REQUIRED(prelude_string_t, *program);
+        REQUIRED(libidmef_string_t, *program);
         OPTIONAL_INT(uint32_t, size);
         idmef_data_t *buffer;
 } TYPE_ID(idmef_overflow_alert_t, 44);
@@ -795,7 +795,7 @@ ENUM(idmef) {
 struct {
         IDMEF_OBJECT;
         REFCOUNT;
-        prelude_string_t *messageid;
+        libidmef_string_t *messageid;
 
         LISTED_OBJECT(analyzer_list, idmef_analyzer_t);
 
@@ -830,7 +830,7 @@ struct {
         IDMEF_OBJECT;
         REFCOUNT;
 
-        prelude_string_t *messageid;
+        libidmef_string_t *messageid;
         LISTED_OBJECT(analyzer_list, idmef_analyzer_t);
 
         REQUIRED(idmef_time_t, *create_time);
@@ -857,7 +857,7 @@ struct {
         IDMEF_OBJECT;
         REFCOUNT;
 
-        REQUIRED(prelude_string_t, *version);
+        REQUIRED(libidmef_string_t, *version);
 
         UNION(idmef_message_type_t, type) {
                 UNION_MEMBER(IDMEF_MESSAGE_TYPE_ALERT, idmef_alert_t, *alert);
@@ -866,4 +866,4 @@ struct {
 
 } TYPE_ID(idmef_message_t, 49);
 
-#endif /* _LIBPRELUDE_IDMEF_TREE_H */
+#endif /* _LIBIDMEF_IDMEF_TREE_H */

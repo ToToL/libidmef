@@ -1,0 +1,101 @@
+<!-- ##### SECTION Title ##### -->
+libidmef-async
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### SECTION Image ##### -->
+
+
+<!-- ##### ENUM libidmef_async_flags_t ##### -->
+<para>
+
+</para>
+
+@LIBIDMEF_ASYNC_FLAGS_TIMER: 
+
+<!-- ##### USER_FUNCTION libidmef_async_callback_t ##### -->
+<para>
+
+</para>
+
+@object: 
+@data: 
+
+
+<!-- ##### MACRO LIBIDMEF_ASYNC_OBJECT ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### STRUCT libidmef_async_object_t ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION libidmef_async_init ##### -->
+<para>
+
+</para>
+
+@void: 
+@Returns: 
+
+
+<!-- ##### FUNCTION libidmef_async_get_flags ##### -->
+<para>
+
+</para>
+
+@void: 
+@Returns: 
+
+
+<!-- ##### FUNCTION libidmef_async_set_flags ##### -->
+<para>
+
+</para>
+
+@flags: 
+
+
+<!-- ##### FUNCTION libidmef_async_add ##### -->
+<para>
+
+</para>
+
+@obj: 
+
+
+<!-- ##### FUNCTION libidmef_async_del ##### -->
+<para>
+
+</para>
+
+@obj: 
+
+
+<!-- ##### FUNCTION libidmef_async_exit ##### -->
+<para>
+
+</para>
+
+@void: 
+
+

@@ -2,7 +2,7 @@
 
 #include <stdlib.h>
 #include <assert.h>
-#include "prelude.h"
+#include "libidmef.h"
 
 #define TEST_STR "abcdefghijklmnopqrstuvwxyz"
 #define MAX_LAG_SEC 3

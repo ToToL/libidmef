@@ -19,19 +19,19 @@ include_HEADERS = common.h			\
 		  idmef-tree-wrap.h		\
 		  idmef-value.h			\
 		  idmef-value-type.h		\
-		  prelude-extract.h		\
-		  prelude-hash.h		\
-		  prelude-linked-object.h	\
-		  prelude-list.h		\
-		  prelude-log.h			\
-		  prelude-failover.h		\
-		  prelude-ident.h		\
-		  prelude-io.h			\
-		  prelude-macros.h		\
-		  prelude-message-id.h		\
-		  prelude-string.h
+		  libidmef-extract.h		\
+		  libidmef-hash.h		\
+		  libidmef-linked-object.h	\
+		  libidmef-list.h		\
+		  libidmef-log.h			\
+		  libidmef-failover.h		\
+		  libidmef-ident.h		\
+		  libidmef-io.h			\
+		  libidmef-macros.h		\
+		  libidmef-message-id.h		\
+		  libidmef-string.h
 
-nodist_include_HEADERS = prelude-inttypes.h
+nodist_include_HEADERS = libidmef-inttypes.h
 
 noinst_HEADERS = idmef-object-prv.h libmissing.h idmef-tree-data.h variable.h ntp.h
 

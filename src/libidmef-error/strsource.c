@@ -21,14 +21,14 @@
 
 #include "config.h"
 
-#include "prelude-error.h"
+#include "libidmef-error.h"
 #include "gettext.h"
 #include "err-sources.h"
 
 /* Return a pointer to a string containing a description of the error
    source in the error value ERR.  */
-const char *prelude_strsource(prelude_error_t err)
+const char *libidmef_strsource(libidmef_error_t err)
 {
-        prelude_error_source_t source = prelude_error_get_source(err);
+        libidmef_error_source_t source = libidmef_error_get_source(err);
         return dgettext(PACKAGE, msgstr + msgidx[msgidxof((int) source)]);
 }

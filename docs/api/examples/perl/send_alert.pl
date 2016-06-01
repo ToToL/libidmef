@@ -1,7 +1,7 @@
 #!/usr/bin/perl -w
 
 use strict;
-use Prelude;
+use LibIdmef;
 
 my $sensor;
 my $alert;

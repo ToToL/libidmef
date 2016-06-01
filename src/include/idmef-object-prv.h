@@ -3,7 +3,7 @@
 * Copyright (C) 2014-2016 CS-SI. All Rights Reserved.
 * Author: Yoann Vandoorselaere <yoannv@gmail.com>
 *
-* This file is part of the Prelude library.
+* This file is part of the LibIdmef library.
 *
 * This program is free software; you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -21,11 +21,11 @@
 *
 *****/
 
-#ifndef _LIBPRELUDE_IDMEF_OBJECT_PRV_H
-#define _LIBPRELUDE_IDMEF_OBJECT_PRV_H
+#ifndef _LIBIDMEF_IDMEF_OBJECT_PRV_H
+#define _LIBIDMEF_IDMEF_OBJECT_PRV_H
 
 #define IDMEF_OBJECT unsigned int _idmef_object_id
-#define IDMEF_LINKED_OBJECT IDMEF_OBJECT; prelude_list_t _list
+#define IDMEF_LINKED_OBJECT IDMEF_OBJECT; libidmef_list_t _list
 
 struct idmef_object {
         IDMEF_OBJECT;
@@ -33,10 +33,10 @@ struct idmef_object {
 
 struct idmef_linked_object {
         IDMEF_OBJECT;
-        prelude_list_t _list;
+        libidmef_list_t _list;
 };
 
 #define idmef_linked_object_get_object(object) \
-        (void *) prelude_list_entry(object, struct idmef_linked_object, _list)
+        (void *) libidmef_list_entry(object, struct idmef_linked_object, _list)
 
-#endif /* _LIBPRELUDE_IDMEF_OBJECT_PRV_H */
+#endif /* _LIBIDMEF_IDMEF_OBJECT_PRV_H */

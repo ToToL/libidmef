@@ -1,11 +1,11 @@
 #!/usr/bin/env lua
 
-require("prelude")
+require("libidmef")
 
 function my_cb(level, log)
 	io.write("log: " .. log)
 end
-prelude.PreludeLog_setCallback(my_cb)
+libidmef.LibIdmefLog_setCallback(my_cb)
 
 
 function tprint (tbl, indent)
@@ -26,7 +26,7 @@ function tprint (tbl, indent)
 end
 
 
-idmef = prelude.IDMEF()
+idmef = libidmef.IDMEF()
 
 print("*** IDMEF->Set() ***")
 idmef:set("alert.classification.text", "My Message")
@@ -57,7 +57,7 @@ fd:close()
 
 print("\n*** IDMEF->Read() ***")
 fd2 = io.open("foo.bin","r")
-idmef2 = prelude.IDMEF()
+idmef2 = libidmef.IDMEF()
 while idmef2:read(fd2) do
 	print(idmef2)
 end
@@ -65,7 +65,7 @@ fd2:close()
 
 
 print("\n*** Client ***")
-c = prelude.ClientEasy("prelude-lml")
+c = libidmef.ClientEasy("libidmef-lml")
 c:start()
 
 c:sendIDMEF(idmef)

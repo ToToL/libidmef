@@ -2,10 +2,10 @@
 /*****
 *
 * Copyright (C) 2004-2016 CS-SI. All Rights Reserved.
-* Author: Yoann Vandoorselaere <yoann.v@prelude-ids.com>
-* Author: Nicolas Delon <nicolas.delon@prelude-ids.com>
+* Author: Yoann Vandoorselaere <yoann.v@libidmef-ids.com>
+* Author: Nicolas Delon <nicolas.delon@libidmef-ids.com>
 *
-* This file is part of the Prelude library.
+* This file is part of the LibIdmef library.
 *
 * This program is free software; you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -44,33 +44,33 @@
 #define conv_int32 conv_int64
 
 
-static int conv_uint64(prelude_io_t *fd, uint64_t value)
+static int conv_uint64(libidmef_io_t *fd, uint64_t value)
 {
         int ret;
         char buf[32];
 
-        ret = snprintf(buf, sizeof(buf), "%" PRELUDE_PRIu64, value);
+        ret = snprintf(buf, sizeof(buf), "%" LIBIDMEF_PRIu64, value);
         if ( ret < 0 || ret >= sizeof(buf) )
                 return -1;
 
-        return prelude_io_write(fd, buf, ret);
+        return libidmef_io_write(fd, buf, ret);
 }
 
 
-static int conv_int64(prelude_io_t *fd, int64_t value)
+static int conv_int64(libidmef_io_t *fd, int64_t value)
 {
         int ret;
         char buf[32];
 
-        ret = snprintf(buf, sizeof(buf), "%" PRELUDE_PRId64, value);
+        ret = snprintf(buf, sizeof(buf), "%" LIBIDMEF_PRId64, value);
         if ( ret < 0 || ret >= sizeof(buf) )
                 return -1;
 
-        return prelude_io_write(fd, buf, ret);
+        return libidmef_io_write(fd, buf, ret);
 }
 
 
-static int conv_float(prelude_io_t *fd, float value)
+static int conv_float(libidmef_io_t *fd, float value)
 {
         int ret;
         char buf[32];
@@ -79,54 +79,54 @@ static int conv_float(prelude_io_t *fd, float value)
         if ( ret < 0 || ret >= sizeof(buf) )
                 return -1;
 
-        return prelude_io_write(fd, buf, ret);
+        return libidmef_io_write(fd, buf, ret);
 }
 
 
-static int conv_string(prelude_io_t *fd, prelude_string_t *string)
+static int conv_string(libidmef_io_t *fd, libidmef_string_t *string)
 {
         size_t i;
         ssize_t ret;
         const unsigned char *content;
 
-        content = (const unsigned char *) prelude_string_get_string_or_default(string, "");
-        ret = prelude_io_write(fd, "\"", 1);
+        content = (const unsigned char *) libidmef_string_get_string_or_default(string, "");
+        ret = libidmef_io_write(fd, "\"", 1);
         if ( ret < 0 )
                 return ret;
 
-        for ( i = 0; i < prelude_string_get_len(string); i++, content++ ) {
+        for ( i = 0; i < libidmef_string_get_len(string); i++, content++ ) {
                 switch(*content) {
                         case '\\':
                         case '"':
                         case '/':
-                                ret = prelude_io_write(fd, "\\", 1);
+                                ret = libidmef_io_write(fd, "\\", 1);
                                 if ( ret < 0 )
                                         return ret;
 
-                                ret = prelude_io_write(fd, content, 1);
+                                ret = libidmef_io_write(fd, content, 1);
                                 break;
                         case '\b':
-                                ret = prelude_io_write(fd, "\\b", 2);
+                                ret = libidmef_io_write(fd, "\\b", 2);
                                 break;
                         case '\t':
-                                ret = prelude_io_write(fd, "\\t", 2);
+                                ret = libidmef_io_write(fd, "\\t", 2);
                                 break;
                         case '\n':
-                                ret = prelude_io_write(fd, "\\n", 2);
+                                ret = libidmef_io_write(fd, "\\n", 2);
                                 break;
                         case '\f':
-                                ret = prelude_io_write(fd, "\\f", 2);
+                                ret = libidmef_io_write(fd, "\\f", 2);
                                 break;
                         case '\r':
-                                ret = prelude_io_write(fd, "\\r", 2);
+                                ret = libidmef_io_write(fd, "\\r", 2);
                                 break;
                         default:
                                 if ( *content >= 0x20 )
-                                        ret = prelude_io_write(fd, content, 1);
+                                        ret = libidmef_io_write(fd, content, 1);
                                 else {
                                         char seq[7];
                                         snprintf(seq, sizeof(seq), "\\u%04X", *content);
-                                        ret = prelude_io_write(fd, seq, strlen(seq));
+                                        ret = libidmef_io_write(fd, seq, strlen(seq));
                                 }
                 }
 
@@ -134,19 +134,19 @@ static int conv_string(prelude_io_t *fd, prelude_string_t *string)
                         return ret;
         }
 
-        return prelude_io_write(fd, "\"", 1);
+        return libidmef_io_write(fd, "\"", 1);
 }
 
 
-static int conv_time(prelude_io_t *fd, idmef_time_t *t)
+static int conv_time(libidmef_io_t *fd, idmef_time_t *t)
 {
         int ret;
-        prelude_string_t *str;
+        libidmef_string_t *str;
 
         if ( ! t )
                 return 0;
 
-        ret = prelude_string_new(&str);
+        ret = libidmef_string_new(&str);
         if ( ret < 0 )
                 return ret;
 
@@ -157,17 +157,17 @@ static int conv_time(prelude_io_t *fd, idmef_time_t *t)
         ret = conv_string(fd, str);
 
 error:
-        prelude_string_destroy(str);
+        libidmef_string_destroy(str);
         return ret;
 }
 
 
-static int conv_data(prelude_io_t *fd, idmef_data_t *data)
+static int conv_data(libidmef_io_t *fd, idmef_data_t *data)
 {
         int ret;
-        prelude_string_t *out;
+        libidmef_string_t *out;
 
-        ret = prelude_string_new(&out);
+        ret = libidmef_string_new(&out);
         if ( ret < 0 )
                 return ret;
 
@@ -178,21 +178,21 @@ static int conv_data(prelude_io_t *fd, idmef_data_t *data)
         switch (idmef_data_get_type(data)) {
                 case IDMEF_DATA_TYPE_INT:
                 case IDMEF_DATA_TYPE_FLOAT:
-                        ret = prelude_io_write(fd, prelude_string_get_string(out), prelude_string_get_len(out));
+                        ret = libidmef_io_write(fd, libidmef_string_get_string(out), libidmef_string_get_len(out));
                         break;
                 default:
                         ret = conv_string(fd, out);
                         break;
         }
 error:
-        prelude_string_destroy(out);
+        libidmef_string_destroy(out);
         return ret;
 }
 
 
-static int do_write(prelude_io_t *fd, const char *str)
+static int do_write(libidmef_io_t *fd, const char *str)
 {
-        return prelude_io_write(fd, str, strlen(str));
+        return libidmef_io_write(fd, str, strlen(str));
 }
 
 
@@ -202,7 +202,7 @@ static int do_write(prelude_io_t *fd, const char *str)
  *
  * This function will convert @ptr to a json,
  */
-int idmef_additional_data_print_json(idmef_additional_data_t *ptr, prelude_io_t *fd)
+int idmef_additional_data_print_json(idmef_additional_data_t *ptr, libidmef_io_t *fd)
 {
         int ret;
 
@@ -215,7 +215,7 @@ int idmef_additional_data_print_json(idmef_additional_data_t *ptr, prelude_io_t 
 
 
         {
-                prelude_string_t *field;
+                libidmef_string_t *field;
 
                 field = idmef_additional_data_get_meaning(ptr);
                 if ( field ) {
@@ -275,7 +275,7 @@ int idmef_additional_data_print_json(idmef_additional_data_t *ptr, prelude_io_t 
  *
  * This function will convert @ptr to a json,
  */
-int idmef_reference_print_json(idmef_reference_t *ptr, prelude_io_t *fd)
+int idmef_reference_print_json(idmef_reference_t *ptr, libidmef_io_t *fd)
 {
         int ret;
 
@@ -310,7 +310,7 @@ int idmef_reference_print_json(idmef_reference_t *ptr, prelude_io_t *fd)
         }
 
         {
-                prelude_string_t *field;
+                libidmef_string_t *field;
 
                 field = idmef_reference_get_name(ptr);
                 if ( field ) {
@@ -325,7 +325,7 @@ int idmef_reference_print_json(idmef_reference_t *ptr, prelude_io_t *fd)
         }
 
         {
-                prelude_string_t *field;
+                libidmef_string_t *field;
 
                 field = idmef_reference_get_url(ptr);
                 if ( field ) {
@@ -340,7 +340,7 @@ int idmef_reference_print_json(idmef_reference_t *ptr, prelude_io_t *fd)
         }
 
         {
-                prelude_string_t *field;
+                libidmef_string_t *field;
 
                 field = idmef_reference_get_meaning(ptr);
                 if ( field ) {
@@ -363,7 +363,7 @@ int idmef_reference_print_json(idmef_reference_t *ptr, prelude_io_t *fd)
  *
  * This function will convert @ptr to a json,
  */
-int idmef_classification_print_json(idmef_classification_t *ptr, prelude_io_t *fd)
+int idmef_classification_print_json(idmef_classification_t *ptr, libidmef_io_t *fd)
 {
         int ret;
 
@@ -376,7 +376,7 @@ int idmef_classification_print_json(idmef_classification_t *ptr, prelude_io_t *f
 
 
         {
-                prelude_string_t *field;
+                libidmef_string_t *field;
 
                 field = idmef_classification_get_ident(ptr);
                 if ( field ) {
@@ -391,7 +391,7 @@ int idmef_classification_print_json(idmef_classification_t *ptr, prelude_io_t *f
         }
 
         {
-                prelude_string_t *field;
+                libidmef_string_t *field;
 
                 field = idmef_classification_get_text(ptr);
                 if ( field ) {
@@ -444,7 +444,7 @@ int idmef_classification_print_json(idmef_classification_t *ptr, prelude_io_t *f
  *
  * This function will convert @ptr to a json,
  */
-int idmef_user_id_print_json(idmef_user_id_t *ptr, prelude_io_t *fd)
+int idmef_user_id_print_json(idmef_user_id_t *ptr, libidmef_io_t *fd)
 {
         int ret;
 
@@ -457,7 +457,7 @@ int idmef_user_id_print_json(idmef_user_id_t *ptr, prelude_io_t *fd)
 
 
         {
-                prelude_string_t *field;
+                libidmef_string_t *field;
 
                 field = idmef_user_id_get_ident(ptr);
                 if ( field ) {
@@ -494,7 +494,7 @@ int idmef_user_id_print_json(idmef_user_id_t *ptr, prelude_io_t *fd)
         }
 
         {
-                prelude_string_t *field;
+                libidmef_string_t *field;
 
                 field = idmef_user_id_get_tty(ptr);
                 if ( field ) {
@@ -509,7 +509,7 @@ int idmef_user_id_print_json(idmef_user_id_t *ptr, prelude_io_t *fd)
         }
 
         {
-                prelude_string_t *field;
+                libidmef_string_t *field;
 
                 field = idmef_user_id_get_name(ptr);
                 if ( field ) {
@@ -547,7 +547,7 @@ int idmef_user_id_print_json(idmef_user_id_t *ptr, prelude_io_t *fd)
  *
  * This function will convert @ptr to a json,
  */
-int idmef_user_print_json(idmef_user_t *ptr, prelude_io_t *fd)
+int idmef_user_print_json(idmef_user_t *ptr, libidmef_io_t *fd)
 {
         int ret;
 
@@ -560,7 +560,7 @@ int idmef_user_print_json(idmef_user_t *ptr, prelude_io_t *fd)
 
 
         {
-                prelude_string_t *field;
+                libidmef_string_t *field;
 
                 field = idmef_user_get_ident(ptr);
                 if ( field ) {
@@ -635,7 +635,7 @@ int idmef_user_print_json(idmef_user_t *ptr, prelude_io_t *fd)
  *
  * This function will convert @ptr to a json,
  */
-int idmef_address_print_json(idmef_address_t *ptr, prelude_io_t *fd)
+int idmef_address_print_json(idmef_address_t *ptr, libidmef_io_t *fd)
 {
         int ret;
 
@@ -648,7 +648,7 @@ int idmef_address_print_json(idmef_address_t *ptr, prelude_io_t *fd)
 
 
         {
-                prelude_string_t *field;
+                libidmef_string_t *field;
 
                 field = idmef_address_get_ident(ptr);
                 if ( field ) {
@@ -685,7 +685,7 @@ int idmef_address_print_json(idmef_address_t *ptr, prelude_io_t *fd)
         }
 
         {
-                prelude_string_t *field;
+                libidmef_string_t *field;
 
                 field = idmef_address_get_vlan_name(ptr);
                 if ( field ) {
@@ -715,7 +715,7 @@ int idmef_address_print_json(idmef_address_t *ptr, prelude_io_t *fd)
         }
 
         {
-                prelude_string_t *field;
+                libidmef_string_t *field;
 
                 field = idmef_address_get_address(ptr);
                 if ( field ) {
@@ -730,7 +730,7 @@ int idmef_address_print_json(idmef_address_t *ptr, prelude_io_t *fd)
         }
 
         {
-                prelude_string_t *field;
+                libidmef_string_t *field;
 
                 field = idmef_address_get_netmask(ptr);
                 if ( field ) {
@@ -753,7 +753,7 @@ int idmef_address_print_json(idmef_address_t *ptr, prelude_io_t *fd)
  *
  * This function will convert @ptr to a json,
  */
-int idmef_process_print_json(idmef_process_t *ptr, prelude_io_t *fd)
+int idmef_process_print_json(idmef_process_t *ptr, libidmef_io_t *fd)
 {
         int ret;
 
@@ -766,7 +766,7 @@ int idmef_process_print_json(idmef_process_t *ptr, prelude_io_t *fd)
 
 
         {
-                prelude_string_t *field;
+                libidmef_string_t *field;
 
                 field = idmef_process_get_ident(ptr);
                 if ( field ) {
@@ -781,7 +781,7 @@ int idmef_process_print_json(idmef_process_t *ptr, prelude_io_t *fd)
         }
 
         {
-                prelude_string_t *field;
+                libidmef_string_t *field;
 
                 field = idmef_process_get_name(ptr);
                 if ( field ) {
@@ -811,7 +811,7 @@ int idmef_process_print_json(idmef_process_t *ptr, prelude_io_t *fd)
         }
 
         {
-                prelude_string_t *field;
+                libidmef_string_t *field;
 
                 field = idmef_process_get_path(ptr);
                 if ( field ) {
@@ -827,7 +827,7 @@ int idmef_process_print_json(idmef_process_t *ptr, prelude_io_t *fd)
 
         {
 
-                prelude_string_t *elem = NULL;
+                libidmef_string_t *elem = NULL;
                 int first = 1;
 
                 while ( (elem = idmef_process_get_next_arg(ptr, elem)) ) {
@@ -857,7 +857,7 @@ int idmef_process_print_json(idmef_process_t *ptr, prelude_io_t *fd)
 
         {
 
-                prelude_string_t *elem = NULL;
+                libidmef_string_t *elem = NULL;
                 int first = 1;
 
                 while ( (elem = idmef_process_get_next_env(ptr, elem)) ) {
@@ -894,7 +894,7 @@ int idmef_process_print_json(idmef_process_t *ptr, prelude_io_t *fd)
  *
  * This function will convert @ptr to a json,
  */
-int idmef_web_service_print_json(idmef_web_service_t *ptr, prelude_io_t *fd)
+int idmef_web_service_print_json(idmef_web_service_t *ptr, libidmef_io_t *fd)
 {
         int ret;
 
@@ -907,7 +907,7 @@ int idmef_web_service_print_json(idmef_web_service_t *ptr, prelude_io_t *fd)
 
 
         {
-                prelude_string_t *field;
+                libidmef_string_t *field;
 
                 field = idmef_web_service_get_url(ptr);
                 if ( field ) {
@@ -922,7 +922,7 @@ int idmef_web_service_print_json(idmef_web_service_t *ptr, prelude_io_t *fd)
         }
 
         {
-                prelude_string_t *field;
+                libidmef_string_t *field;
 
                 field = idmef_web_service_get_cgi(ptr);
                 if ( field ) {
@@ -937,7 +937,7 @@ int idmef_web_service_print_json(idmef_web_service_t *ptr, prelude_io_t *fd)
         }
 
         {
-                prelude_string_t *field;
+                libidmef_string_t *field;
 
                 field = idmef_web_service_get_http_method(ptr);
                 if ( field ) {
@@ -953,7 +953,7 @@ int idmef_web_service_print_json(idmef_web_service_t *ptr, prelude_io_t *fd)
 
         {
 
-                prelude_string_t *elem = NULL;
+                libidmef_string_t *elem = NULL;
                 int first = 1;
 
                 while ( (elem = idmef_web_service_get_next_arg(ptr, elem)) ) {
@@ -990,7 +990,7 @@ int idmef_web_service_print_json(idmef_web_service_t *ptr, prelude_io_t *fd)
  *
  * This function will convert @ptr to a json,
  */
-int idmef_snmp_service_print_json(idmef_snmp_service_t *ptr, prelude_io_t *fd)
+int idmef_snmp_service_print_json(idmef_snmp_service_t *ptr, libidmef_io_t *fd)
 {
         int ret;
 
@@ -1003,7 +1003,7 @@ int idmef_snmp_service_print_json(idmef_snmp_service_t *ptr, prelude_io_t *fd)
 
 
         {
-                prelude_string_t *field;
+                libidmef_string_t *field;
 
                 field = idmef_snmp_service_get_oid(ptr);
                 if ( field ) {
@@ -1048,7 +1048,7 @@ int idmef_snmp_service_print_json(idmef_snmp_service_t *ptr, prelude_io_t *fd)
         }
 
         {
-                prelude_string_t *field;
+                libidmef_string_t *field;
 
                 field = idmef_snmp_service_get_security_name(ptr);
                 if ( field ) {
@@ -1078,7 +1078,7 @@ int idmef_snmp_service_print_json(idmef_snmp_service_t *ptr, prelude_io_t *fd)
         }
 
         {
-                prelude_string_t *field;
+                libidmef_string_t *field;
 
                 field = idmef_snmp_service_get_context_name(ptr);
                 if ( field ) {
@@ -1093,7 +1093,7 @@ int idmef_snmp_service_print_json(idmef_snmp_service_t *ptr, prelude_io_t *fd)
         }
 
         {
-                prelude_string_t *field;
+                libidmef_string_t *field;
 
                 field = idmef_snmp_service_get_context_engine_id(ptr);
                 if ( field ) {
@@ -1108,7 +1108,7 @@ int idmef_snmp_service_print_json(idmef_snmp_service_t *ptr, prelude_io_t *fd)
         }
 
         {
-                prelude_string_t *field;
+                libidmef_string_t *field;
 
                 field = idmef_snmp_service_get_command(ptr);
                 if ( field ) {
@@ -1131,7 +1131,7 @@ int idmef_snmp_service_print_json(idmef_snmp_service_t *ptr, prelude_io_t *fd)
  *
  * This function will convert @ptr to a json,
  */
-int idmef_service_print_json(idmef_service_t *ptr, prelude_io_t *fd)
+int idmef_service_print_json(idmef_service_t *ptr, libidmef_io_t *fd)
 {
         int ret;
 
@@ -1144,7 +1144,7 @@ int idmef_service_print_json(idmef_service_t *ptr, prelude_io_t *fd)
 
 
         {
-                prelude_string_t *field;
+                libidmef_string_t *field;
 
                 field = idmef_service_get_ident(ptr);
                 if ( field ) {
@@ -1189,7 +1189,7 @@ int idmef_service_print_json(idmef_service_t *ptr, prelude_io_t *fd)
         }
 
         {
-                prelude_string_t *field;
+                libidmef_string_t *field;
 
                 field = idmef_service_get_iana_protocol_name(ptr);
                 if ( field ) {
@@ -1204,7 +1204,7 @@ int idmef_service_print_json(idmef_service_t *ptr, prelude_io_t *fd)
         }
 
         {
-                prelude_string_t *field;
+                libidmef_string_t *field;
 
                 field = idmef_service_get_name(ptr);
                 if ( field ) {
@@ -1234,7 +1234,7 @@ int idmef_service_print_json(idmef_service_t *ptr, prelude_io_t *fd)
         }
 
         {
-                prelude_string_t *field;
+                libidmef_string_t *field;
 
                 field = idmef_service_get_portlist(ptr);
                 if ( field ) {
@@ -1249,7 +1249,7 @@ int idmef_service_print_json(idmef_service_t *ptr, prelude_io_t *fd)
         }
 
         {
-                prelude_string_t *field;
+                libidmef_string_t *field;
 
                 field = idmef_service_get_protocol(ptr);
                 if ( field ) {
@@ -1297,7 +1297,7 @@ int idmef_service_print_json(idmef_service_t *ptr, prelude_io_t *fd)
  *
  * This function will convert @ptr to a json,
  */
-int idmef_node_print_json(idmef_node_t *ptr, prelude_io_t *fd)
+int idmef_node_print_json(idmef_node_t *ptr, libidmef_io_t *fd)
 {
         int ret;
 
@@ -1310,7 +1310,7 @@ int idmef_node_print_json(idmef_node_t *ptr, prelude_io_t *fd)
 
 
         {
-                prelude_string_t *field;
+                libidmef_string_t *field;
 
                 field = idmef_node_get_ident(ptr);
                 if ( field ) {
@@ -1347,7 +1347,7 @@ int idmef_node_print_json(idmef_node_t *ptr, prelude_io_t *fd)
         }
 
         {
-                prelude_string_t *field;
+                libidmef_string_t *field;
 
                 field = idmef_node_get_location(ptr);
                 if ( field ) {
@@ -1362,7 +1362,7 @@ int idmef_node_print_json(idmef_node_t *ptr, prelude_io_t *fd)
         }
 
         {
-                prelude_string_t *field;
+                libidmef_string_t *field;
 
                 field = idmef_node_get_name(ptr);
                 if ( field ) {
@@ -1415,7 +1415,7 @@ int idmef_node_print_json(idmef_node_t *ptr, prelude_io_t *fd)
  *
  * This function will convert @ptr to a json,
  */
-int idmef_source_print_json(idmef_source_t *ptr, prelude_io_t *fd)
+int idmef_source_print_json(idmef_source_t *ptr, libidmef_io_t *fd)
 {
         int ret;
 
@@ -1428,7 +1428,7 @@ int idmef_source_print_json(idmef_source_t *ptr, prelude_io_t *fd)
 
 
         {
-                prelude_string_t *field;
+                libidmef_string_t *field;
 
                 field = idmef_source_get_ident(ptr);
                 if ( field ) {
@@ -1465,7 +1465,7 @@ int idmef_source_print_json(idmef_source_t *ptr, prelude_io_t *fd)
         }
 
         {
-                prelude_string_t *field;
+                libidmef_string_t *field;
 
                 field = idmef_source_get_interface(ptr);
                 if ( field ) {
@@ -1548,7 +1548,7 @@ int idmef_source_print_json(idmef_source_t *ptr, prelude_io_t *fd)
  *
  * This function will convert @ptr to a json,
  */
-int idmef_file_access_print_json(idmef_file_access_t *ptr, prelude_io_t *fd)
+int idmef_file_access_print_json(idmef_file_access_t *ptr, libidmef_io_t *fd)
 {
         int ret;
 
@@ -1577,7 +1577,7 @@ int idmef_file_access_print_json(idmef_file_access_t *ptr, prelude_io_t *fd)
 
         {
 
-                prelude_string_t *elem = NULL;
+                libidmef_string_t *elem = NULL;
                 int first = 1;
 
                 while ( (elem = idmef_file_access_get_next_permission(ptr, elem)) ) {
@@ -1614,7 +1614,7 @@ int idmef_file_access_print_json(idmef_file_access_t *ptr, prelude_io_t *fd)
  *
  * This function will convert @ptr to a json,
  */
-int idmef_inode_print_json(idmef_inode_t *ptr, prelude_io_t *fd)
+int idmef_inode_print_json(idmef_inode_t *ptr, libidmef_io_t *fd)
 {
         int ret;
 
@@ -1725,7 +1725,7 @@ int idmef_inode_print_json(idmef_inode_t *ptr, prelude_io_t *fd)
  *
  * This function will convert @ptr to a json,
  */
-int idmef_checksum_print_json(idmef_checksum_t *ptr, prelude_io_t *fd)
+int idmef_checksum_print_json(idmef_checksum_t *ptr, libidmef_io_t *fd)
 {
         int ret;
 
@@ -1738,7 +1738,7 @@ int idmef_checksum_print_json(idmef_checksum_t *ptr, prelude_io_t *fd)
 
 
         {
-                prelude_string_t *field;
+                libidmef_string_t *field;
 
                 field = idmef_checksum_get_value(ptr);
                 if ( field ) {
@@ -1753,7 +1753,7 @@ int idmef_checksum_print_json(idmef_checksum_t *ptr, prelude_io_t *fd)
         }
 
         {
-                prelude_string_t *field;
+                libidmef_string_t *field;
 
                 field = idmef_checksum_get_key(ptr);
                 if ( field ) {
@@ -1798,7 +1798,7 @@ int idmef_checksum_print_json(idmef_checksum_t *ptr, prelude_io_t *fd)
  *
  * This function will convert @ptr to a json,
  */
-int idmef_file_print_json(idmef_file_t *ptr, prelude_io_t *fd)
+int idmef_file_print_json(idmef_file_t *ptr, libidmef_io_t *fd)
 {
         int ret;
 
@@ -1811,7 +1811,7 @@ int idmef_file_print_json(idmef_file_t *ptr, prelude_io_t *fd)
 
 
         {
-                prelude_string_t *field;
+                libidmef_string_t *field;
 
                 field = idmef_file_get_ident(ptr);
                 if ( field ) {
@@ -1826,7 +1826,7 @@ int idmef_file_print_json(idmef_file_t *ptr, prelude_io_t *fd)
         }
 
         {
-                prelude_string_t *field;
+                libidmef_string_t *field;
 
                 field = idmef_file_get_name(ptr);
                 if ( field ) {
@@ -1841,7 +1841,7 @@ int idmef_file_print_json(idmef_file_t *ptr, prelude_io_t *fd)
         }
 
         {
-                prelude_string_t *field;
+                libidmef_string_t *field;
 
                 field = idmef_file_get_path(ptr);
                 if ( field ) {
@@ -2082,7 +2082,7 @@ int idmef_file_print_json(idmef_file_t *ptr, prelude_io_t *fd)
         }
 
         {
-                prelude_string_t *field;
+                libidmef_string_t *field;
 
                 field = idmef_file_get_file_type(ptr);
                 if ( field ) {
@@ -2105,7 +2105,7 @@ int idmef_file_print_json(idmef_file_t *ptr, prelude_io_t *fd)
  *
  * This function will convert @ptr to a json,
  */
-int idmef_linkage_print_json(idmef_linkage_t *ptr, prelude_io_t *fd)
+int idmef_linkage_print_json(idmef_linkage_t *ptr, libidmef_io_t *fd)
 {
         int ret;
 
@@ -2140,7 +2140,7 @@ int idmef_linkage_print_json(idmef_linkage_t *ptr, prelude_io_t *fd)
         }
 
         {
-                prelude_string_t *field;
+                libidmef_string_t *field;
 
                 field = idmef_linkage_get_name(ptr);
                 if ( field ) {
@@ -2155,7 +2155,7 @@ int idmef_linkage_print_json(idmef_linkage_t *ptr, prelude_io_t *fd)
         }
 
         {
-                prelude_string_t *field;
+                libidmef_string_t *field;
 
                 field = idmef_linkage_get_path(ptr);
                 if ( field ) {
@@ -2193,7 +2193,7 @@ int idmef_linkage_print_json(idmef_linkage_t *ptr, prelude_io_t *fd)
  *
  * This function will convert @ptr to a json,
  */
-int idmef_target_print_json(idmef_target_t *ptr, prelude_io_t *fd)
+int idmef_target_print_json(idmef_target_t *ptr, libidmef_io_t *fd)
 {
         int ret;
 
@@ -2206,7 +2206,7 @@ int idmef_target_print_json(idmef_target_t *ptr, prelude_io_t *fd)
 
 
         {
-                prelude_string_t *field;
+                libidmef_string_t *field;
 
                 field = idmef_target_get_ident(ptr);
                 if ( field ) {
@@ -2243,7 +2243,7 @@ int idmef_target_print_json(idmef_target_t *ptr, prelude_io_t *fd)
         }
 
         {
-                prelude_string_t *field;
+                libidmef_string_t *field;
 
                 field = idmef_target_get_interface(ptr);
                 if ( field ) {
@@ -2356,7 +2356,7 @@ int idmef_target_print_json(idmef_target_t *ptr, prelude_io_t *fd)
  *
  * This function will convert @ptr to a json,
  */
-int idmef_analyzer_print_json(idmef_analyzer_t *ptr, prelude_io_t *fd)
+int idmef_analyzer_print_json(idmef_analyzer_t *ptr, libidmef_io_t *fd)
 {
         int ret;
 
@@ -2369,7 +2369,7 @@ int idmef_analyzer_print_json(idmef_analyzer_t *ptr, prelude_io_t *fd)
 
 
         {
-                prelude_string_t *field;
+                libidmef_string_t *field;
 
                 field = idmef_analyzer_get_analyzerid(ptr);
                 if ( field ) {
@@ -2384,7 +2384,7 @@ int idmef_analyzer_print_json(idmef_analyzer_t *ptr, prelude_io_t *fd)
         }
 
         {
-                prelude_string_t *field;
+                libidmef_string_t *field;
 
                 field = idmef_analyzer_get_name(ptr);
                 if ( field ) {
@@ -2399,7 +2399,7 @@ int idmef_analyzer_print_json(idmef_analyzer_t *ptr, prelude_io_t *fd)
         }
 
         {
-                prelude_string_t *field;
+                libidmef_string_t *field;
 
                 field = idmef_analyzer_get_manufacturer(ptr);
                 if ( field ) {
@@ -2414,7 +2414,7 @@ int idmef_analyzer_print_json(idmef_analyzer_t *ptr, prelude_io_t *fd)
         }
 
         {
-                prelude_string_t *field;
+                libidmef_string_t *field;
 
                 field = idmef_analyzer_get_model(ptr);
                 if ( field ) {
@@ -2429,7 +2429,7 @@ int idmef_analyzer_print_json(idmef_analyzer_t *ptr, prelude_io_t *fd)
         }
 
         {
-                prelude_string_t *field;
+                libidmef_string_t *field;
 
                 field = idmef_analyzer_get_version(ptr);
                 if ( field ) {
@@ -2444,7 +2444,7 @@ int idmef_analyzer_print_json(idmef_analyzer_t *ptr, prelude_io_t *fd)
         }
 
         {
-                prelude_string_t *field;
+                libidmef_string_t *field;
 
                 field = idmef_analyzer_get_class(ptr);
                 if ( field ) {
@@ -2459,7 +2459,7 @@ int idmef_analyzer_print_json(idmef_analyzer_t *ptr, prelude_io_t *fd)
         }
 
         {
-                prelude_string_t *field;
+                libidmef_string_t *field;
 
                 field = idmef_analyzer_get_ostype(ptr);
                 if ( field ) {
@@ -2474,7 +2474,7 @@ int idmef_analyzer_print_json(idmef_analyzer_t *ptr, prelude_io_t *fd)
         }
 
         {
-                prelude_string_t *field;
+                libidmef_string_t *field;
 
                 field = idmef_analyzer_get_osversion(ptr);
                 if ( field ) {
@@ -2527,7 +2527,7 @@ int idmef_analyzer_print_json(idmef_analyzer_t *ptr, prelude_io_t *fd)
  *
  * This function will convert @ptr to a json,
  */
-int idmef_alertident_print_json(idmef_alertident_t *ptr, prelude_io_t *fd)
+int idmef_alertident_print_json(idmef_alertident_t *ptr, libidmef_io_t *fd)
 {
         int ret;
 
@@ -2540,7 +2540,7 @@ int idmef_alertident_print_json(idmef_alertident_t *ptr, prelude_io_t *fd)
 
 
         {
-                prelude_string_t *field;
+                libidmef_string_t *field;
 
                 field = idmef_alertident_get_alertident(ptr);
                 if ( field ) {
@@ -2555,7 +2555,7 @@ int idmef_alertident_print_json(idmef_alertident_t *ptr, prelude_io_t *fd)
         }
 
         {
-                prelude_string_t *field;
+                libidmef_string_t *field;
 
                 field = idmef_alertident_get_analyzerid(ptr);
                 if ( field ) {
@@ -2578,7 +2578,7 @@ int idmef_alertident_print_json(idmef_alertident_t *ptr, prelude_io_t *fd)
  *
  * This function will convert @ptr to a json,
  */
-int idmef_impact_print_json(idmef_impact_t *ptr, prelude_io_t *fd)
+int idmef_impact_print_json(idmef_impact_t *ptr, libidmef_io_t *fd)
 {
         int ret;
 
@@ -2661,7 +2661,7 @@ int idmef_impact_print_json(idmef_impact_t *ptr, prelude_io_t *fd)
         }
 
         {
-                prelude_string_t *field;
+                libidmef_string_t *field;
 
                 field = idmef_impact_get_description(ptr);
                 if ( field ) {
@@ -2684,7 +2684,7 @@ int idmef_impact_print_json(idmef_impact_t *ptr, prelude_io_t *fd)
  *
  * This function will convert @ptr to a json,
  */
-int idmef_action_print_json(idmef_action_t *ptr, prelude_io_t *fd)
+int idmef_action_print_json(idmef_action_t *ptr, libidmef_io_t *fd)
 {
         int ret;
 
@@ -2719,7 +2719,7 @@ int idmef_action_print_json(idmef_action_t *ptr, prelude_io_t *fd)
         }
 
         {
-                prelude_string_t *field;
+                libidmef_string_t *field;
 
                 field = idmef_action_get_description(ptr);
                 if ( field ) {
@@ -2742,7 +2742,7 @@ int idmef_action_print_json(idmef_action_t *ptr, prelude_io_t *fd)
  *
  * This function will convert @ptr to a json,
  */
-int idmef_confidence_print_json(idmef_confidence_t *ptr, prelude_io_t *fd)
+int idmef_confidence_print_json(idmef_confidence_t *ptr, libidmef_io_t *fd)
 {
         int ret;
 
@@ -2800,7 +2800,7 @@ int idmef_confidence_print_json(idmef_confidence_t *ptr, prelude_io_t *fd)
  *
  * This function will convert @ptr to a json,
  */
-int idmef_assessment_print_json(idmef_assessment_t *ptr, prelude_io_t *fd)
+int idmef_assessment_print_json(idmef_assessment_t *ptr, libidmef_io_t *fd)
 {
         int ret;
 
@@ -2881,7 +2881,7 @@ int idmef_assessment_print_json(idmef_assessment_t *ptr, prelude_io_t *fd)
  *
  * This function will convert @ptr to a json,
  */
-int idmef_tool_alert_print_json(idmef_tool_alert_t *ptr, prelude_io_t *fd)
+int idmef_tool_alert_print_json(idmef_tool_alert_t *ptr, libidmef_io_t *fd)
 {
         int ret;
 
@@ -2894,7 +2894,7 @@ int idmef_tool_alert_print_json(idmef_tool_alert_t *ptr, prelude_io_t *fd)
 
 
         {
-                prelude_string_t *field;
+                libidmef_string_t *field;
 
                 field = idmef_tool_alert_get_name(ptr);
                 if ( field ) {
@@ -2909,7 +2909,7 @@ int idmef_tool_alert_print_json(idmef_tool_alert_t *ptr, prelude_io_t *fd)
         }
 
         {
-                prelude_string_t *field;
+                libidmef_string_t *field;
 
                 field = idmef_tool_alert_get_command(ptr);
                 if ( field ) {
@@ -2962,7 +2962,7 @@ int idmef_tool_alert_print_json(idmef_tool_alert_t *ptr, prelude_io_t *fd)
  *
  * This function will convert @ptr to a json,
  */
-int idmef_correlation_alert_print_json(idmef_correlation_alert_t *ptr, prelude_io_t *fd)
+int idmef_correlation_alert_print_json(idmef_correlation_alert_t *ptr, libidmef_io_t *fd)
 {
         int ret;
 
@@ -2975,7 +2975,7 @@ int idmef_correlation_alert_print_json(idmef_correlation_alert_t *ptr, prelude_i
 
 
         {
-                prelude_string_t *field;
+                libidmef_string_t *field;
 
                 field = idmef_correlation_alert_get_name(ptr);
                 if ( field ) {
@@ -3028,7 +3028,7 @@ int idmef_correlation_alert_print_json(idmef_correlation_alert_t *ptr, prelude_i
  *
  * This function will convert @ptr to a json,
  */
-int idmef_overflow_alert_print_json(idmef_overflow_alert_t *ptr, prelude_io_t *fd)
+int idmef_overflow_alert_print_json(idmef_overflow_alert_t *ptr, libidmef_io_t *fd)
 {
         int ret;
 
@@ -3041,7 +3041,7 @@ int idmef_overflow_alert_print_json(idmef_overflow_alert_t *ptr, prelude_io_t *f
 
 
         {
-                prelude_string_t *field;
+                libidmef_string_t *field;
 
                 field = idmef_overflow_alert_get_program(ptr);
                 if ( field ) {
@@ -3094,7 +3094,7 @@ int idmef_overflow_alert_print_json(idmef_overflow_alert_t *ptr, prelude_io_t *f
  *
  * This function will convert @ptr to a json,
  */
-int idmef_alert_print_json(idmef_alert_t *ptr, prelude_io_t *fd)
+int idmef_alert_print_json(idmef_alert_t *ptr, libidmef_io_t *fd)
 {
         int ret;
 
@@ -3107,7 +3107,7 @@ int idmef_alert_print_json(idmef_alert_t *ptr, prelude_io_t *fd)
 
 
         {
-                prelude_string_t *field;
+                libidmef_string_t *field;
 
                 field = idmef_alert_get_messageid(ptr);
                 if ( field ) {
@@ -3360,7 +3360,7 @@ int idmef_alert_print_json(idmef_alert_t *ptr, prelude_io_t *fd)
  *
  * This function will convert @ptr to a json,
  */
-int idmef_heartbeat_print_json(idmef_heartbeat_t *ptr, prelude_io_t *fd)
+int idmef_heartbeat_print_json(idmef_heartbeat_t *ptr, libidmef_io_t *fd)
 {
         int ret;
 
@@ -3373,7 +3373,7 @@ int idmef_heartbeat_print_json(idmef_heartbeat_t *ptr, prelude_io_t *fd)
 
 
         {
-                prelude_string_t *field;
+                libidmef_string_t *field;
 
                 field = idmef_heartbeat_get_messageid(ptr);
                 if ( field ) {
@@ -3501,7 +3501,7 @@ int idmef_heartbeat_print_json(idmef_heartbeat_t *ptr, prelude_io_t *fd)
  *
  * This function will convert @ptr to a json,
  */
-int idmef_message_print_json(idmef_message_t *ptr, prelude_io_t *fd)
+int idmef_message_print_json(idmef_message_t *ptr, libidmef_io_t *fd)
 {
         int ret;
 
@@ -3514,7 +3514,7 @@ int idmef_message_print_json(idmef_message_t *ptr, prelude_io_t *fd)
 
 
         {
-                prelude_string_t *field;
+                libidmef_string_t *field;
 
                 field = idmef_message_get_version(ptr);
                 if ( field ) {

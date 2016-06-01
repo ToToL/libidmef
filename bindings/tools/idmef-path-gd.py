@@ -11,10 +11,10 @@ sys.path.append('./.libs')
 import gd
 
 try:
-       import PreludeEasy
+       import LibIdmefEasy
 except:
        print "Import failed"
-       print "Try 'cd ./.libs && ln -s libprelude_python.so _PreludeEasy.so'"
+       print "Try 'cd ./.libs && ln -s libidmef_python.so _LibIdmefEasy.so'"
        sys.exit(1)
 
 #
@@ -44,7 +44,7 @@ blue = im.colorAllocate((0, 0, 255))
 green = im.colorAllocate((0, 255, 0))
 
 
-client = PreludeEasy.Client("PoolingTest")
+client = LibIdmefEasy.Client("PoolingTest")
 client.Init()
 
 client.PoolInit("192.168.33.215", 1)

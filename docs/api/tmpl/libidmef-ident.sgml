@@ -1,0 +1,64 @@
+<!-- ##### SECTION Title ##### -->
+libidmef-ident
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### SECTION Image ##### -->
+
+
+<!-- ##### TYPEDEF libidmef_ident_t ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION libidmef_ident_inc ##### -->
+<para>
+
+</para>
+
+@ident: 
+@Returns: 
+
+
+<!-- ##### FUNCTION libidmef_ident_generate ##### -->
+<para>
+
+</para>
+
+@ident: 
+@out: 
+@Returns: 
+
+
+<!-- ##### FUNCTION libidmef_ident_destroy ##### -->
+<para>
+
+</para>
+
+@ident: 
+
+
+<!-- ##### FUNCTION libidmef_ident_new ##### -->
+<para>
+
+</para>
+
+@ret: 
+@Returns: 
+
+

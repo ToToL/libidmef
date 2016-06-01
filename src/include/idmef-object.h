@@ -3,7 +3,7 @@
 * Copyright (C) 2014-2016 CS-SI. All Rights Reserved.
 * Author: Yoann Vandoorselaere <yoannv@gmail.com>
 *
-* This file is part of the Prelude library.
+* This file is part of the LibIdmef library.
 *
 * This program is free software; you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -21,8 +21,8 @@
 *
 *****/
 
-#ifndef _LIBPRELUDE_IDMEF_OBJECT_H
-#define _LIBPRELUDE_IDMEF_OBJECT_H
+#ifndef _LIBIDMEF_IDMEF_OBJECT_H
+#define _LIBIDMEF_IDMEF_OBJECT_H
 
 #ifdef __cplusplus
   extern "C" {
@@ -32,8 +32,8 @@
 # include "config.h"
 #endif
 
-#include "prelude-io.h"
-#include "prelude-list.h"
+#include "libidmef-io.h"
+#include "libidmef-list.h"
 
 typedef struct idmef_object idmef_object_t;
 
@@ -49,21 +49,21 @@ int idmef_object_clone(idmef_object_t *obj, idmef_object_t **dst);
 
 int idmef_object_copy(idmef_object_t *src, idmef_object_t *dst);
 
-int idmef_object_print(idmef_object_t *obj, prelude_io_t *fd);
+int idmef_object_print(idmef_object_t *obj, libidmef_io_t *fd);
 
-int idmef_object_print_json(idmef_object_t *obj, prelude_io_t *fd);
+int idmef_object_print_json(idmef_object_t *obj, libidmef_io_t *fd);
 
-int idmef_object_print_binary(idmef_object_t *obj, prelude_io_t *fd);
+int idmef_object_print_binary(idmef_object_t *obj, libidmef_io_t *fd);
 
-void idmef_object_add(prelude_list_t *head, idmef_object_t *obj);
+void idmef_object_add(libidmef_list_t *head, idmef_object_t *obj);
 
-void idmef_object_add_tail(prelude_list_t *head, idmef_object_t *obj);
+void idmef_object_add_tail(libidmef_list_t *head, idmef_object_t *obj);
 
 void idmef_object_del(idmef_object_t *object);
 
 void idmef_object_del_init(idmef_object_t *object);
 
-void *idmef_object_get_list_entry(prelude_list_t *listm);
+void *idmef_object_get_list_entry(libidmef_list_t *listm);
 
 int idmef_object_new_from_json(idmef_object_t **object, const char * json_message);
 
@@ -71,4 +71,4 @@ int idmef_object_new_from_json(idmef_object_t **object, const char * json_messag
   }
 #endif
 
-#endif /* _LIBPRELUDE_IDMEF_OBJECT_H */
+#endif /* _LIBIDMEF_IDMEF_OBJECT_H */

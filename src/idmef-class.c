@@ -1,10 +1,10 @@
 /*****
 *
 * Copyright (C) 2002-2016 CS-SI. All Rights Reserved.
-* Author: Yoann Vandoorselaere <yoann.v@prelude-ids.com>
+* Author: Yoann Vandoorselaere <yoann.v@libidmef-ids.com>
 * Author: Krzysztof Zaraska
 *
-* This file is part of the Prelude library.
+* This file is part of the LibIdmef library.
 *
 * This program is free software; you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -31,13 +31,13 @@
 #include <stdarg.h>
 
 #include "libmissing.h"
-#include "prelude-list.h"
-#include "prelude-log.h"
-#include "prelude-inttypes.h"
-#include "prelude-string.h"
+#include "libidmef-list.h"
+#include "libidmef-log.h"
+#include "libidmef-inttypes.h"
+#include "libidmef-string.h"
 
-#define PRELUDE_ERROR_SOURCE_DEFAULT PRELUDE_ERROR_SOURCE_IDMEF_TYPE
-#include "prelude-error.h"
+#define LIBIDMEF_ERROR_SOURCE_DEFAULT LIBIDMEF_ERROR_SOURCE_IDMEF_TYPE
+#include "libidmef-error.h"
 
 #include "idmef-time.h"
 #include "idmef-data.h"
@@ -56,7 +56,7 @@
 static inline int is_class_valid(idmef_class_id_t class)
 {
         if ( class < 0 || (size_t) class >= sizeof(object_data) / sizeof(*object_data) )
-                return prelude_error_verbose(PRELUDE_ERROR_IDMEF_CLASS_UNKNOWN, "Unknown IDMEF class '%d'", (int) class);
+                return libidmef_error_verbose(LIBIDMEF_ERROR_IDMEF_CLASS_UNKNOWN, "Unknown IDMEF class '%d'", (int) class);
 
         return 0;
 }
@@ -71,7 +71,7 @@ static inline int is_child_valid(idmef_class_id_t class, idmef_class_child_id_t 
                 return ret;
 
         if ( child < 0 || (size_t) child >= object_data[class].children_list_elem )
-                return prelude_error_verbose(PRELUDE_ERROR_IDMEF_CLASS_UNKNOWN_CHILD, "Unknown IDMEF child '%d' for class '%s'",
+                return libidmef_error_verbose(LIBIDMEF_ERROR_IDMEF_CLASS_UNKNOWN_CHILD, "Unknown IDMEF child '%d' for class '%s'",
                                              (int) child, object_data[class].name);
 
         return 0;
@@ -98,13 +98,13 @@ idmef_class_child_id_t idmef_class_find_child(idmef_class_id_t class, const char
                                 return i;
         }
 
-        return prelude_error_verbose(PRELUDE_ERROR_IDMEF_CLASS_UNKNOWN_CHILD, "Unknown IDMEF child '%s' for class '%s'", name, idmef_class_get_name(class));
+        return libidmef_error_verbose(LIBIDMEF_ERROR_IDMEF_CLASS_UNKNOWN_CHILD, "Unknown IDMEF child '%s' for class '%s'", name, idmef_class_get_name(class));
 }
 
 
 
 
-prelude_bool_t idmef_class_is_child_union_member(idmef_class_id_t class, idmef_class_child_id_t child)
+libidmef_bool_t idmef_class_is_child_union_member(idmef_class_id_t class, idmef_class_child_id_t child)
 {
         int ret;
 
@@ -117,7 +117,7 @@ prelude_bool_t idmef_class_is_child_union_member(idmef_class_id_t class, idmef_c
 
 
 
-prelude_bool_t idmef_class_is_child_list(idmef_class_id_t class, idmef_class_child_id_t child)
+libidmef_bool_t idmef_class_is_child_list(idmef_class_id_t class, idmef_class_child_id_t child)
 {
         int ret;
 
@@ -130,7 +130,7 @@ prelude_bool_t idmef_class_is_child_list(idmef_class_id_t class, idmef_class_chi
 
 
 
-prelude_bool_t idmef_class_is_child_keyed_list(idmef_class_id_t class, idmef_class_child_id_t child)
+libidmef_bool_t idmef_class_is_child_keyed_list(idmef_class_id_t class, idmef_class_child_id_t child)
 {
         int ret;
 
@@ -180,7 +180,7 @@ int idmef_class_get_child_union_id(idmef_class_id_t class, idmef_class_child_id_
 
         c = &object_data[class].children_list[child];
         if ( ! c->union_id )
-                return prelude_error(PRELUDE_ERROR_IDMEF_CLASS_CHILD_NOT_UNION);
+                return libidmef_error(LIBIDMEF_ERROR_IDMEF_CLASS_CHILD_NOT_UNION);
 
         return c->union_id;
 }
@@ -198,7 +198,7 @@ idmef_class_id_t idmef_class_get_child_class(idmef_class_id_t class, idmef_class
 
         c = &object_data[class].children_list[child];
         if ( c->type != IDMEF_VALUE_TYPE_CLASS && c->type != IDMEF_VALUE_TYPE_ENUM )
-                return prelude_error(PRELUDE_ERROR_IDMEF_CLASS_CHILD_NOT_CLASS);
+                return libidmef_error(LIBIDMEF_ERROR_IDMEF_CLASS_CHILD_NOT_CLASS);
 
         return c->class;
 }
@@ -227,7 +227,7 @@ idmef_class_id_t idmef_class_find(const char *name)
                 if ( strcasecmp(object_data[i].name, name) == 0 )
                         return i;
 
-        return prelude_error_verbose(PRELUDE_ERROR_IDMEF_CLASS_UNKNOWN_NAME, "Unknown IDMEF class '%s'", name);
+        return libidmef_error_verbose(LIBIDMEF_ERROR_IDMEF_CLASS_UNKNOWN_NAME, "Unknown IDMEF class '%s'", name);
 }
 
 
@@ -369,7 +369,7 @@ int idmef_class_ref(idmef_class_id_t class, void *obj)
 
 
 
-int idmef_class_print(idmef_class_id_t class, void *obj, prelude_io_t *fd)
+int idmef_class_print(idmef_class_id_t class, void *obj, libidmef_io_t *fd)
 {
         int ret;
 
@@ -381,7 +381,7 @@ int idmef_class_print(idmef_class_id_t class, void *obj, prelude_io_t *fd)
 }
 
 
-int idmef_class_print_json(idmef_class_id_t class, void *obj, prelude_io_t *fd)
+int idmef_class_print_json(idmef_class_id_t class, void *obj, libidmef_io_t *fd)
 {
         int ret;
         ret = is_class_valid(class);
@@ -392,7 +392,7 @@ int idmef_class_print_json(idmef_class_id_t class, void *obj, prelude_io_t *fd)
 }
 
 
-int idmef_class_print_binary(idmef_class_id_t class, void *obj, prelude_io_t *fd)
+int idmef_class_print_binary(idmef_class_id_t class, void *obj, libidmef_io_t *fd)
 {
         int ret;
         ret = is_class_valid(class);
@@ -413,7 +413,7 @@ const char *idmef_class_get_name(idmef_class_id_t class)
 
 
 
-prelude_bool_t idmef_class_is_listed(idmef_class_id_t class)
+libidmef_bool_t idmef_class_is_listed(idmef_class_id_t class)
 {
         int ret;
 

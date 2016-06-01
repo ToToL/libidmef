@@ -1,11 +1,11 @@
 /*****
 *
 * Copyright (C) 2002-2016 CS-SI. All Rights Reserved.
-* Author: Nicolas Delon <nicolas.delon@prelude-ids.com>
+* Author: Nicolas Delon <nicolas.delon@libidmef-ids.com>
 * Author: Krzysztof Zaraska <kzaraska@student.uci.agh.edu.pl>
-* Author: Yoann Vandoorselaere <yoann.v@prelude-ids.com>
+* Author: Yoann Vandoorselaere <yoann.v@libidmef-ids.com>
 *
-* This file is part of the Prelude library.
+* This file is part of the LibIdmef library.
 *
 * This program is free software; you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -23,15 +23,15 @@
 *
 *****/
 
-#ifndef _LIBPRELUDE_IDMEF_VALUE_H
-#define _LIBPRELUDE_IDMEF_VALUE_H
+#ifndef _LIBIDMEF_IDMEF_VALUE_H
+#define _LIBIDMEF_IDMEF_VALUE_H
 
 
 typedef struct idmef_value idmef_value_t;
 
-#include "prelude-io.h"
+#include "libidmef-io.h"
 #include "idmef-value-type.h"
-#include "prelude-string.h"
+#include "libidmef-string.h"
 #include "idmef-class.h"
 #include "idmef-path.h"
 
@@ -49,7 +49,7 @@ int idmef_value_new_int64(idmef_value_t **value, int64_t val);
 int idmef_value_new_uint64(idmef_value_t **value, uint64_t val);
 int idmef_value_new_float(idmef_value_t **value, float val);
 int idmef_value_new_double(idmef_value_t **value, double val);
-int idmef_value_new_string(idmef_value_t **value, prelude_string_t *string);
+int idmef_value_new_string(idmef_value_t **value, libidmef_string_t *string);
 int idmef_value_new_time(idmef_value_t **value, idmef_time_t *time);
 int idmef_value_new_data(idmef_value_t **value, idmef_data_t *data);
 int idmef_value_new_class(idmef_value_t **value, idmef_class_id_t classid, void *ptr);
@@ -68,7 +68,7 @@ int idmef_value_set_int64(idmef_value_t *value, int64_t val);
 int idmef_value_set_uint64(idmef_value_t *value, uint64_t val);
 int idmef_value_set_float(idmef_value_t *value, float val);
 int idmef_value_set_double(idmef_value_t *value, double val);
-int idmef_value_set_string(idmef_value_t *value, prelude_string_t *string);
+int idmef_value_set_string(idmef_value_t *value, libidmef_string_t *string);
 int idmef_value_set_time(idmef_value_t *value, idmef_time_t *time);
 int idmef_value_set_data(idmef_value_t *value, idmef_data_t *data);
 int idmef_value_set_enum(idmef_value_t *value, idmef_class_id_t classid, const char *buf);
@@ -94,11 +94,11 @@ double idmef_value_get_double(const idmef_value_t *val);
 
 idmef_time_t *idmef_value_get_time(const idmef_value_t *val);
 idmef_data_t *idmef_value_get_data(const idmef_value_t *val);
-prelude_string_t *idmef_value_get_string(const idmef_value_t *val);
+libidmef_string_t *idmef_value_get_string(const idmef_value_t *val);
 
 int idmef_value_list_add(idmef_value_t *list, idmef_value_t *item);
-prelude_bool_t idmef_value_is_list(const idmef_value_t *list);
-prelude_bool_t idmef_value_list_is_empty(const idmef_value_t *list);
+libidmef_bool_t idmef_value_is_list(const idmef_value_t *list);
+libidmef_bool_t idmef_value_list_is_empty(const idmef_value_t *list);
 
 int idmef_value_have_own_data(idmef_value_t *value);
 int idmef_value_dont_have_own_data(idmef_value_t *value);
@@ -122,9 +122,9 @@ int idmef_value_clone(const idmef_value_t *val, idmef_value_t **dst);
 
 idmef_value_t *idmef_value_ref(idmef_value_t *val);
 
-int idmef_value_print(const idmef_value_t *val, prelude_io_t *fd);
+int idmef_value_print(const idmef_value_t *val, libidmef_io_t *fd);
 
-int idmef_value_to_string(const idmef_value_t *value, prelude_string_t *out);
+int idmef_value_to_string(const idmef_value_t *value, libidmef_string_t *out);
 
 int idmef_value_get(const idmef_value_t *val, void *res);
 
@@ -148,4 +148,4 @@ int _idmef_value_cast(idmef_value_t *val, idmef_value_type_id_t target_type, idm
  }
 #endif
 
-#endif /* _LIBPRELUDE_IDMEF_VALUE_H */
+#endif /* _LIBIDMEF_IDMEF_VALUE_H */

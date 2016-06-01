@@ -3,7 +3,7 @@
 * Copyright (C) 2009-2016 CS-SI. All Rights Reserved.
 * Author: Yoann Vandoorselaere <yoannv@gmail.com>
 *
-* This file is part of the Prelude library.
+* This file is part of the LibIdmef library.
 *
 * This program is free software; you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -29,7 +29,7 @@
 #include <idmef-message-print.h>
 #include <idmef-object-prv.h>
 
-#include "prelude-error.hxx"
+#include "libidmef-error.hxx"
 #include "idmef-path.hxx"
 #include "idmef.hxx"
 
@@ -42,7 +42,7 @@ IDMEF::IDMEF() : _object(NULL)
 
         ret = idmef_message_new((idmef_message_t **) &_object);
         if ( ret < 0 )
-                throw PreludeError(ret);
+                throw LibIdmefError(ret);
 }
 
 
@@ -52,7 +52,7 @@ IDMEF::IDMEF(const char *json) : _object(NULL)
 
         ret = idmef_object_new_from_json(&_object, json);
         if ( ret < 0 )
-                throw PreludeError(ret);
+                throw LibIdmefError(ret);
 }
 
 
@@ -177,7 +177,7 @@ IDMEF IDMEF::clone()
 
         ret = idmef_object_clone(_object, &clone);
         if ( ret < 0 )
-                throw PreludeError(ret);
+                throw LibIdmefError(ret);
 
         return IDMEF(clone);
 }
@@ -193,19 +193,19 @@ const std::string IDMEF::toString() const
 {
         int ret;
         std::string str;
-        prelude_io_t *fd;
+        libidmef_io_t *fd;
 
-        ret = prelude_io_new(&fd);
+        ret = libidmef_io_new(&fd);
         if ( ret < 0 )
-                throw PreludeError(ret);
+                throw LibIdmefError(ret);
 
-        prelude_io_set_buffer_io(fd);
+        libidmef_io_set_buffer_io(fd);
         idmef_object_print(_object, fd);
 
-        str.assign((const char *) prelude_io_get_fdptr(fd), prelude_io_pending(fd));
+        str.assign((const char *) libidmef_io_get_fdptr(fd), libidmef_io_pending(fd));
 
-        prelude_io_close(fd);
-        prelude_io_destroy(fd);
+        libidmef_io_close(fd);
+        libidmef_io_destroy(fd);
 
         return str;
 }
@@ -215,19 +215,19 @@ const std::string IDMEF::toJSON() const
 {
         int ret;
         std::string str;
-        prelude_io_t *fd;
+        libidmef_io_t *fd;
 
-        ret = prelude_io_new(&fd);
+        ret = libidmef_io_new(&fd);
         if ( ret < 0 )
-                throw PreludeError(ret);
+                throw LibIdmefError(ret);
 
-        prelude_io_set_buffer_io(fd);
+        libidmef_io_set_buffer_io(fd);
         idmef_object_print_json(_object, fd);
 
-        str.assign((const char *) prelude_io_get_fdptr(fd), prelude_io_pending(fd));
+        str.assign((const char *) libidmef_io_get_fdptr(fd), libidmef_io_pending(fd));
 
-        prelude_io_close(fd);
-        prelude_io_destroy(fd);
+        libidmef_io_close(fd);
+        libidmef_io_destroy(fd);
 
         return str;
 }
@@ -236,19 +236,19 @@ const std::string IDMEF::toBinary() const
 {
         int ret;
         std::string str;
-        prelude_io_t *fd;
+        libidmef_io_t *fd;
 
-        ret = prelude_io_new(&fd);
+        ret = libidmef_io_new(&fd);
         if ( ret < 0 )
-                throw PreludeError(ret);
+                throw LibIdmefError(ret);
 
-        prelude_io_set_buffer_io(fd);
+        libidmef_io_set_buffer_io(fd);
         idmef_object_print_binary(_object, fd);
 
-        str.assign((const char *) prelude_io_get_fdptr(fd), prelude_io_pending(fd));
+        str.assign((const char *) libidmef_io_get_fdptr(fd), libidmef_io_pending(fd));
 
-        prelude_io_close(fd);
-        prelude_io_destroy(fd);
+        libidmef_io_close(fd);
+        libidmef_io_destroy(fd);
 
         return str;
 }

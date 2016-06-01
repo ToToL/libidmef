@@ -1,0 +1,68 @@
+<?xml version="1.0"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
+               "http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd"
+[
+  <!ENTITY % local.common.attrib "xmlns:xi  CDATA  #FIXED 'http://www.w3.org/2003/XInclude'">
+]>
+<book id="index">
+  <bookinfo>
+    <title>libidmef Reference Manual</title>
+    <releaseinfo>
+      for libidmef [VERSION].
+      The latest version of this documentation can be found on-line at
+      <ulink role="online-location" url="http://[SERVER]/libidmef/index.html">http://[SERVER]/libidmef/</ulink>.
+    </releaseinfo>
+  </bookinfo>
+
+  <chapter>
+    <title>[Insert title here]</title>
+        <xi:include href="xml/libidmef-error.xml"/>
+    <xi:include href="xml/libidmef-linked-object.xml"/>
+    <xi:include href="xml/idmef-tree-wrap.xml"/>
+    <xi:include href="xml/libidmef-io.xml"/>
+    <xi:include href="xml/libidmef-log.xml"/>
+    <xi:include href="xml/libidmef-msg.xml"/>
+    <xi:include href="xml/libidmef-option.xml"/>
+    <xi:include href="xml/libidmef-connection.xml"/>
+    <xi:include href="xml/libidmef-string.xml"/>
+    <xi:include href="xml/idmef-message-print.xml"/>
+    <xi:include href="xml/libidmef-msgbuf.xml"/>
+    <xi:include href="xml/idmef-message-write.xml"/>
+    <xi:include href="xml/libidmef-ident.xml"/>
+    <xi:include href="xml/libidmef-client.xml"/>
+    <xi:include href="xml/libidmef-client-profile.xml"/>
+    <xi:include href="xml/libidmef-plugin.xml"/>
+    <xi:include href="xml/libidmef-hash.xml"/>
+    <xi:include href="xml/libidmef-failover.xml"/>
+    <xi:include href="xml/libidmef-connection-pool.xml"/>
+    <xi:include href="xml/libidmef-async.xml"/>
+    <xi:include href="xml/idmef-message-read.xml"/>
+    <xi:include href="xml/libidmef-list.xml"/>
+    <xi:include href="xml/libidmef-inttypes.xml"/>
+    <xi:include href="xml/libidmef.xml"/>
+    <xi:include href="xml/libidmef-option-wide.xml"/>
+    <xi:include href="xml/idmef-criteria.xml"/>
+    <xi:include href="xml/idmef-data.xml"/>
+    <xi:include href="xml/idmef-criterion-value.xml"/>
+    <xi:include href="xml/idmef-path.xml"/>
+    <xi:include href="xml/idmef-additional-data.xml"/>
+    <xi:include href="xml/idmef-time.xml"/>
+    <xi:include href="xml/libidmef-timer.xml"/>
+    <xi:include href="xml/idmef-value.xml"/>
+
+  </chapter>
+  <chapter id="object-tree">
+    <title>Object Hierarchy</title>
+     <xi:include href="xml/tree_index.sgml"/>
+  </chapter>
+  <index id="api-index-full">
+    <title>API Index</title>
+    <xi:include href="xml/api-index-full.xml"><xi:fallback /></xi:include>
+  </index>
+  <index id="deprecated-api-index" role="deprecated">
+    <title>Index of deprecated API</title>
+    <xi:include href="xml/api-index-deprecated.xml"><xi:fallback /></xi:include>
+  </index>
+
+  <xi:include href="xml/annotation-glossary.xml"><xi:fallback /></xi:include>
+</book>

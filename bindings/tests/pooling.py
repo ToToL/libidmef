@@ -1,12 +1,12 @@
 #!/usr/bin/python
 
-import PreludeEasy
+import LibIdmefEasy
 
-client = PreludeEasy.ClientEasy("PoolingTest", PreludeEasy.Client.IDMEF_READ)
+client = LibIdmefEasy.ClientEasy("PoolingTest", LibIdmefEasy.Client.IDMEF_READ)
 client.Start()
 
 while True:
-    idmef = PreludeEasy.IDMEF()
+    idmef = LibIdmefEasy.IDMEF()
 
     ret = client.RecvIDMEF(idmef)
     if ret:

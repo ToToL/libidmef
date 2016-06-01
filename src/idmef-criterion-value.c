@@ -1,10 +1,10 @@
 /*****
 *
 * Copyright (C) 2004-2016 CS-SI. All Rights Reserved.
-* Author: Nicolas Delon <nicolas.delon@prelude-ids.com>
-* Author: Yoann Vandoorselaere <yoann@prelude-ids.com>
+* Author: Nicolas Delon <nicolas.delon@libidmef-ids.com>
+* Author: Yoann Vandoorselaere <yoann@libidmef-ids.com>
 *
-* This file is part of the Prelude library.
+* This file is part of the LibIdmef library.
 *
 * This program is free software; you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -35,9 +35,9 @@
 #include <errno.h>
 
 #include "common.h"
-#include "prelude-log.h"
-#include "prelude-error.h"
-#include "prelude-inttypes.h"
+#include "libidmef-log.h"
+#include "libidmef-error.h"
+#include "libidmef-inttypes.h"
 
 #include "idmef.h"
 #include "idmef-criterion-value.h"
@@ -63,12 +63,12 @@ struct regex_value {
 struct idmef_criterion_value {
 
         void *value;
-        prelude_bool_t value_need_free;
+        libidmef_bool_t value_need_free;
         idmef_criterion_value_type_t type;
 
         int (*clone)(const idmef_criterion_value_t *cv, idmef_criterion_value_t *dst);
-        int (*print)(const idmef_criterion_value_t *cv, prelude_io_t *fd);
-        int (*to_string)(const idmef_criterion_value_t *cv, prelude_string_t *out);
+        int (*print)(const idmef_criterion_value_t *cv, libidmef_io_t *fd);
+        int (*to_string)(const idmef_criterion_value_t *cv, libidmef_string_t *out);
         int (*match)(const idmef_criterion_value_t *cv, idmef_criterion_operator_t operator, idmef_value_t *value);
         void (*destroy)(idmef_criterion_value_t *cv);
 };
@@ -182,14 +182,14 @@ static int do_btime_match(const idmef_criterion_value_t *cv, idmef_criterion_ope
         int ret;
         time_t sec;
         struct tm lt, comp = *(struct tm *) cv->value;
-        prelude_bool_t need_full_compare = FALSE;
+        libidmef_bool_t need_full_compare = FALSE;
 
         if ( idmef_value_get_type(value) != IDMEF_VALUE_TYPE_TIME )
                 return -1;
 
         sec = idmef_time_get_sec(idmef_value_get_time(value));
         if ( ! gmtime_r(&sec, &lt) )
-                return prelude_error_from_errno(errno);
+                return libidmef_error_from_errno(errno);
 
         /*
          * Apply mask
@@ -255,55 +255,55 @@ static int btime_match(const idmef_criterion_value_t *cv, idmef_criterion_operat
 
 
 
-static int btime_to_string(const idmef_criterion_value_t *cv, prelude_string_t *out)
+static int btime_to_string(const idmef_criterion_value_t *cv, libidmef_string_t *out)
 {
         struct tm *lt = cv->value;
 
         if ( lt->tm_year != -1 )
-                prelude_string_sprintf(out, "year:%d ", lt->tm_year + 1900);
+                libidmef_string_sprintf(out, "year:%d ", lt->tm_year + 1900);
 
         if ( lt->tm_yday != -1 )
-                prelude_string_sprintf(out, "yday:%d ", lt->tm_yday);
+                libidmef_string_sprintf(out, "yday:%d ", lt->tm_yday);
 
         if ( lt->tm_mon != -1 )
-                prelude_string_sprintf(out, "month:%d ", lt->tm_mon);
+                libidmef_string_sprintf(out, "month:%d ", lt->tm_mon);
 
         if ( lt->tm_mday != -1 )
-                prelude_string_sprintf(out, "mday:%d ", lt->tm_mday);
+                libidmef_string_sprintf(out, "mday:%d ", lt->tm_mday);
 
         if ( lt->tm_wday != -1 )
-                prelude_string_sprintf(out, "wday:%d ", lt->tm_wday);
+                libidmef_string_sprintf(out, "wday:%d ", lt->tm_wday);
 
         if ( lt->tm_hour != -1 )
-                prelude_string_sprintf(out, "hour:%d ", lt->tm_hour);
+                libidmef_string_sprintf(out, "hour:%d ", lt->tm_hour);
 
         if ( lt->tm_min != -1 )
-                prelude_string_sprintf(out, "min:%d ", lt->tm_min);
+                libidmef_string_sprintf(out, "min:%d ", lt->tm_min);
 
         if ( lt->tm_sec != -1 )
-                prelude_string_sprintf(out, "sec:%d ", lt->tm_sec);
+                libidmef_string_sprintf(out, "sec:%d ", lt->tm_sec);
 
         return 0;
 }
 
 
-static int btime_print(const idmef_criterion_value_t *cv, prelude_io_t *fd)
+static int btime_print(const idmef_criterion_value_t *cv, libidmef_io_t *fd)
 {
         int ret;
-        prelude_string_t *out;
+        libidmef_string_t *out;
 
-        ret = prelude_string_new(&out);
+        ret = libidmef_string_new(&out);
         if ( ret < 0 )
                 return ret;
 
         ret = btime_to_string(cv, out);
         if ( ret < 0 ) {
-                prelude_string_destroy(out);
+                libidmef_string_destroy(out);
                 return ret;
         }
 
-        ret = prelude_io_write(fd, prelude_string_get_string(out), prelude_string_get_len(out));
-        prelude_string_destroy(out);
+        ret = libidmef_io_write(fd, libidmef_string_get_string(out), libidmef_string_get_len(out));
+        libidmef_string_destroy(out);
 
         return ret;
 }
@@ -343,7 +343,7 @@ static int regex_match(const idmef_criterion_value_t *cv, idmef_criterion_operat
         struct regex_value *rv = cv->value;
 
         if ( idmef_value_get_type(value) == IDMEF_VALUE_TYPE_STRING )
-                str = prelude_string_get_string(idmef_value_get_string(value));
+                str = libidmef_string_get_string(idmef_value_get_string(value));
 
         else if ( idmef_value_get_type(value) == IDMEF_VALUE_TYPE_ENUM ) {
                 class = idmef_value_get_class(value);
@@ -370,19 +370,19 @@ static int regex_match(const idmef_criterion_value_t *cv, idmef_criterion_operat
 
 
 
-static int regex_print(const idmef_criterion_value_t *cv, prelude_io_t *fd)
+static int regex_print(const idmef_criterion_value_t *cv, libidmef_io_t *fd)
 {
         struct regex_value *rv = cv->value;
-        prelude_io_write(fd, rv->regex_string, strlen(rv->regex_string));
+        libidmef_io_write(fd, rv->regex_string, strlen(rv->regex_string));
         return 0;
 }
 
 
 
-static int regex_to_string(const idmef_criterion_value_t *cv, prelude_string_t *out)
+static int regex_to_string(const idmef_criterion_value_t *cv, libidmef_string_t *out)
 {
         struct regex_value *rv = cv->value;
-        return prelude_string_cat(out, rv->regex_string);
+        return libidmef_string_cat(out, rv->regex_string);
 }
 
 
@@ -427,14 +427,14 @@ static int value_match(const idmef_criterion_value_t *cv, idmef_criterion_operat
 
 
 
-static int value_print(const idmef_criterion_value_t *cv, prelude_io_t *fd)
+static int value_print(const idmef_criterion_value_t *cv, libidmef_io_t *fd)
 {
         return idmef_value_print(cv->value, fd);
 }
 
 
 
-static int value_to_string(const idmef_criterion_value_t *cv, prelude_string_t *out)
+static int value_to_string(const idmef_criterion_value_t *cv, libidmef_string_t *out)
 {
         return idmef_value_to_string(cv->value, out);
 }
@@ -526,14 +526,14 @@ int idmef_criterion_value_clone(const idmef_criterion_value_t *src, idmef_criter
 
 
 
-int idmef_criterion_value_print(idmef_criterion_value_t *cv, prelude_io_t *fd)
+int idmef_criterion_value_print(idmef_criterion_value_t *cv, libidmef_io_t *fd)
 {
         return cv->print(cv, fd);
 }
 
 
 
-int idmef_criterion_value_to_string(idmef_criterion_value_t *cv, prelude_string_t *out)
+int idmef_criterion_value_to_string(idmef_criterion_value_t *cv, libidmef_string_t *out)
 {
         return cv->to_string(cv, out);
 }
@@ -581,7 +581,7 @@ int idmef_criterion_value_new(idmef_criterion_value_t **cv)
 {
         *cv = calloc(1, sizeof(**cv));
         if ( ! *cv )
-                return prelude_error_from_errno(errno);
+                return libidmef_error_from_errno(errno);
 
         (*cv)->value_need_free = TRUE;
 
@@ -620,7 +620,7 @@ static int btime_parse(struct tm *lt, const char *time)
                 { "gmtoff", 6, &gmt_offset, btime_parse_gmtoff }
         };
 
-        ret = prelude_get_gmt_offset(&gmt_offset);
+        ret = libidmef_get_gmt_offset(&gmt_offset);
         if ( ret < 0 )
                 return ret;
 
@@ -676,7 +676,7 @@ int idmef_criterion_value_new_broken_down_time(idmef_criterion_value_t **cv, con
         lt = malloc(sizeof(struct tm));
         if ( ! lt ) {
                 free(*cv);
-                return prelude_error_from_errno(errno);
+                return libidmef_error_from_errno(errno);
         }
 
         memset(lt, -1, sizeof(*lt));
@@ -715,14 +715,14 @@ int idmef_criterion_value_new_regex(idmef_criterion_value_t **cv, const char *re
         rv = (*cv)->value = malloc(sizeof(*rv));
         if ( ! rv ) {
                 free(*cv);
-                return prelude_error_from_errno(errno);
+                return libidmef_error_from_errno(errno);
         }
 
         rv->regex_string = strdup(regex);
         if ( ! rv->regex_string ) {
                 free(rv);
                 free(*cv);
-                return prelude_error_from_errno(errno);
+                return libidmef_error_from_errno(errno);
         }
 
         if ( op & IDMEF_CRITERION_OPERATOR_NOCASE )
@@ -738,7 +738,7 @@ int idmef_criterion_value_new_regex(idmef_criterion_value_t **cv, const char *re
                 free(rv);
                 free(*cv);
 
-                return prelude_error_verbose(PRELUDE_ERROR_IDMEF_CRITERION_INVALID_REGEX,
+                return libidmef_error_verbose(LIBIDMEF_ERROR_IDMEF_CRITERION_INVALID_REGEX,
                                              "error compiling regex: %s", errbuf);
         }
 

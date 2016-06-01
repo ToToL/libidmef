@@ -5,19 +5,19 @@ sys.path.append('.')
 sys.path.append('./.libs')
 
 try:
-	import PreludeEasy
+	import LibIdmefEasy
 except:
 	print "Import failed"
-	print "Try 'cd ./.libs && ln -s libprelude_python.so _PreludeEasy.so'"
+	print "Try 'cd ./.libs && ln -s libidmef_python.so _LibIdmefEasy.so'"
 	sys.exit(1)
 
 def foo(id):
         print "callback: id = " + str(id)
-	idmef = PreludeEasy._get_IDMEF(id)
+	idmef = LibIdmefEasy._get_IDMEF(id)
         idmef.PrintToStdout()
         #print bar.Get("alert.classification.text") # XXX not yet implemented
         return 0
 
-PreludeEasy.set_pymethod(foo)
+LibIdmefEasy.set_pymethod(foo)
 
-PreludeEasy.test_fct()
+LibIdmefEasy.test_fct()

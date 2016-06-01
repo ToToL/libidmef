@@ -1,9 +1,9 @@
 import time
-import prelude
+import libidmef
 
-sensor = prelude.Sensor("test")
+sensor = libidmef.Sensor("test")
 
-alert = prelude.IDMEFAlert()
+alert = libidmef.IDMEFAlert()
 
 alert["alert.classification(0).name"] = "test python"
 alert["alert.assessment.impact.severity"] = "low"

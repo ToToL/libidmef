@@ -41,7 +41,7 @@ endif
 
 _idmef.cxx idmef.py: $(top_srcdir)/bindings/c++/include/*.hxx $(top_srcdir)/bindings/libidmefcpp.i libidmefcpp-python.i 
 if HAVE_SWIG
-	$(SWIG) -c++ -DSWIG_COMPILE_LIBPRELUDE -I$(top_srcdir)/bindings -I$(top_srcdir)/bindings/c++/include -I$(top_srcdir)/src/include -I$(top_srcdir)/src/libidmef-error -python -threads -builtin -O -o $@ $(top_srcdir)/bindings/libidmefcpp.i
+	$(SWIG) -c++ -DSWIG_COMPILE_LIBIDMEF -I$(top_srcdir)/bindings -I$(top_srcdir)/bindings/c++/include -I$(top_srcdir)/src/include -I$(top_srcdir)/src/libidmef-error -python -threads -builtin -O -o $@ $(top_srcdir)/bindings/libidmefcpp.i
 endif
 
 endif

@@ -1,9 +1,9 @@
 /*****
 *
 * Copyright (C) 2001-2016 CS-SI. All Rights Reserved.
-* Author: Yoann Vandoorselaere <yoann.v@prelude-ids.com>
+* Author: Yoann Vandoorselaere <yoann.v@libidmef-ids.com>
 *
-* This file is part of the Prelude library.
+* This file is part of the LibIdmef library.
 *
 * This program is free software; you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -19,16 +19,16 @@
 * with this program; if not, write to the Free Software Foundation, Inc.,
 * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 *
-* Written by Yoann Vandoorselaere <yoann@prelude-ids.org>
+* Written by Yoann Vandoorselaere <yoann@libidmef-ids.org>
 *
 *****/
 
-#ifndef _LIBPRELUDE_RULES_VARIABLE_H
-#define _LIBPRELUDE_RULES_VARIABLE_H
+#ifndef _LIBIDMEF_RULES_VARIABLE_H
+#define _LIBIDMEF_RULES_VARIABLE_H
 
 int variable_set(const char *variable, const char *value);
 int variable_unset(const char *variable);
 char *variable_get(const char *variable);
 void variable_unset_all(void);
 
-#endif /* _LIBPRELUDE_RULES_VARIABLE_H */
+#endif /* _LIBIDMEF_RULES_VARIABLE_H */

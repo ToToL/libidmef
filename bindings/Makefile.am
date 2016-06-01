@@ -1,18 +1,18 @@
 SUBDIRS = c++ lua python ruby
 
-EXTRA_DIST = libidmefcpp.i perl/libidmefcpp-perl.i perl/Makefile.PL.in perl/Prelude.cxx perl/Prelude.pm
+EXTRA_DIST = libidmefcpp.i perl/libidmefcpp-perl.i perl/Makefile.PL.in perl/LibIdmef.cxx perl/LibIdmef.pm
 
-CLEANFILES = perl/pm_to_blib perl/Prelude.o perl/blib python/build
-DISTCLEANFILES = lua/prelude.cxx perl/Prelude.cxx ruby/Prelude.cxx
+CLEANFILES = perl/pm_to_blib perl/LibIdmef.o perl/blib python/build
+DISTCLEANFILES = lua/libidmef.cxx perl/LibIdmef.cxx ruby/LibIdmef.cxx
 MAINTAINERCLEANFILES =   \
-			lua/prelude.cxx	     \
+			lua/libidmef.cxx	     \
 			perl/Makefile		     \
-                        perl/Prelude.cxx         \
-			perl/Prelude.pm	     \
-			perl/Prelude.bs 	     \
+                        perl/LibIdmef.cxx         \
+			perl/LibIdmef.pm	     \
+			perl/LibIdmef.bs 	     \
                         python/_idmef.cxx	     \
 			python/idmef.py	     \
-			ruby/Prelude.cxx
+			ruby/LibIdmef.cxx
 
 swigdatadir = @SWIG_DATA_DIR@
 dist_swigdata_DATA = libidmefcpp.i
@@ -31,13 +31,13 @@ perl: perl-build
 perl-makefile:
 	cd perl && LANG="" DESTDIR=$(DESTDIR) LIBDIR=$(libdir) $(PERL) Makefile.PL @PERL_EXTRA_PARAMS@ CC="$(CXX)"
 
-perl/Prelude.cxx: $(top_srcdir)/bindings/c++/include/*.hxx libidmefcpp.i perl/libidmefcpp-perl.i
+perl/LibIdmef.cxx: $(top_srcdir)/bindings/c++/include/*.hxx libidmefcpp.i perl/libidmefcpp-perl.i
 if HAVE_SWIG
-	$(SWIG) -c++ -DSWIG_COMPILE_LIBPRELUDE -I$(top_srcdir)/bindings -I$(top_srcdir)/bindings/c++/include -I$(top_srcdir)/src/include -I$(top_srcdir)/src/libidmef-error -perl5 -o $@ libidmefcpp.i
+	$(SWIG) -c++ -DSWIG_COMPILE_LIBIDMEF -I$(top_srcdir)/bindings -I$(top_srcdir)/bindings/c++/include -I$(top_srcdir)/src/include -I$(top_srcdir)/src/libidmef-error -perl5 -o $@ libidmefcpp.i
 endif
 
 
-perl-build: perl/Prelude.cxx perl-makefile
+perl-build: perl/LibIdmef.cxx perl-makefile
 	cd perl && $(MAKE) LD_RUN_PATH="" CC="$(CXX)"
 
 install-exec-hook: perl-makefile 

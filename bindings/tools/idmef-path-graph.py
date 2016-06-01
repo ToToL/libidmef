@@ -12,14 +12,14 @@ sys.path.append('./.libs')
 import gvgen
 
 try:
-       import PreludeEasy
+       import LibIdmefEasy
 except Exception,e:
        print "Import failed: ",e
-       print "Try 'cd ./.libs && ln -s libprelude_python.so _PreludeEasy.so'"
+       print "Try 'cd ./.libs && ln -s libidmef_python.so _LibIdmefEasy.so'"
        sys.exit(1)
 
 
-client = PreludeEasy.Client("PoolingTest")
+client = LibIdmefEasy.Client("PoolingTest")
 client.Init()
 
 client.PoolInit("192.168.33.215", 1)

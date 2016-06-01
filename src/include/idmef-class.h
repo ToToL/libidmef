@@ -3,7 +3,7 @@
 * Copyright (C) 2002, 2003, 2004 Krzysztof Zaraska <kzaraska@student.uci.agh.edu.pl>
 * All Rights Reserved
 *
-* This file is part of the Prelude library.
+* This file is part of the LibIdmef library.
 *
 * This program is free software; you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -22,8 +22,8 @@
 *****/
 
 
-#ifndef _LIBPRELUDE_IDMEF_CLASS_H
-#define _LIBPRELUDE_IDMEF_CLASS_H
+#ifndef _LIBIDMEF_IDMEF_CLASS_H
+#define _LIBIDMEF_IDMEF_CLASS_H
 
 #ifdef __cplusplus
  extern "C" {
@@ -37,11 +37,11 @@ typedef int idmef_class_child_id_t;
 /*
  *
  */
-prelude_bool_t idmef_class_is_child_list(idmef_class_id_t classid, idmef_class_child_id_t child);
+libidmef_bool_t idmef_class_is_child_list(idmef_class_id_t classid, idmef_class_child_id_t child);
 
-prelude_bool_t idmef_class_is_child_keyed_list(idmef_class_id_t classid, idmef_class_child_id_t child);
+libidmef_bool_t idmef_class_is_child_keyed_list(idmef_class_id_t classid, idmef_class_child_id_t child);
 
-prelude_bool_t idmef_class_is_child_union_member(idmef_class_id_t classid, idmef_class_child_id_t child);
+libidmef_bool_t idmef_class_is_child_union_member(idmef_class_id_t classid, idmef_class_child_id_t child);
 
 int idmef_class_get_child_union_id(idmef_class_id_t classid, idmef_class_child_id_t child);
 
@@ -96,18 +96,18 @@ int idmef_class_compare(idmef_class_id_t classid, const void *c1, const void *c2
 
 int idmef_class_ref(idmef_class_id_t classid, void *obj);
 
-int idmef_class_print(idmef_class_id_t classid, void *obj, prelude_io_t *fd);
+int idmef_class_print(idmef_class_id_t classid, void *obj, libidmef_io_t *fd);
 
-int idmef_class_print_json(idmef_class_id_t classid, void *obj, prelude_io_t *fd);
+int idmef_class_print_json(idmef_class_id_t classid, void *obj, libidmef_io_t *fd);
 
-int idmef_class_print_binary(idmef_class_id_t classid, void *obj, prelude_io_t *fd);
+int idmef_class_print_binary(idmef_class_id_t classid, void *obj, libidmef_io_t *fd);
 
 int idmef_class_destroy(idmef_class_id_t classid, void *obj);
 
-prelude_bool_t idmef_class_is_listed(idmef_class_id_t classid);
+libidmef_bool_t idmef_class_is_listed(idmef_class_id_t classid);
 
 #ifdef __cplusplus
  }
 #endif
 
-#endif /* _LIBPRELUDE_IDMEF_CLASS_H */
+#endif /* _LIBIDMEF_IDMEF_CLASS_H */

@@ -7,7 +7,7 @@ pkgconfigdir = $(libdir)/pkgconfig
 
 libidmefincludedir = $(includedir)/
 libidmef_la_LIBADD = @LIBIDMEF_LIBS@ $(LIBLTDL) $(top_builddir)/libmissing/libmissing.la libidmef-error/libidmef-error.la
-libidmef_la_LDFLAGS = $(GETADDRINFO_LIB) $(GETHOSTNAME_LIB) $(HOSTENT_LIB) $(INET_NTOP_LIB) $(INET_PTON_LIB) $(LIBSOCKET) $(LIB_POLL) $(LIB_SELECT) $(LTLIBINTL) $(LTLIBTHREAD) $(SERVENT_LIB) -no-undefined -version-info @LIBIDMEF_SONAME@ -export-symbols-regex "^(idmef|_?prelude)_"
+libidmef_la_LDFLAGS = $(GETADDRINFO_LIB) $(GETHOSTNAME_LIB) $(HOSTENT_LIB) $(INET_NTOP_LIB) $(INET_PTON_LIB) $(LIBSOCKET) $(LIB_POLL) $(LIB_SELECT) $(LTLIBINTL) $(LTLIBTHREAD) $(SERVENT_LIB) -no-undefined -version-info @LIBIDMEF_SONAME@ -export-symbols-regex "^(idmef|_?libidmef)_"
 lib_LTLIBRARIES = libidmef.la
 BUILT_SOURCES = $(LTDLDEPS) 
 
@@ -18,11 +18,11 @@ libidmef_la_SOURCES = 		\
 	common.c			\
 	ntp.c				\
 	variable.c			\
-	prelude-hash.c			\
-	prelude-ident.c			\
-	prelude-io.c			\
-	prelude-log.c			\
-	prelude-string.c		\
+	libidmef-hash.c			\
+	libidmef-ident.c			\
+	libidmef-io.c			\
+	libidmef-log.c			\
+	libidmef-string.c		\
 	idmef-additional-data.c		\
 	idmef-class.c			\
 	idmef-criteria.c		\
